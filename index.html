@@ -1,43 +1,4 @@
-<script type="text/javascript">
-        var gk_isXlsx = false;
-        var gk_xlsxFileLookup = {};
-        var gk_fileData = {};
-        function filledCell(cell) {
-          return cell !== '' && cell != null;
-        }
-        function loadFileData(filename) {
-        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
-            try {
-                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
-                var firstSheetName = workbook.SheetNames[0];
-                var worksheet = workbook.Sheets[firstSheetName];
-
-                // Convert sheet to JSON to filter blank rows
-                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
-                // Filter out blank rows (rows where all cells are empty, null, or undefined)
-                var filteredData = jsonData.filter(row => row.some(filledCell));
-
-                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
-                var headerRowIndex = filteredData.findIndex((row, index) =>
-                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
-                );
-                // Fallback
-                if (headerRowIndex === -1 || headerRowIndex > 25) {
-                  headerRowIndex = 0;
-                }
-
-                // Convert filtered JSON back to CSV
-                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
-                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
-                return csv;
-            } catch (e) {
-                console.error(e);
-                return "";
-            }
-        }
-        return gk_fileData[filename] || "";
-        }
-        </script>```html
+```html
 <!DOCTYPE html>
 <html lang="bn">
 <head>
@@ -70,7 +31,7 @@
             margin-top: 10px;
             border-left: 4px solid #4CAF50;
         }
-        .payment-modal {
+        .auth-modal {
             display: none;
             position: fixed;
             top: 0;
@@ -81,7 +42,7 @@
             justify-content: center;
             align-items: center;
         }
-        .payment-content {
+        .auth-content {
             background: white;
             padding: 20px;
             border-radius: 8px;
@@ -89,11 +50,10 @@
             max-width: 400px;
             text-align: center;
         }
-        .pending {
-            color: orange;
-        }
-        .confirmed {
-            color: green;
+        .whatsapp-icon {
+            font-size: 2rem;
+            color: #25D366;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -186,17 +146,16 @@
         </div>
     </footer>
 
-    <!-- Payment Modal -->
-    <div id="paymentModal" class="payment-modal" onclick="closeModal(event)">
-        <div class="payment-content" onclick="event.stopPropagation()">
-            <h3 class="text-xl font-bold mb-4 text-green-700">পেমেন্ট করুন</h3>
-            <p class="mb-4">নিচের বিকাশ নম্বরে টাকা সেন্ড করুন:</p>
-            <p class="text-lg font-semibold bg-gray-200 p-2 rounded-md mb-4" id="bikashNumber">01712345678 <button onclick="copyToClipboard('bikashNumber')" class="ml-2 text-blue-500 hover:text-blue-700">কপি</button></p>
-            <p class="mb-4">অ্যামাউন্ট: ৫০ টাকা</p>
-            <input type="text" id="transactionId" placeholder="ট্রানজেকশন আইডি লিখুন" class="w-full px-4 py-2 mb-4 rounded-md border border-gray-300" required>
-            <button onclick="confirmPayment()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md w-full">কনফার্ম</button>
-            <p id="paymentStatus" class="mt-4"></p>
-            <button onclick="adminAccept()" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md mt-4 hidden" id="adminAcceptBtn">একসেপ্ট (এডমিন)</button>
+    <!-- Authentication Modal -->
+    <div id="authModal" class="auth-modal" onclick="closeModal(event)">
+        <div class="auth-content" onclick="event.stopPropagation()">
+            <h3 class="text-xl font-bold mb-4 text-green-700">আইডি ডাউনলোড করতে, হোয়াটসঅ্যাপে যোগাযোগ করুন</h3>
+            <input type="text" id="otpCode" placeholder="কোড লিখুন" class="w-full px-4 py-2 mb-4 rounded-md border border-gray-300" required>
+            <button onclick="confirmOTP()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md w-full">কনফার্ম</button>
+            <p id="authStatus" class="mt-4"></p>
+            <div class="mt-4">
+                <span class="whatsapp-icon" onclick="openWhatsApp()">📱</span>
+            </div>
         </div>
     </div>
 
@@ -204,7 +163,28 @@
         let mapDatabase = {};
         let isDataLoaded = false;
         let selectedMap = null;
-        let paymentStatus = 'pending';
+        let usedOTPs = new Set(); // একবার ব্যবহৃত OTP ট্র্যাক
+
+        // WebSocket সংযোগ
+        const ws = new WebSocket('ws://localhost:8080');
+        ws.onopen = () => console.log('Connected to WebSocket');
+        ws.onmessage = (event) => {
+            const data = JSON.parse(event.data);
+            if (data.type === 'otp_generated') {
+                console.log('Received OTP:', data.otp);
+            } else if (data.type === 'otp_verified' && data.success) {
+                document.getElementById('authStatus').textContent = 'কোড যাচাই সফল! ফাইল ডাউনলোড করুন।';
+                document.getElementById('authStatus').classList.add('confirmed');
+                displayDownloadOptions();
+                document.getElementById('authModal').style.display = 'none';
+                usedOTPs.add(document.getElementById('otpCode').value); // OTP ব্যবহৃত হিসেবে চিহ্নিত
+            } else if (data.type === 'otp_verified' && !data.success) {
+                document.getElementById('authStatus').textContent = 'অবৈধ বা ব্যবহৃত কোড!';
+                document.getElementById('authStatus').classList.add('pending');
+            }
+        };
+        ws.onerror = (error) => console.error('WebSocket error:', error);
+        ws.onclose = () => console.log('WebSocket disconnected');
 
         // ডাটা লোড করার ফাংশন
         async function loadMapDatabase() {
@@ -246,52 +226,39 @@
             console.log('Searching for:', district, upazila, mouza);
             if (mapDatabase[district] && mapDatabase[district][upazila] && mapDatabase[district][upazila][mouza]) {
                 selectedMap = mapDatabase[district][upazila][mouza];
-                showPaymentModal();
+                showAuthModal();
             } else {
                 alert(`কোনো ম্যাপ পাওয়া যায়নি: ${district}, ${upazila}, ${mouza}`);
             }
         }
 
-        function showPaymentModal() {
-            paymentStatus = 'pending';
-            document.getElementById('paymentStatus').textContent = '';
-            document.getElementById('transactionId').value = '';
-            document.getElementById('adminAcceptBtn').classList.add('hidden');
-            const modal = document.getElementById('paymentModal');
+        function showAuthModal() {
+            document.getElementById('authStatus').textContent = '';
+            document.getElementById('otpCode').value = '';
+            const modal = document.getElementById('authModal');
             modal.style.display = 'flex';
         }
 
         function closeModal(event) {
-            if (event.target.id === 'paymentModal') {
-                document.getElementById('paymentModal').style.display = 'none';
+            if (event.target.id === 'authModal') {
+                document.getElementById('authModal').style.display = 'none';
             }
         }
 
-        function copyToClipboard(elementId) {
-            const text = document.getElementById(elementId).textContent.split(' ')[0];
-            navigator.clipboard.writeText(text).then(() => {
-                alert('বিকাশ নম্বর কপি করা হয়েছে!');
-            });
+        function openWhatsApp() {
+            const phoneNumber = '8801712345678'; // এডমিনের WhatsApp নম্বর
+            const message = 'আমি ম্যাপ ডাউনলোড করতে চাই। দয়া করে একটি কোড প্রদান করুন।';
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
         }
 
-        function confirmPayment() {
-            const transactionId = document.getElementById('transactionId').value.trim();
-            if (!transactionId) {
-                document.getElementById('paymentStatus').textContent = 'অবৈধ ট্রানজেকশন আইডি!';
+        function confirmOTP() {
+            const otp = document.getElementById('otpCode').value.trim();
+            if (!otp) {
+                document.getElementById('authStatus').textContent = 'কোড লিখুন!';
                 return;
             }
-            document.getElementById('paymentStatus').textContent = 'পেমেন্ট Pending...';
-            document.getElementById('paymentStatus').classList.add('pending');
-            document.getElementById('adminAcceptBtn').classList.remove('hidden');
-        }
-
-        function adminAccept() {
-            paymentStatus = 'confirmed';
-            document.getElementById('paymentStatus').textContent = 'পেমেন্ট নিশ্চিত! ফাইল ডাউনলোড করুন।';
-            document.getElementById('paymentStatus').classList.remove('pending');
-            document.getElementById('paymentStatus').classList.add('confirmed');
-            document.getElementById('adminAcceptBtn').classList.add('hidden');
-            displayDownloadOptions();
+            ws.send(JSON.stringify({ type: 'verify_otp', otp }));
         }
 
         function displayDownloadOptions() {
@@ -323,9 +290,7 @@
             }
 
             document.querySelector('.hero-bg').appendChild(resultDiv);
-            document.getElementById('paymentModal').style.display = 'none';
         }
     </script>
 </body>
 </html>
-```
