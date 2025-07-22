@@ -15,9 +15,9 @@ function generateOTP() {
 wss.on('connection', (ws) => {
   console.log('New client connected');
   ws.on('message', (message) => {
-    console.log('Received message:', message);
+    console.log('Received message:', message.toString());
     try {
-      const data = JSON.parse(message);
+      const data = JSON.parse(message.toString());
       if (data.type === 'generate_otp') {
         const otp = generateOTP();
         otps.set(otp, { used: false, timestamp: Date.now() });
