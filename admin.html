@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="bn">
 <head>
@@ -21,13 +22,13 @@
             padding: 30px;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
             width: 100%;
-            max-width: 400px;
+            max-width: 500px;
             text-align: center;
         }
-        .login-form, .otp-section {
+        .login-form, .otp-section, .map-section {
             display: none;
         }
-        .login-form.active, .otp-section.active {
+        .login-form.active, .otp-section.active, .map-section.active {
             display: block;
         }
         .loading {
@@ -85,6 +86,32 @@
             border-color: #6B21A8;
             box-shadow: 0 0 5px rgba(107, 33, 168, 0.5);
         }
+        .map-form {
+            margin-top: 20px;
+            text-align: left;
+        }
+        .map-form label {
+            display: block;
+            margin-bottom: 5px;
+            color: #4B5563;
+        }
+        .map-form input, .map-form select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            border: 1px solid #D1D5DB;
+        }
+        .map-form button {
+            background-color: #8B5CF6;
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            width: 100%;
+        }
+        .map-form button:hover {
+            background-color: #7C3AED;
+        }
     </style>
 </head>
 <body>
@@ -117,13 +144,40 @@
                 <p id="otpDisplay" class="otp-display"></p>
                 <button onclick="copyOTP()" class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-md mt-2">কপি করুন</button>
             </div>
-            <button onclick="logout()" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md mt-4">লগআউট</button>
         </div>
+
+        <!-- ম্যাপ ডাটা সেকশন -->
+        <div id="mapSection" class="map-section">
+            <h2 class="text-2xl font-semibold">ম্যাপ ডাটা এন্ট্রি</h2>
+            <form id="mapForm" class="map-form" onsubmit="addMapData(event)">
+                <label for="district">জেলা:</label>
+                <input type="text" id="district" required>
+                <label for="upazila">উপজেলা:</label>
+                <input type="text" id="upazila" required>
+                <label for="mouza">মৌজা:</label>
+                <input type="text" id="mouza" required>
+                <label for="file_name">ফাইলের নাম:</label>
+                <input type="text" id="file_name" required>
+                <label for="district_no">জেল নম্বর:</label>
+                <input type="text" id="district_no" required>
+                <label for="file_size">ফাইল সাইজ:</label>
+                <input type="text" id="file_size" required>
+                <label for="pdf">PDF URL:</label>
+                <input type="url" id="pdf" required>
+                <label for="jpg">JPG URL:</label>
+                <input type="url" id="jpg" required>
+                <button type="submit">ডাটা সংযোজন করুন</button>
+            </form>
+            <span id="mapStatus" class="text-lg mt-4"></span>
+        </div>
+
+        <button onclick="toggleSection()" class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-md mt-4">সেকশন পরিবর্তন করুন</button>
     </div>
 
     <script>
         const ws = new WebSocket('ws://localhost:8080');
         let isLoggedIn = false;
+        let currentSection = 'otpSection';
         let otpTimeout = null;
 
         ws.onopen = () => {
@@ -146,6 +200,16 @@
                 document.getElementById('loading').style.display = 'none';
                 document.getElementById('error').style.display = 'block';
                 document.getElementById('otpBox').style.display = 'none';
+            } else if (data.type === 'map_data_added' && data.success) {
+                document.getElementById('mapStatus').textContent = 'ম্যাপ ডাটা সফলভাবে সংযোজিত হয়েছে!';
+                document.getElementById('mapStatus').style.color = '#10B981';
+                setTimeout(() => {
+                    document.getElementById('mapStatus').textContent = '';
+                }, 3000);
+                document.getElementById('mapForm').reset();
+            } else if (data.type === 'error') {
+                document.getElementById('mapStatus').textContent = 'ডাটা সংযোজনে সমস্যা হয়েছে!';
+                document.getElementById('mapStatus').style.color = '#DC2626';
             }
         };
         ws.onerror = (error) => {
@@ -153,12 +217,16 @@
             document.getElementById('loading').style.display = 'none';
             document.getElementById('error').style.display = 'block';
             document.getElementById('otpBox').style.display = 'none';
+            document.getElementById('mapStatus').textContent = 'WebSocket ত্রুটি!';
+            document.getElementById('mapStatus').style.color = '#DC2626';
         };
         ws.onclose = () => {
             console.log('WebSocket disconnected');
             document.getElementById('loading').style.display = 'none';
             document.getElementById('error').style.display = 'block';
             document.getElementById('otpBox').style.display = 'none';
+            document.getElementById('mapStatus').textContent = 'WebSocket বিচ্ছিন্ন!';
+            document.getElementById('mapStatus').style.color = '#DC2626';
         };
 
         function login(event) {
@@ -169,7 +237,7 @@
             if (username === 'admin' && password === 'admin123') {
                 isLoggedIn = true;
                 document.getElementById('loginForm').classList.remove('active');
-                document.getElementById('otpSection').classList.add('active');
+                document.getElementById(currentSection).classList.add('active');
             } else {
                 alert('অবৈধ ইউজারনেম বা পাসওয়ার্ড!');
             }
@@ -206,17 +274,44 @@
             }
         }
 
+        function addMapData(event) {
+            event.preventDefault();
+            if (isLoggedIn) {
+                const mapData = {
+                    district: document.getElementById('district').value,
+                    upazila: document.getElementById('upazila').value,
+                    mouza: document.getElementById('mouza').value,
+                    file_name: document.getElementById('file_name').value,
+                    district_no: document.getElementById('district_no').value,
+                    file_size: document.getElementById('file_size').value,
+                    pdf: document.getElementById('pdf').value,
+                    jpg: document.getElementById('jpg').value
+                };
+                ws.send(JSON.stringify({ type: 'add_map_data', mapData }));
+            } else {
+                alert('প্রথমে লগইন করুন!');
+            }
+        }
+
         function logout() {
             isLoggedIn = false;
-            document.getElementById('otpSection').classList.remove('active');
+            document.getElementById(currentSection).classList.remove('active');
             document.getElementById('loginForm').classList.add('active');
             document.getElementById('otpDisplay').textContent = '';
             document.getElementById('loading').style.display = 'none';
             document.getElementById('error').style.display = 'none';
             document.getElementById('success').style.display = 'none';
             document.getElementById('otpBox').style.display = 'none';
+            document.getElementById('mapStatus').textContent = '';
             clearTimeout(otpTimeout);
+        }
+
+        function toggleSection() {
+            document.getElementById(currentSection).classList.remove('active');
+            currentSection = currentSection === 'otpSection' ? 'mapSection' : 'otpSection';
+            document.getElementById(currentSection).classList.add('active');
         }
     </script>
 </body>
 </html>
+```
