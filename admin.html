@@ -1,19 +1,53 @@
+```html
 <!DOCTYPE html>
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
     <title>এডমিন প্যানেল</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Noto Sans Bengali', sans-serif;
+        }
+        .login-form, .otp-section {
+            display: none;
+        }
+        .login-form.active, .otp-section.active {
+            display: block;
+        }
+    </style>
 </head>
-<body>
+<body class="bg-gray-100">
     <div class="container mx-auto p-4">
-        <h1 class="text-2xl font-bold mb-4">এডমিন প্যানেল</h1>
-        <button onclick="generateOTP()" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md mb-4">OTP জেনারেট করুন</button>
-        <p id="otpDisplay" class="text-lg font-semibold"></p>
+        <h1 class="text-2xl font-bold mb-4 text-center">এডমিন প্যানেল</h1>
+
+        <!-- লগইন ফর্ম -->
+        <div id="loginForm" class="login-form active">
+            <form onsubmit="login(event)" class="bg-white p-6 rounded-lg shadow-md">
+                <div class="mb-4">
+                    <label for="username" class="block text-gray-700">ইউজারনেম</label>
+                    <input type="text" id="username" class="w-full px-4 py-2 border border-gray-300 rounded-md" required>
+                </div>
+                <div class="mb-4">
+                    <label for="password" class="block text-gray-700">পাসওয়ার্ড</label>
+                    <input type="password" id="password" class="w-full px-4 py-2 border border-gray-300 rounded-md" required>
+                </div>
+                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md w-full">লগইন</button>
+            </form>
+        </div>
+
+        <!-- OTP সেকশন -->
+        <div id="otpSection" class="otp-section">
+            <h2 class="text-xl font-semibold mb-4">OTP ম্যানেজমেন্ট</h2>
+            <button onclick="generateOTP()" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md mb-4">OTP জেনারেট করুন</button>
+            <p id="otpDisplay" class="text-lg font-semibold"></p>
+            <button onclick="logout()" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md mt-4">লগআউট</button>
+        </div>
     </div>
 
     <script>
         const ws = new WebSocket('ws://localhost:8080');
+        let isLoggedIn = false;
 
         ws.onopen = () => console.log('Admin connected to WebSocket');
         ws.onmessage = (event) => {
@@ -23,9 +57,36 @@
             }
         };
 
+        function login(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // সিমুলেটেড লগইন (বাস্তবে সার্ভারে চেক করা উচিত)
+            if (username === 'admin' && password === 'admin123') {
+                isLoggedIn = true;
+                document.getElementById('loginForm').classList.remove('active');
+                document.getElementById('otpSection').classList.add('active');
+            } else {
+                alert('অবৈধ ইউজারনেম বা পাসওয়ার্ড!');
+            }
+        }
+
         function generateOTP() {
-            ws.send(JSON.stringify({ type: 'generate_otp' }));
+            if (isLoggedIn) {
+                ws.send(JSON.stringify({ type: 'generate_otp' }));
+            } else {
+                alert('প্রথমে লগইন করুন!');
+            }
+        }
+
+        function logout() {
+            isLoggedIn = false;
+            document.getElementById('otpSection').classList.remove('active');
+            document.getElementById('loginForm').classList.add('active');
+            document.getElementById('otpDisplay').textContent = '';
         }
     </script>
 </body>
 </html>
+```
