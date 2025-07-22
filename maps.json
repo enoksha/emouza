@@ -1,0 +1,26 @@
+```json
+   {
+       "dhaka": {
+           "savar": {
+               "mouza1": {
+                   "pdf": "https://drive.google.com/uc?export=download&id=FILE_ID_1",
+                   "jpg": "https://drive.google.com/uc?export=download&id=FILE_ID_2"
+               }
+           },
+           "mirpur": {
+               "mouza2": {
+                   "pdf": "https://drive.google.com/uc?export=download&id=FILE_ID_3",
+                   "jpg": "https://drive.google.com/uc?export=download&id=FILE_ID_4"
+               }
+           }
+       },
+       "chittagong": {
+           "mirpur": {
+               "mouza2": {
+                   "pdf": "https://drive.google.com/uc?export=download&id=FILE_ID_5",
+                   "jpg": "https://drive.google.com/uc?export=download&id=FILE_ID_6"
+               }
+           }
+       }
+   }
+   ```
