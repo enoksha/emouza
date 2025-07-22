@@ -37,7 +37,7 @@
         }
         return gk_fileData[filename] || "";
         }
-        </script>
+        </script>```html
 <!DOCTYPE html>
 <html lang="bn">
 <head>
@@ -156,16 +156,18 @@
 
     <script>
         let mapDatabase = {};
+        let isDataLoaded = false;
 
-        // একবার মাত্র ডাটা লোড করা
-        async function initializeData() {
-            if (Object.keys(mapDatabase).length === 0) {
+        // ডাটা লোড করার ফাংশন
+        async function loadMapDatabase() {
+            if (!isDataLoaded) {
                 try {
                     const response = await fetch('maps.json');
                     if (!response.ok) {
                         throw new Error(`HTTP error! status: ${response.status} - ${response.statusText}`);
                     }
                     mapDatabase = await response.json();
+                    isDataLoaded = true;
                     console.log('maps.json data loaded:', mapDatabase);
                 } catch (error) {
                     console.error('Error loading map database:', error);
@@ -175,7 +177,7 @@
         }
 
         // পেজ লোড হলে ডাটা লোড
-        window.onload = initializeData;
+        window.onload = loadMapDatabase;
 
         function searchMap() {
             const district = document.getElementById('district').value.toLowerCase();
@@ -184,6 +186,13 @@
 
             if (!district || !upazila || !mouza) {
                 alert('দয়া করে জেলা, উপজেলা এবং মৌজার নাম নির্বাচন করুন।');
+                return;
+            }
+
+            // ডাটা লোড হয়নি এমন ক্ষেত্রে মেসেজ দেখাও
+            if (!isDataLoaded) {
+                alert('ডাটা লোড হচ্ছে, দয়া করে অপেক্ষা করুন।');
+                loadMapDatabase();
                 return;
             }
 
@@ -206,3 +215,4 @@
     </script>
 </body>
 </html>
+```
