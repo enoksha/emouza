@@ -55,25 +55,27 @@
             background-size: cover;
             background-position: center;
             min-height: 500px;
+            background-color: #4a90e2; /* হালকা নীল ব্যাকগ্রাউন্ড */
         }
         .search-box {
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
             padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
-<body class="bg-gray-100">
+<body class="bg-gradient-to-r from-green-100 via-blue-100 to-purple-100">
     <!-- Header -->
-    <header class="bg-blue-900 text-white sticky top-0 z-50 shadow-md">
+    <header class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white sticky top-0 z-50 shadow-lg">
         <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <div class="text-3xl font-bold">
+            <div class="text-3xl font-bold text-yellow-300">
                 <a href="index.html">ই-মৌজা</a>
             </div>
             <ul class="flex space-x-6 text-lg">
-                <li><a href="index.html" class="hover:text-blue-300">হোম</a></li>
-                <li><a href="services.html" class="hover:text-blue-300">সেবা</a></li>
-                <li><a href="contact.html" class="hover:text-blue-300">যোগাযোগ</a></li>
+                <li><a href="index.html" class="hover:text-yellow-200">হোম</a></li>
+                <li><a href="services.html" class="hover:text-yellow-200">সেবা</a></li>
+                <li><a href="contact.html" class="hover:text-yellow-200">যোগাযোগ</a></li>
             </ul>
         </nav>
     </header>
@@ -81,22 +83,22 @@
     <!-- Hero Section -->
     <section class="hero-bg flex items-center justify-center text-center text-white py-20">
         <div class="container mx-auto px-4">
-            <h1 class="text-4xl md:text-5xl font-bold mb-6">মৌজা ম্যাপ ডাউনলোড করুন</h1>
-            <p class="text-lg mb-8">বাংলাদেশের সকল জেলা, উপজেলা ও মৌজার ম্যাপ PDF এবং JPG ফরম্যাটে।</p>
+            <h1 class="text-4xl md:text-5xl font-bold mb-6 text-orange-300">মৌজা ম্যাপ ডাউনলোড করুন</h1>
+            <p class="text-lg mb-8 text-green-200">বাংলাদেশের সকল জেলা, উপজেলা ও মৌজার ম্যাপ PDF এবং JPG ফরম্যাটে।</p>
             <div class="search-box max-w-2xl mx-auto">
                 <form id="searchForm" class="flex flex-col md:flex-row gap-4">
-                    <select id="district" class="w-full px-4 py-2 rounded-md text-black">
+                    <select id="district" class="w-full px-4 py-2 rounded-md text-black bg-white border border-green-300">
                         <option value="">জেলা নির্বাচন করুন</option>
                         <option value="dhaka">ঢাকা</option>
                         <option value="chittagong">চট্টগ্রাম</option>
                     </select>
-                    <select id="upazila" class="w-full px-4 py-2 rounded-md text-black">
+                    <select id="upazila" class="w-full px-4 py-2 rounded-md text-black bg-white border border-green-300">
                         <option value="">উপজেলা নির্বাচন করুন</option>
                         <option value="savar">সাভার</option>
                         <option value="mirpur">মিরপুর</option>
                     </select>
-                    <input type="text" id="mouza" placeholder="মৌজার নাম লিখুন" class="w-full px-4 py-2 rounded-md text-black">
-                    <button type="button" onclick="searchMap()" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md">অনুসন্ধান</button>
+                    <input type="text" id="mouza" placeholder="মৌজার নাম লিখুন" class="w-full px-4 py-2 rounded-md text-black bg-white border border-green-300">
+                    <button type="button" onclick="searchMap()" class="bg-gradient-to-r from-green-500 to-teal-500 hover:from-green-600 hover:to-teal-600 text-white px-6 py-2 rounded-md">অনুসন্ধান</button>
                 </form>
             </div>
         </div>
@@ -104,50 +106,50 @@
 
     <!-- Features Section -->
     <section class="container mx-auto px-4 py-16">
-        <h2 class="text-3xl font-bold text-center mb-12">আমাদের সেবাসমূহ</h2>
+        <h2 class="text-3xl font-bold text-center mb-12 text-indigo-700">আমাদের সেবাসমূহ</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="bg-white p-6 rounded-lg shadow-md text-center">
+            <div class="bg-gradient-to-br from-blue-100 to-cyan-100 p-6 rounded-lg shadow-md text-center hover:bg-gradient-to-tl hover:from-blue-200 hover:to-cyan-200 transition duration-300">
                 <img src="https://via.placeholder.com/50" alt="Map Icon" class="mx-auto mb-4">
-                <h3 class="text-xl font-semibold mb-4">উচ্চ মানের ম্যাপ</h3>
-                <p>উচ্চ রেজোলিউশনের মৌজা ম্যাপ PDF এবং JPG ফরম্যাটে।</p>
+                <h3 class="text-xl font-semibold mb-4 text-blue-700">উচ্চ মানের ম্যাপ</h3>
+                <p class="text-gray-700">উচ্চ রেজোলিউশনের মৌজা ম্যাপ PDF এবং JPG ফরম্যাটে।</p>
             </div>
-            <div class="bg-white p-6 rounded-lg shadow-md text-center">
+            <div class="bg-gradient-to-br from-purple-100 to-pink-100 p-6 rounded-lg shadow-md text-center hover:bg-gradient-to-tl hover:from-purple-200 hover:to-pink-200 transition duration-300">
                 <img src="https://via.placeholder.com/50" alt="Search Icon" class="mx-auto mb-4">
-                <h3 class="text-xl font-semibold mb-4">সহজ অনুসন্ধান</h3>
-                <p>জেলা, উপজেলা এবং মৌজার নাম দিয়ে দ্রুত ম্যাপ খুঁজুন।</p>
+                <h3 class="text-xl font-semibold mb-4 text-purple-700">সহজ অনুসন্ধান</h3>
+                <p class="text-gray-700">জেলা, উপজেলা এবং মৌজার নাম দিয়ে দ্রুত ম্যাপ খুঁজুন।</p>
             </div>
-            <div class="bg-white p-6 rounded-lg shadow-md text-center">
+            <div class="bg-gradient-to-br from-yellow-100 to-orange-100 p-6 rounded-lg shadow-md text-center hover:bg-gradient-to-tl hover:from-yellow-200 hover:to-orange-200 transition duration-300">
                 <img src="https://via.placeholder.com/50" alt="Download Icon" class="mx-auto mb-4">
-                <h3 class="text-xl font-semibold mb-4">দ্রুত ডাউনলোড</h3>
-                <p>এক ক্লিকে ম্যাপ ডাউনলোড করুন।</p>
+                <h3 class="text-xl font-semibold mb-4 text-yellow-700">দ্রুত ডাউনলোড</h3>
+                <p class="text-gray-700">এক ক্লিকে ম্যাপ ডাউনলোড করুন।</p>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-blue-900 text-white py-8">
+    <footer class="bg-gradient-to-r from-indigo-800 to-purple-800 text-white py-8">
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div>
-                    <h3 class="text-xl font-semibold mb-4">ই-মৌজা</h3>
-                    <p>বাংলাদেশের মৌজা ম্যাপ ডাউনলোডের সহজ প্ল্যাটফর্ম।</p>
+                    <h3 class="text-xl font-semibold mb-4 text-yellow-200">ই-মৌজা</h3>
+                    <p class="text-gray-300">বাংলাদেশের মৌজা ম্যাপ ডাউনলোডের সহজ প্ল্যাটফর্ম।</p>
                 </div>
                 <div>
-                    <h3 class="text-xl font-semibold mb-4">দ্রুত লিঙ্ক</h3>
+                    <h3 class="text-xl font-semibold mb-4 text-yellow-200">দ্রুত লিঙ্ক</h3>
                     <ul class="space-y-2">
-                        <li><a href="index.html" class="hover:text-blue-300">হোম</a></li>
-                        <li><a href="services.html" class="hover:text-blue-300">সেবা</a></li>
-                        <li><a href="contact.html" class="hover:text-blue-300">যোগাযোগ</a></li>
+                        <li><a href="index.html" class="hover:text-yellow-100">হোম</a></li>
+                        <li><a href="services.html" class="hover:text-yellow-100">সেবা</a></li>
+                        <li><a href="contact.html" class="hover:text-yellow-100">যোগাযোগ</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h3 class="text-xl font-semibold mb-4">যোগাযোগ</h3>
-                    <p>ইমেইল: info@emouza.com</p>
-                    <p>ফোন: +৮৮০ ১২৩৪-৫৬৭৮৯০</p>
+                    <h3 class="text-xl font-semibold mb-4 text-yellow-200">যোগাযোগ</h3>
+                    <p class="text-gray-300">ইমেইল: info@emouza.com</p>
+                    <p class="text-gray-300">ফোন: +৮৮০ ১২৩৪-৫৬৭৮৯০</p>
                 </div>
             </div>
             <div class="text-center mt-8">
-                <p>© ২০২৫ ই-মৌজা। সর্বস্বত্ব সংরক্ষিত।</p>
+                <p class="text-gray-300">© ২০২৫ ই-মৌজা। সর্বস্বত্ব সংরক্ষিত।</p>
             </div>
         </div>
     </footer>
@@ -156,16 +158,18 @@
         let mapDatabase = {};
 
         async function loadMapDatabase() {
-            try {
-                const response = await fetch('maps.json');
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status} - ${response.statusText}`);
+            if (Object.keys(mapDatabase).length === 0) {
+                try {
+                    const response = await fetch('maps.json');
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status} - ${response.statusText}`);
+                    }
+                    mapDatabase = await response.json();
+                    console.log('maps.json data loaded:', mapDatabase);
+                } catch (error) {
+                    console.error('Error loading map database:', error);
+                    alert('ম্যাপ ডাটাবেইস লোড করতে সমস্যা হয়েছে।\nত্রুটি: ' + error.message);
                 }
-                mapDatabase = await response.json();
-                console.log('maps.json data loaded:', mapDatabase); // ডিবাগিং
-            } catch (error) {
-                console.error('Error loading map database:', error);
-                alert('ম্যাপ ডাটাবেইস লোড করতে সমস্যা হয়েছে।\nত্রুটি: ' + error.message);
             }
         }
 
@@ -181,13 +185,13 @@
                 return;
             }
 
-            console.log('Searching for:', district, upazila, mouza); // ডিবাগিং
+            console.log('Searching for:', district, upazila, mouza);
             if (mapDatabase[district] && mapDatabase[district][upazila] && mapDatabase[district][upazila][mouza]) {
                 const map = mapDatabase[district][upazila][mouza];
                 const result = `
                     <p>ম্যাপ পাওয়া গেছে! নিচে ডাউনলোড করুন:</p>
-                    <a href="${map.pdf || '#'}" download class="bg-blue-600 text-white px-4 py-2 rounded-md mr-2">PDF ডাউনলোড</a>
-                    <a href="${map.jpg || '#'}" download class="bg-blue-600 text-white px-4 py-2 rounded-md">JPG ডাউনলোড</a>
+                    <a href="${map.pdf || '#'}" download class="bg-green-600 text-white px-4 py-2 rounded-md mr-2">PDF ডাউনলোড</a>
+                    <a href="${map.jpg || '#'}" download class="bg-green-600 text-white px-4 py-2 rounded-md">JPG ডাউনলোড</a>
                 `;
                 const resultDiv = document.createElement('div');
                 resultDiv.innerHTML = result;
