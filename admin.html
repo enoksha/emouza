@@ -9,175 +9,188 @@
     <style>
         body {
             font-family: 'Noto Sans Bengali', sans-serif;
-            background: linear-gradient(135deg, #6b48ff, #ff6b6b);
+            background: linear-gradient(135deg, #4A90E2, #F5A623);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             margin: 0;
+            color: #333;
         }
         .container {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
             width: 100%;
-            max-width: 500px;
+            max-width: 600px;
             text-align: center;
+            transition: all 0.3s ease;
         }
-        .login-form, .otp-section, .map-section {
+        .login-form, .data-entry {
             display: none;
         }
-        .login-form.active, .otp-section.active, .map-section.active {
+        .login-form.active, .data-entry.active {
             display: block;
         }
         .loading {
             display: none;
-            color: #4B5563;
-            font-weight: 500;
+            color: #6B7280;
+            font-weight: 600;
         }
         .error {
             display: none;
-            color: #DC2626;
-            font-weight: 500;
+            color: #EF4444;
+            font-weight: 600;
         }
         .success {
             display: none;
             color: #10B981;
-            font-weight: 500;
+            font-weight: 600;
         }
         .otp-box {
             display: none;
-            margin-top: 15px;
-            padding: 15px;
-            border: 2px solid #10B981;
-            border-radius: 10px;
-            background-color: #f3faf6;
+            margin-top: 20px;
+            padding: 20px;
+            border: 3px solid #10B981;
+            border-radius: 15px;
+            background-color: #F3FAF6;
             text-align: center;
             transition: all 0.3s ease;
         }
         .otp-display {
-            font-size: 1.5rem;
-            font-weight: 700;
-            letter-spacing: 5px;
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: 8px;
             color: #1E40AF;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
         button {
             transition: all 0.3s ease;
+            border-radius: 10px;
+            padding: 12px 20px;
         }
         button:hover {
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            filter: brightness(1.1);
         }
         h1 {
             color: #1E40AF;
-            margin-bottom: 20px;
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
         }
         h2 {
-            color: #6B21A8;
+            color: #7E22CE;
+            font-size: 1.8rem;
             margin-bottom: 20px;
         }
-        input {
+        input, select {
             border-color: #D1D5DB;
-            border-radius: 8px;
+            border-radius: 10px;
+            padding: 10px;
+            width: 100%;
+            margin-bottom: 15px;
+            transition: border-color 0.3s ease;
         }
-        input:focus {
+        input:focus, select:focus {
             outline: none;
-            border-color: #6B21A8;
-            box-shadow: 0 0 5px rgba(107, 33, 168, 0.5);
+            border-color: #7E22CE;
+            box-shadow: 0 0 8px rgba(126, 34, 206, 0.5);
         }
-        .map-form {
+        .data-entry-form {
             margin-top: 20px;
             text-align: left;
         }
-        .map-form label {
+        .data-entry-form label {
             display: block;
             margin-bottom: 5px;
             color: #4B5563;
+            font-weight: 500;
         }
-        .map-form input, .map-form select {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
-            border-radius: 8px;
-            border: 1px solid #D1D5DB;
-        }
-        .map-form button {
+        .data-entry-form button {
             background-color: #8B5CF6;
             color: white;
-            padding: 10px;
-            border-radius: 8px;
             width: 100%;
         }
-        .map-form button:hover {
+        .data-entry-form button:hover {
             background-color: #7C3AED;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1 class="text-3xl font-bold">এডমিন প্যানেল</h1>
+        <h1>এডমিন প্যানেল</h1>
 
         <!-- লগইন ফর্ম -->
         <div id="loginForm" class="login-form active">
-            <form onsubmit="login(event)" class="space-y-4">
+            <form onsubmit="login(event)" class="space-y-6">
                 <div>
                     <label for="username" class="block text-gray-700 font-medium">ইউজারনেম</label>
-                    <input type="text" id="username" class="w-full px-4 py-2 border rounded-md" required>
+                    <input type="text" id="username" class="w-full px-4 py-2 border" required>
                 </div>
                 <div>
                     <label for="password" class="block text-gray-700 font-medium">পাসওয়ার্ড</label>
-                    <input type="password" id="password" class="w-full px-4 py-2 border rounded-md" required>
+                    <input type="password" id="password" class="w-full px-4 py-2 border" required>
                 </div>
-                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md w-full">লগইন</button>
+                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white">লগইন</button>
             </form>
         </div>
 
-        <!-- OTP সেকশন -->
-        <div id="otpSection" class="otp-section">
-            <h2 class="text-2xl font-semibold">OTP ম্যানেজমেন্ট</h2>
-            <button id="generateOTPBtn" onclick="generateOTP()" class="bg-green-500 hover:bg-green-600 text-white px-5 py-2 rounded-md mb-4">OTP জেনারেট করুন</button>
+        <!-- ডাটা এন্ট্রি সেকশন -->
+        <div id="dataEntry" class="data-entry">
+            <h2>ডাটা এন্ট্রি</h2>
+            <button id="generateOTPBtn" onclick="generateOTP()" class="bg-green-500 hover:bg-green-600 text-white mr-4">OTP জেনারেট করুন</button>
             <span id="loading" class="loading">OTP জেনারেট হচ্ছে...</span>
             <span id="error" class="error">OTP জেনারেট করতে সমস্যা হয়েছে! সার্ভার চালু আছে কিনা চেক করুন।</span>
             <span id="success" class="success">OTP সফলভাবে জেনারেট হয়েছে!</span>
             <div id="otpBox" class="otp-box">
                 <p id="otpDisplay" class="otp-display"></p>
-                <button onclick="copyOTP()" class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-md mt-2">কপি করুন</button>
+                <button onclick="copyOTP()" class="bg-blue-500 hover:bg-blue-600 text-white mt-3">কপি করুন</button>
             </div>
-        </div>
-
-        <!-- ম্যাপ ডাটা সেকশন -->
-        <div id="mapSection" class="map-section">
-            <h2 class="text-2xl font-semibold">ম্যাপ ডাটা এন্ট্রি</h2>
-            <form id="mapForm" class="map-form" onsubmit="addMapData(event)">
-                <label for="district">জেলা:</label>
-                <input type="text" id="district" required>
-                <label for="upazila">উপজেলা:</label>
-                <input type="text" id="upazila" required>
-                <label for="mouza">মৌজা:</label>
-                <input type="text" id="mouza" required>
-                <label for="file_name">ফাইলের নাম:</label>
-                <input type="text" id="file_name" required>
-                <label for="district_no">জেল নম্বর:</label>
-                <input type="text" id="district_no" required>
-                <label for="file_size">ফাইল সাইজ:</label>
-                <input type="text" id="file_size" required>
-                <label for="pdf">PDF URL:</label>
-                <input type="url" id="pdf" required>
-                <label for="jpg">JPG URL:</label>
-                <input type="url" id="jpg" required>
-                <button type="submit">ডাটা সংযোজন করুন</button>
+            <form id="mapForm" class="data-entry-form space-y-4" onsubmit="addMapData(event)">
+                <div>
+                    <label for="district">জেলা:</label>
+                    <input type="text" id="district" required>
+                </div>
+                <div>
+                    <label for="upazila">উপজেলা:</label>
+                    <input type="text" id="upazila" required>
+                </div>
+                <div>
+                    <label for="mouza">মৌজা:</label>
+                    <input type="text" id="mouza" required>
+                </div>
+                <div>
+                    <label for="file_name">ফাইলের নাম:</label>
+                    <input type="text" id="file_name" required>
+                </div>
+                <div>
+                    <label for="district_no">জেল নম্বর:</label>
+                    <input type="text" id="district_no" required>
+                </div>
+                <div>
+                    <label for="file_size">ফাইল সাইজ:</label>
+                    <input type="text" id="file_size" required>
+                </div>
+                <div>
+                    <label for="pdf">PDF URL:</label>
+                    <input type="url" id="pdf" required>
+                </div>
+                <div>
+                    <label for="jpg">JPG URL:</label>
+                    <input type="url" id="jpg" required>
+                </div>
+                <button type="submit" class="mt-4">ডাটা সংযোজন করুন</button>
             </form>
             <span id="mapStatus" class="text-lg mt-4"></span>
+            <button onclick="logout()" class="bg-red-500 hover:bg-red-600 text-white mt-6">লগআউট</button>
         </div>
-
-        <button onclick="toggleSection()" class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-md mt-4">সেকশন পরিবর্তন করুন</button>
     </div>
 
     <script>
         const ws = new WebSocket('ws://localhost:8080');
         let isLoggedIn = false;
-        let currentSection = 'otpSection';
         let otpTimeout = null;
 
         ws.onopen = () => {
@@ -209,7 +222,7 @@
                 document.getElementById('mapForm').reset();
             } else if (data.type === 'error') {
                 document.getElementById('mapStatus').textContent = 'ডাটা সংযোজনে সমস্যা হয়েছে!';
-                document.getElementById('mapStatus').style.color = '#DC2626';
+                document.getElementById('mapStatus').style.color = '#EF4444';
             }
         };
         ws.onerror = (error) => {
@@ -218,7 +231,7 @@
             document.getElementById('error').style.display = 'block';
             document.getElementById('otpBox').style.display = 'none';
             document.getElementById('mapStatus').textContent = 'WebSocket ত্রুটি!';
-            document.getElementById('mapStatus').style.color = '#DC2626';
+            document.getElementById('mapStatus').style.color = '#EF4444';
         };
         ws.onclose = () => {
             console.log('WebSocket disconnected');
@@ -226,7 +239,7 @@
             document.getElementById('error').style.display = 'block';
             document.getElementById('otpBox').style.display = 'none';
             document.getElementById('mapStatus').textContent = 'WebSocket বিচ্ছিন্ন!';
-            document.getElementById('mapStatus').style.color = '#DC2626';
+            document.getElementById('mapStatus').style.color = '#EF4444';
         };
 
         function login(event) {
@@ -237,7 +250,7 @@
             if (username === 'admin' && password === 'admin123') {
                 isLoggedIn = true;
                 document.getElementById('loginForm').classList.remove('active');
-                document.getElementById(currentSection).classList.add('active');
+                document.getElementById('dataEntry').classList.add('active');
             } else {
                 alert('অবৈধ ইউজারনেম বা পাসওয়ার্ড!');
             }
@@ -295,7 +308,7 @@
 
         function logout() {
             isLoggedIn = false;
-            document.getElementById(currentSection).classList.remove('active');
+            document.getElementById('dataEntry').classList.remove('active');
             document.getElementById('loginForm').classList.add('active');
             document.getElementById('otpDisplay').textContent = '';
             document.getElementById('loading').style.display = 'none';
@@ -304,12 +317,6 @@
             document.getElementById('otpBox').style.display = 'none';
             document.getElementById('mapStatus').textContent = '';
             clearTimeout(otpTimeout);
-        }
-
-        function toggleSection() {
-            document.getElementById(currentSection).classList.remove('active');
-            currentSection = currentSection === 'otpSection' ? 'mapSection' : 'otpSection';
-            document.getElementById(currentSection).classList.add('active');
         }
     </script>
 </body>
