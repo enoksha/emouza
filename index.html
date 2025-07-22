@@ -1,158 +1,202 @@
- <!DOCTYPE html>
-   <html lang="bn">
-   <head>
-       <meta charset="UTF-8">
-       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-       <title>ই-মৌজা - মৌজা ম্যাপ ডাউনলোড</title>
-       <script src="https://cdn.tailwindcss.com"></script>
-       <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;700&display=swap" rel="stylesheet">
-       <style>
-           body {
-               font-family: 'Noto Sans Bengali', sans-serif;
-           }
-           .hero-bg {
-               background-image: url('https://images.unsplash.com/photo-1597072689227-8882273fc85b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
-               background-size: cover;
-               background-position: center;
-               min-height: 500px;
-           }
-           .search-box {
-               background: rgba(255, 255, 255, 0.9);
-               border-radius: 8px;
-               padding: 20px;
-           }
-       </style>
-   </head>
-   <body class="bg-gray-100">
-       <!-- Header -->
-       <header class="bg-blue-900 text-white sticky top-0 z-50 shadow-md">
-           <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
-               <div class="text-3xl font-bold">
-                   <a href="index.html">ই-মৌজা</a>
-               </div>
-               <ul class="flex space-x-6 text-lg">
-                   <li><a href="index.html" class="hover:text-blue-300">হোম</a></li>
-                   <li><a href="services.html" class="hover:text-blue-300">সেবা</a></li>
-                   <li><a href="contact.html" class="hover:text-blue-300">যোগাযোগ</a></li>
-               </ul>
-           </nav>
-       </header>
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
 
-       <!-- Hero Section -->
-       <section class="hero-bg flex items-center justify-center text-center text-white py-20">
-           <div class="container mx-auto px-4">
-               <h1 class="text-4xl md:text-5xl font-bold mb-6">মৌজা ম্যাপ ডাউনলোড করুন</h1>
-               <p class="text-lg mb-8">বাংলাদেশের সকল জেলা, উপজেলা ও মৌজার ম্যাপ PDF এবং JPG ফরম্যাটে।</p>
-               <div class="search-box max-w-2xl mx-auto">
-                   <form id="searchForm" class="flex flex-col md:flex-row gap-4">
-                       <select id="district" class="w-full px-4 py-2 rounded-md text-black">
-                           <option value="">জেলা নির্বাচন করুন</option>
-                           <option value="dhaka">ঢাকা</option>
-                           <option value="chittagong">চট্টগ্রাম</option>
-                       </select>
-                       <select id="upazila" class="w-full px-4 py-2 rounded-md text-black">
-                           <option value="">উপজেলা নির্বাচন করুন</option>
-                           <option value="savar">সাভার</option>
-                           <option value="mirpur">মিরপুর</option>
-                       </select>
-                       <input type="text" id="mouza" placeholder="মৌজার নাম লিখুন" class="w-full px-4 py-2 rounded-md text-black">
-                       <button type="button" onclick="searchMap()" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md">অনুসন্ধান</button>
-                   </form>
-               </div>
-           </div>
-       </section>
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
 
-       <!-- Features Section -->
-       <section class="container mx-auto px-4 py-16">
-           <h2 class="text-3xl font-bold text-center mb-12">আমাদের সেবাসমূহ</h2>
-           <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-               <div class="bg-white p-6 rounded-lg shadow-md text-center">
-                   <img src="https://via.placeholder.com/50" alt="Map Icon" class="mx-auto mb-4">
-                   <h3 class="text-xl font-semibold mb-4">উচ্চ মানের ম্যাপ</h3>
-                   <p>উচ্চ রেজোলিউশনের মৌজা ম্যাপ PDF এবং JPG ফরম্যাটে।</p>
-               </div>
-               <div class="bg-white p-6 rounded-lg shadow-md text-center">
-                   <img src="https://via.placeholder.com/50" alt="Search Icon" class="mx-auto mb-4">
-                   <h3 class="text-xl font-semibold mb-4">সহজ অনুসন্ধান</h3>
-                   <p>জেলা, উপজেলা এবং মৌজার নাম দিয়ে দ্রুত ম্যাপ খুঁজুন।</p>
-               </div>
-               <div class="bg-white p-6 rounded-lg shadow-md text-center">
-                   <img src="https://via.placeholder.com/50" alt="Download Icon" class="mx-auto mb-4">
-                   <h3 class="text-xl font-semibold mb-4">দ্রুত ডাউনলোড</h3>
-                   <p>এক ক্লিকে ম্যাপ ডাউনলোড করুন।</p>
-               </div>
-           </div>
-       </section>
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
 
-       <!-- Footer -->
-       <footer class="bg-blue-900 text-white py-8">
-           <div class="container mx-auto px-4">
-               <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                   <div>
-                       <h3 class="text-xl font-semibold mb-4">ই-মৌজা</h3>
-                       <p>বাংলাদেশের মৌজা ম্যাপ ডাউনলোডের সহজ প্ল্যাটফর্ম।</p>
-                   </div>
-                   <div>
-                       <h3 class="text-xl font-semibold mb-4">দ্রুত লিঙ্ক</h3>
-                       <ul class="space-y-2">
-                           <li><a href="index.html" class="hover:text-blue-300">হোম</a></li>
-                           <li><a href="services.html" class="hover:text-blue-300">সেবা</a></li>
-                           <li><a href="contact.html" class="hover:text-blue-300">যোগাযোগ</a></li>
-                       </ul>
-                   </div>
-                   <div>
-                       <h3 class="text-xl font-semibold mb-4">যোগাযোগ</h3>
-                       <p>ইমেইল: info@emouza.com</p>
-                       <p>ফোন: +৮৮০ ১২৩৪-৫৬৭৮৯০</p>
-                   </div>
-               </div>
-               <div class="text-center mt-8">
-                   <p>© ২০২৫ ই-মৌজা। সর্বস্বত্ব সংরক্ষিত।</p>
-               </div>
-           </div>
-       </footer>
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script>```html
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ই-মৌজা - মৌজা ম্যাপ ডাউনলোড</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans Bengali', sans-serif;
+        }
+        .hero-bg {
+            background-image: url('https://images.unsplash.com/photo-1597072689227-8882273fc85b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            min-height: 500px;
+        }
+        .search-box {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <!-- Header -->
+    <header class="bg-blue-900 text-white sticky top-0 z-50 shadow-md">
+        <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="text-3xl font-bold">
+                <a href="index.html">ই-মৌজা</a>
+            </div>
+            <ul class="flex space-x-6 text-lg">
+                <li><a href="index.html" class="hover:text-blue-300">হোম</a></li>
+                <li><a href="services.html" class="hover:text-blue-300">সেবা</a></li>
+                <li><a href="contact.html" class="hover:text-blue-300">যোগাযোগ</a></li>
+            </ul>
+        </nav>
+    </header>
 
-       <script>
-           async function loadMapDatabase() {
-               try {
-                   const response = await fetch('maps.json');
-                   if (!response.ok) {
-                       throw new Error('maps.json ফাইল লোড করা যায়নি');
-                   }
-                   return await response.json();
-               } catch (error) {
-                   console.error('Error loading map database:', error);
-                   alert('ম্যাপ ডাটাবেইস লোড করতে সমস্যা হয়েছে। দয়া করে পরে চেষ্টা করুন।');
-                   return {};
-               }
-           }
+    <!-- Hero Section -->
+    <section class="hero-bg flex items-center justify-center text-center text-white py-20">
+        <div class="container mx-auto px-4">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6">মৌজা ম্যাপ ডাউনলোড করুন</h1>
+            <p class="text-lg mb-8">বাংলাদেশের সকল জেলা, উপজেলা ও মৌজার ম্যাপ PDF এবং JPG ফরম্যাটে।</p>
+            <div class="search-box max-w-2xl mx-auto">
+                <form id="searchForm" class="flex flex-col md:flex-row gap-4">
+                    <select id="district" class="w-full px-4 py-2 rounded-md text-black">
+                        <option value="">জেলা নির্বাচন করুন</option>
+                        <option value="dhaka">ঢাকা</option>
+                        <option value="chittagong">চট্টগ্রাম</option>
+                    </select>
+                    <select id="upazila" class="w-full px-4 py-2 rounded-md text-black">
+                        <option value="">উপজেলা নির্বাচন করুন</option>
+                        <option value="savar">সাভার</option>
+                        <option value="mirpur">মিরপুর</option>
+                    </select>
+                    <input type="text" id="mouza" placeholder="মৌজার নাম লিখুন" class="w-full px-4 py-2 rounded-md text-black">
+                    <button type="button" onclick="searchMap()" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md">অনুসন্ধান</button>
+                </form>
+            </div>
+        </div>
+    </section>
 
-           async function searchMap() {
-               const district = document.getElementById('district').value;
-               const upazila = document.getElementById('upazila').value;
-               const mouza = document.getElementById('mouza').value.trim().toLowerCase();
+    <!-- Features Section -->
+    <section class="container mx-auto px-4 py-16">
+        <h2 class="text-3xl font-bold text-center mb-12">আমাদের সেবাসমূহ</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                <img src="https://via.placeholder.com/50" alt="Map Icon" class="mx-auto mb-4">
+                <h3 class="text-xl font-semibold mb-4">উচ্চ মানের ম্যাপ</h3>
+                <p>উচ্চ রেজোলিউশনের মৌজা ম্যাপ PDF এবং JPG ফরম্যাটে।</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                <img src="https://via.placeholder.com/50" alt="Search Icon" class="mx-auto mb-4">
+                <h3 class="text-xl font-semibold mb-4">সহজ অনুসন্ধান</h3>
+                <p>জেলা, উপজেলা এবং মৌজার নাম দিয়ে দ্রুত ম্যাপ খুঁজুন।</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                <img src="https://via.placeholder.com/50" alt="Download Icon" class="mx-auto mb-4">
+                <h3 class="text-xl font-semibold mb-4">দ্রুত ডাউনলোড</h3>
+                <p>এক ক্লিকে ম্যাপ ডাউনলোড করুন।</p>
+            </div>
+        </div>
+    </section>
 
-               if (!district || !upazila || !mouza) {
-                   alert('দয়া করে জেলা, উপজেলা এবং মৌজার নাম নির্বাচন করুন।');
-                   return;
-               }
+    <!-- Footer -->
+    <footer class="bg-blue-900 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">ই-মৌজা</h3>
+                    <p>বাংলাদেশের মৌজা ম্যাপ ডাউনলোডের সহজ প্ল্যাটফর্ম।</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">দ্রুত লিঙ্ক</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="hover:text-blue-300">হোম</a></li>
+                        <li><a href="services.html" class="hover:text-blue-300">সেবা</a></li>
+                        <li><a href="contact.html" class="hover:text-blue-300">যোগাযোগ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">যোগাযোগ</h3>
+                    <p>ইমেইল: info@emouza.com</p>
+                    <p>ফোন: +৮৮০ ১২৩৪-৫৬৭৮৯০</p>
+                </div>
+            </div>
+            <div class="text-center mt-8">
+                <p>© ২০২৫ ই-মৌজা। সর্বস্বত্ব সংরক্ষিত।</p>
+            </div>
+        </div>
+    </footer>
 
-               const mapDatabase = await loadMapDatabase();
-               if (mapDatabase[district] && mapDatabase[district][upazila] && mapDatabase[district][upazila][mouza]) {
-                   const map = mapDatabase[district][upazila][mouza];
-                   const result = `
-                       <p>ম্যাপ পাওয়া গেছে! নিচে ডাউনলোড করুন:</p>
-                       <a href="${map.pdf}" download class="bg-blue-600 text-white px-4 py-2 rounded-md mr-2">PDF ডাউনলোড</a>
-                       <a href="${map.jpg}" download class="bg-blue-600 text-white px-4 py-2 rounded-md">JPG ডাউনলোড</a>
-                   `;
-                   const resultDiv = document.createElement('div');
-                   resultDiv.innerHTML = result;
-                   resultDiv.className = 'container mx-auto px-4 mt-4 text-center';
-                   document.querySelector('.hero-bg').appendChild(resultDiv);
-               } else {
-                   alert(`কোনো ম্যাপ পাওয়া যায়নি: ${district}, ${upazila}, ${mouza}`);
-               }
-           }
-       </script>
-   </body>
-   </html>
+    <script>
+        let mapDatabase = {};
+
+        async function loadMapDatabase() {
+            try {
+                const response = await fetch('maps.json');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status} - ${response.statusText}`);
+                }
+                mapDatabase = await response.json();
+                console.log('maps.json data loaded:', mapDatabase); // ডিবাগিং
+            } catch (error) {
+                console.error('Error loading map database:', error);
+                alert('ম্যাপ ডাটাবেইস লোড করতে সমস্যা হয়েছে।\nত্রুটি: ' + error.message);
+            }
+        }
+
+        window.onload = loadMapDatabase;
+
+        function searchMap() {
+            const district = document.getElementById('district').value.toLowerCase();
+            const upazila = document.getElementById('upazila').value.toLowerCase();
+            const mouza = document.getElementById('mouza').value.trim().toLowerCase();
+
+            if (!district || !upazila || !mouza) {
+                alert('দয়া করে জেলা, উপজেলা এবং মৌজার নাম নির্বাচন করুন।');
+                return;
+            }
+
+            console.log('Searching for:', district, upazila, mouza); // ডিবাগিং
+            if (mapDatabase[district] && mapDatabase[district][upazila] && mapDatabase[district][upazila][mouza]) {
+                const map = mapDatabase[district][upazila][mouza];
+                const result = `
+                    <p>ম্যাপ পাওয়া গেছে! নিচে ডাউনলোড করুন:</p>
+                    <a href="${map.pdf || '#'}" download class="bg-blue-600 text-white px-4 py-2 rounded-md mr-2">PDF ডাউনলোড</a>
+                    <a href="${map.jpg || '#'}" download class="bg-blue-600 text-white px-4 py-2 rounded-md">JPG ডাউনলোড</a>
+                `;
+                const resultDiv = document.createElement('div');
+                resultDiv.innerHTML = result;
+                resultDiv.className = 'container mx-auto px-4 mt-4 text-center';
+                document.querySelector('.hero-bg').appendChild(resultDiv);
+            } else {
+                alert(`কোনো ম্যাপ পাওয়া যায়নি: ${district}, ${upazila}, ${mouza}`);
+            }
+        }
+    </script>
+</body>
+</html>
