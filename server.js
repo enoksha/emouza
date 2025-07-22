@@ -3,7 +3,7 @@ const http = require('http');
 const server = http.createServer();
 const wss = new WebSocket.Server({ server });
 
-// OTP ট্র্যাকিং (সিমুলেটেড ডাটাবেস)
+// OTP ট্র্যাকিং
 const otps = new Map();
 
 function generateOTP() {
@@ -13,8 +13,14 @@ function generateOTP() {
 wss.on('connection', (ws) => {
   console.log('Client connected');
   ws.on('message', (message) => {
+    console.log('Received message:', message);
     const data = JSON.parse(message);
-    if (data.type === 'verify_otp') {
+    if (data.type === 'generate_otp') {
+      const otp = generateOTP();
+      otps.set(otp, { used: false, timestamp: Date.now() });
+      ws.send(JSON.stringify({ type: 'otp_generated', otp }));
+      console.log(`Generated OTP: ${otp} for connection`);
+    } else if (data.type === 'verify_otp') {
       const otp = data.otp;
       if (otps.has(otp) && otps.get(otp).used === false) {
         otps.get(otp).used = true;
@@ -25,15 +31,8 @@ wss.on('connection', (ws) => {
     }
   });
 
-  // এডমিনের জন্য OTP জেনারেট (সিমুলেটেড, বাস্তবে এডমিন প্যানেল থেকে কল হবে)
-  ws.on('message', (message) => {
-    const data = JSON.parse(message);
-    if (data.type === 'generate_otp') {
-      const otp = generateOTP();
-      otps.set(otp, { used: false, timestamp: Date.now() });
-      ws.send(JSON.stringify({ type: 'otp_generated', otp }));
-      console.log(`Generated OTP: ${otp}`);
-    }
+  ws.on('error', (error) => {
+    console.error('WebSocket error:', error);
   });
 });
 
