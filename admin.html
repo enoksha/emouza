@@ -15,6 +15,14 @@
         .login-form.active, .otp-section.active {
             display: block;
         }
+        .loading {
+            display: none;
+            color: #4B5563;
+        }
+        .error {
+            display: none;
+            color: #DC2626;
+        }
     </style>
 </head>
 <body class="bg-gray-100">
@@ -39,7 +47,9 @@
         <!-- OTP সেকশন -->
         <div id="otpSection" class="otp-section">
             <h2 class="text-xl font-semibold mb-4">OTP ম্যানেজমেন্ট</h2>
-            <button onclick="generateOTP()" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md mb-4">OTP জেনারেট করুন</button>
+            <button id="generateOTPBtn" onclick="generateOTP()" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md mb-4">OTP জেনারেট করুন</button>
+            <span id="loading" class="loading">OTP জেনারেট হচ্ছে...</span>
+            <span id="error" class="error">OTP জেনারেট করতে সমস্যা হয়েছে!</span>
             <p id="otpDisplay" class="text-lg font-semibold"></p>
             <button onclick="logout()" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md mt-4">লগআউট</button>
         </div>
@@ -49,12 +59,27 @@
         const ws = new WebSocket('ws://localhost:8080');
         let isLoggedIn = false;
 
-        ws.onopen = () => console.log('Admin connected to WebSocket');
+        ws.onopen = () => {
+            console.log('Admin connected to WebSocket');
+        };
         ws.onmessage = (event) => {
             const data = JSON.parse(event.data);
+            console.log('Received from server:', data);
             if (data.type === 'otp_generated') {
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('error').style.display = 'none';
                 document.getElementById('otpDisplay').textContent = `OTP: ${data.otp} (এটি WhatsApp-এ পাঠান)`;
             }
+        };
+        ws.onerror = (error) => {
+            console.error('WebSocket error:', error);
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('error').style.display = 'block';
+        };
+        ws.onclose = () => {
+            console.log('WebSocket disconnected');
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('error').style.display = 'block';
         };
 
         function login(event) {
@@ -62,7 +87,6 @@
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
 
-            // সিমুলেটেড লগইন (বাস্তবে সার্ভারে চেক করা উচিত)
             if (username === 'admin' && password === 'admin123') {
                 isLoggedIn = true;
                 document.getElementById('loginForm').classList.remove('active');
@@ -74,7 +98,17 @@
 
         function generateOTP() {
             if (isLoggedIn) {
+                document.getElementById('loading').style.display = 'inline';
+                document.getElementById('error').style.display = 'none';
+                document.getElementById('otpDisplay').textContent = '';
                 ws.send(JSON.stringify({ type: 'generate_otp' }));
+                // 5 সেকেন্ডের মধ্যে প্রতিক্রিয়া না পেলে ত্রুটি দেখানো
+                setTimeout(() => {
+                    if (document.getElementById('loading').style.display === 'inline') {
+                        document.getElementById('loading').style.display = 'none';
+                        document.getElementById('error').style.display = 'block';
+                    }
+                }, 5000);
             } else {
                 alert('প্রথমে লগইন করুন!');
             }
@@ -85,6 +119,8 @@
             document.getElementById('otpSection').classList.remove('active');
             document.getElementById('loginForm').classList.add('active');
             document.getElementById('otpDisplay').textContent = '';
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('error').style.display = 'none';
         }
     </script>
 </body>
