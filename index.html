@@ -89,6 +89,12 @@
             max-width: 400px;
             text-align: center;
         }
+        .pending {
+            color: orange;
+        }
+        .confirmed {
+            color: green;
+        }
     </style>
 </head>
 <body class="bg-gradient-to-r from-green-100 via-blue-100 to-purple-100">
@@ -184,13 +190,13 @@
     <div id="paymentModal" class="payment-modal" onclick="closeModal(event)">
         <div class="payment-content" onclick="event.stopPropagation()">
             <h3 class="text-xl font-bold mb-4 text-green-700">পেমেন্ট করুন</h3>
-            <p class="mb-4">ফাইল ডাউনলোড করতে বিকাশ পেমেন্ট প্রয়োজন।</p>
-            <form id="paymentForm">
-                <input type="text" id="mobileNumber" placeholder="আপনার বিকাশ নম্বর" class="w-full px-4 py-2 mb-4 rounded-md border border-gray-300" required>
-                <input type="number" id="amount" value="50" min="10" class="w-full px-4 py-2 mb-4 rounded-md border border-gray-300" readonly>
-                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md w-full">পেমেন্ট করুন</button>
-            </form>
-            <p id="paymentStatus" class="mt-4 text-red-500"></p>
+            <p class="mb-4">নিচের বিকাশ নম্বরে টাকা সেন্ড করুন:</p>
+            <p class="text-lg font-semibold bg-gray-200 p-2 rounded-md mb-4" id="bikashNumber">01712345678 <button onclick="copyToClipboard('bikashNumber')" class="ml-2 text-blue-500 hover:text-blue-700">কপি</button></p>
+            <p class="mb-4">অ্যামাউন্ট: ৫০ টাকা</p>
+            <input type="text" id="transactionId" placeholder="ট্রানজেকশন আইডি লিখুন" class="w-full px-4 py-2 mb-4 rounded-md border border-gray-300" required>
+            <button onclick="confirmPayment()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md w-full">কনফার্ম</button>
+            <p id="paymentStatus" class="mt-4"></p>
+            <button onclick="adminAccept()" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md mt-4 hidden" id="adminAcceptBtn">একসেপ্ট (এডমিন)</button>
         </div>
     </div>
 
@@ -198,6 +204,7 @@
         let mapDatabase = {};
         let isDataLoaded = false;
         let selectedMap = null;
+        let paymentStatus = 'pending';
 
         // ডাটা লোড করার ফাংশন
         async function loadMapDatabase() {
@@ -246,6 +253,10 @@
         }
 
         function showPaymentModal() {
+            paymentStatus = 'pending';
+            document.getElementById('paymentStatus').textContent = '';
+            document.getElementById('transactionId').value = '';
+            document.getElementById('adminAcceptBtn').classList.add('hidden');
             const modal = document.getElementById('paymentModal');
             modal.style.display = 'flex';
         }
@@ -253,53 +264,59 @@
         function closeModal(event) {
             if (event.target.id === 'paymentModal') {
                 document.getElementById('paymentModal').style.display = 'none';
-                document.getElementById('paymentStatus').textContent = '';
             }
         }
 
-        document.getElementById('paymentForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const mobileNumber = document.getElementById('mobileNumber').value;
-            const amount = document.getElementById('amount').value;
+        function copyToClipboard(elementId) {
+            const text = document.getElementById(elementId).textContent.split(' ')[0];
+            navigator.clipboard.writeText(text).then(() => {
+                alert('বিকাশ নম্বর কপি করা হয়েছে!');
+            });
+        }
 
-            if (!mobileNumber.match(/^01[3-9]\d{8}$/)) {
-                document.getElementById('paymentStatus').textContent = 'অবৈধ বিকাশ নম্বর!';
+        function confirmPayment() {
+            const transactionId = document.getElementById('transactionId').value.trim();
+            if (!transactionId) {
+                document.getElementById('paymentStatus').textContent = 'অবৈধ ট্রানজেকশন আইডি!';
                 return;
             }
+            document.getElementById('paymentStatus').textContent = 'পেমেন্ট Pending...';
+            document.getElementById('paymentStatus').classList.add('pending');
+            document.getElementById('adminAcceptBtn').classList.remove('hidden');
+        }
 
-            // সিমুলেটেড পেমেন্ট প্রক্রিয়া
-            document.getElementById('paymentStatus').textContent = 'পেমেন্ট প্রক্রিয়া চলছে...';
-            setTimeout(() => {
-                document.getElementById('paymentStatus').textContent = 'পেমেন্ট সফল! ফাইল ডাউনলোড করুন।';
-                displayDownloadOptions();
-            }, 2000); // 2 সেকেন্ড অপেক্ষা
-        });
+        function adminAccept() {
+            paymentStatus = 'confirmed';
+            document.getElementById('paymentStatus').textContent = 'পেমেন্ট নিশ্চিত! ফাইল ডাউনলোড করুন।';
+            document.getElementById('paymentStatus').classList.remove('pending');
+            document.getElementById('paymentStatus').classList.add('confirmed');
+            document.getElementById('adminAcceptBtn').classList.add('hidden');
+            displayDownloadOptions();
+        }
 
         function displayDownloadOptions() {
             const resultDiv = document.createElement('div');
             resultDiv.className = 'container mx-auto px-4 mt-4 text-center';
 
             if (selectedMap.pdf) {
-                const pdfName = selectedMap.pdf.split('/').pop().replace('?export=download', '') || 'map.pdf';
                 const pdfInfo = `
                     <div class="file-info">
-                        <p><strong>ফাইলের নাম:</strong> ${pdfName}</p>
-                        <p><strong>টাইপ:</strong> PDF</p>
-                        <p><strong>আকার:</strong> ~2 MB (আনুমানিক)</p>
-                        <a href="${selectedMap.pdf}" download class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md mt-2 inline-block">ডাউনলোড</a>
+                        <p><strong>ফাইলের নাম:</strong> ${selectedMap.file_name}</p>
+                        <p><strong>জেল নং:</strong> ${selectedMap.district_no}</p>
+                        <p><strong>ফাইল সাইজ:</strong> ${selectedMap.file_size}</p>
+                        <a href="${selectedMap.pdf}" download class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md mt-2 inline-block">ডাউনলোড (PDF)</a>
                     </div>
                 `;
                 resultDiv.innerHTML += pdfInfo;
             }
 
             if (selectedMap.jpg) {
-                const jpgName = selectedMap.jpg.split('/').pop().replace('?export=download', '') || 'map.jpg';
                 const jpgInfo = `
                     <div class="file-info">
-                        <p><strong>ফাইলের নাম:</strong> ${jpgName}</p>
-                        <p><strong>টাইপ:</strong> JPG</p>
-                        <p><strong>আকার:</strong> ~1 MB (আনুমানিক)</p>
-                        <a href="${selectedMap.jpg}" download class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md mt-2 inline-block">ডাউনলোড</a>
+                        <p><strong>ফাইলের নাম:</strong> ${selectedMap.file_name}</p>
+                        <p><strong>জেল নং:</strong> ${selectedMap.district_no}</p>
+                        <p><strong>ফাইল সাইজ:</strong> ${selectedMap.file_size}</p>
+                        <a href="${selectedMap.jpg}" download class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md mt-2 inline-block">ডাউনলোড (JPG)</a>
                     </div>
                 `;
                 resultDiv.innerHTML += jpgInfo;
