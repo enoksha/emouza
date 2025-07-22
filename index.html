@@ -55,7 +55,7 @@
             background-size: cover;
             background-position: center;
             min-height: 500px;
-            background-color: #4a90e2; /* হালকা নীল ব্যাকগ্রাউন্ড */
+            background-color: #4a90e2;
         }
         .search-box {
             background: rgba(255, 255, 255, 0.95);
@@ -157,7 +157,8 @@
     <script>
         let mapDatabase = {};
 
-        async function loadMapDatabase() {
+        // একবার মাত্র ডাটা লোড করা
+        async function initializeData() {
             if (Object.keys(mapDatabase).length === 0) {
                 try {
                     const response = await fetch('maps.json');
@@ -173,7 +174,8 @@
             }
         }
 
-        window.onload = loadMapDatabase;
+        // পেজ লোড হলে ডাটা লোড
+        window.onload = initializeData;
 
         function searchMap() {
             const district = document.getElementById('district').value.toLowerCase();
@@ -204,3 +206,4 @@
     </script>
 </body>
 </html>
+```
