@@ -1,43 +1,4 @@
-<script type="text/javascript">
-        var gk_isXlsx = false;
-        var gk_xlsxFileLookup = {};
-        var gk_fileData = {};
-        function filledCell(cell) {
-          return cell !== '' && cell != null;
-        }
-        function loadFileData(filename) {
-        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
-            try {
-                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
-                var firstSheetName = workbook.SheetNames[0];
-                var worksheet = workbook.Sheets[firstSheetName];
-
-                // Convert sheet to JSON to filter blank rows
-                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
-                // Filter out blank rows (rows where all cells are empty, null, or undefined)
-                var filteredData = jsonData.filter(row => row.some(filledCell));
-
-                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
-                var headerRowIndex = filteredData.findIndex((row, index) =>
-                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
-                );
-                // Fallback
-                if (headerRowIndex === -1 || headerRowIndex > 25) {
-                  headerRowIndex = 0;
-                }
-
-                // Convert filtered JSON back to CSV
-                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
-                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
-                return csv;
-            } catch (e) {
-                console.error(e);
-                return "";
-            }
-        }
-        return gk_fileData[filename] || "";
-        }
-</script>
+```html
 <!DOCTYPE html>
 <html lang="bn">
 <head>
@@ -65,6 +26,15 @@
         .success {
             display: none;
             color: #10B981;
+        }
+        .otp-box {
+            display: none;
+            margin-top: 10px;
+            padding: 10px;
+            border: 2px solid #10B981;
+            border-radius: 5px;
+            background-color: #f3faf6;
+            text-align: center;
         }
     </style>
 </head>
@@ -94,7 +64,10 @@
             <span id="loading" class="loading">OTP জেনারেট হচ্ছে...</span>
             <span id="error" class="error">OTP জেনারেট করতে সমস্যা হয়েছে! সার্ভার চালু আছে কিনা চেক করুন।</span>
             <span id="success" class="success">OTP সফলভাবে জেনারেট হয়েছে!</span>
-            <p id="otpDisplay" class="text-lg font-semibold"></p>
+            <div id="otpBox" class="otp-box">
+                <p id="otpDisplay" class="text-lg font-semibold"></p>
+                <button onclick="copyOTP()" class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded-md mt-2">কপি করুন</button>
+            </div>
             <button onclick="logout()" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md mt-4">লগআউট</button>
         </div>
     </div>
@@ -110,29 +83,33 @@
         ws.onmessage = (event) => {
             const data = JSON.parse(event.data);
             console.log('Received from server:', data);
-            clearTimeout(otpTimeout); // টাইমআউট ক্লিয়ার
+            clearTimeout(otpTimeout);
             if (data.type === 'otp_generated') {
                 document.getElementById('loading').style.display = 'none';
                 document.getElementById('error').style.display = 'none';
                 document.getElementById('success').style.display = 'inline';
-                document.getElementById('otpDisplay').textContent = `OTP: ${data.otp} (এটি WhatsApp-এ পাঠান)`;
+                document.getElementById('otpBox').style.display = 'block';
+                document.getElementById('otpDisplay').textContent = data.otp;
                 setTimeout(() => {
                     document.getElementById('success').style.display = 'none';
-                }, 3000); // 3 সেকেন্ড পর সফল মেসেজ লুকানো
+                }, 3000);
             } else if (data.type === 'error') {
                 document.getElementById('loading').style.display = 'none';
                 document.getElementById('error').style.display = 'block';
+                document.getElementById('otpBox').style.display = 'none';
             }
         };
         ws.onerror = (error) => {
             console.error('WebSocket error:', error);
             document.getElementById('loading').style.display = 'none';
             document.getElementById('error').style.display = 'block';
+            document.getElementById('otpBox').style.display = 'none';
         };
         ws.onclose = () => {
             console.log('WebSocket disconnected');
             document.getElementById('loading').style.display = 'none';
             document.getElementById('error').style.display = 'block';
+            document.getElementById('otpBox').style.display = 'none';
         };
 
         function login(event) {
@@ -154,9 +131,9 @@
                 document.getElementById('loading').style.display = 'inline';
                 document.getElementById('error').style.display = 'none';
                 document.getElementById('success').style.display = 'none';
+                document.getElementById('otpBox').style.display = 'none';
                 document.getElementById('otpDisplay').textContent = '';
                 ws.send(JSON.stringify({ type: 'generate_otp' }));
-                // 5 সেকেন্ডের মধ্যে প্রতিক্রিয়া না পেলে ত্রুটি
                 otpTimeout = setTimeout(() => {
                     if (document.getElementById('loading').style.display === 'inline') {
                         document.getElementById('loading').style.display = 'none';
@@ -168,6 +145,18 @@
             }
         }
 
+        function copyOTP() {
+            const otp = document.getElementById('otpDisplay').textContent;
+            if (otp) {
+                navigator.clipboard.writeText(otp).then(() => {
+                    alert('OTP কপি হয়ে গেছে!');
+                }).catch(err => {
+                    console.error('Copy failed:', err);
+                    alert('OTP কপি করতে সমস্যা হয়েছে!');
+                });
+            }
+        }
+
         function logout() {
             isLoggedIn = false;
             document.getElementById('otpSection').classList.remove('active');
@@ -176,8 +165,10 @@
             document.getElementById('loading').style.display = 'none';
             document.getElementById('error').style.display = 'none';
             document.getElementById('success').style.display = 'none';
+            document.getElementById('otpBox').style.display = 'none';
             clearTimeout(otpTimeout);
         }
     </script>
 </body>
 </html>
+```
