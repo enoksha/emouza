@@ -1,4 +1,43 @@
-```html
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+</script>
 <!DOCTYPE html>
 <html lang="bn">
 <head>
@@ -22,6 +61,10 @@
         .error {
             display: none;
             color: #DC2626;
+        }
+        .success {
+            display: none;
+            color: #10B981;
         }
     </style>
 </head>
@@ -49,7 +92,8 @@
             <h2 class="text-xl font-semibold mb-4">OTP ম্যানেজমেন্ট</h2>
             <button id="generateOTPBtn" onclick="generateOTP()" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md mb-4">OTP জেনারেট করুন</button>
             <span id="loading" class="loading">OTP জেনারেট হচ্ছে...</span>
-            <span id="error" class="error">OTP জেনারেট করতে সমস্যা হয়েছে!</span>
+            <span id="error" class="error">OTP জেনারেট করতে সমস্যা হয়েছে! সার্ভার চালু আছে কিনা চেক করুন।</span>
+            <span id="success" class="success">OTP সফলভাবে জেনারেট হয়েছে!</span>
             <p id="otpDisplay" class="text-lg font-semibold"></p>
             <button onclick="logout()" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md mt-4">লগআউট</button>
         </div>
@@ -58,6 +102,7 @@
     <script>
         const ws = new WebSocket('ws://localhost:8080');
         let isLoggedIn = false;
+        let otpTimeout = null;
 
         ws.onopen = () => {
             console.log('Admin connected to WebSocket');
@@ -65,10 +110,18 @@
         ws.onmessage = (event) => {
             const data = JSON.parse(event.data);
             console.log('Received from server:', data);
+            clearTimeout(otpTimeout); // টাইমআউট ক্লিয়ার
             if (data.type === 'otp_generated') {
                 document.getElementById('loading').style.display = 'none';
                 document.getElementById('error').style.display = 'none';
+                document.getElementById('success').style.display = 'inline';
                 document.getElementById('otpDisplay').textContent = `OTP: ${data.otp} (এটি WhatsApp-এ পাঠান)`;
+                setTimeout(() => {
+                    document.getElementById('success').style.display = 'none';
+                }, 3000); // 3 সেকেন্ড পর সফল মেসেজ লুকানো
+            } else if (data.type === 'error') {
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('error').style.display = 'block';
             }
         };
         ws.onerror = (error) => {
@@ -100,10 +153,11 @@
             if (isLoggedIn) {
                 document.getElementById('loading').style.display = 'inline';
                 document.getElementById('error').style.display = 'none';
+                document.getElementById('success').style.display = 'none';
                 document.getElementById('otpDisplay').textContent = '';
                 ws.send(JSON.stringify({ type: 'generate_otp' }));
-                // 5 সেকেন্ডের মধ্যে প্রতিক্রিয়া না পেলে ত্রুটি দেখানো
-                setTimeout(() => {
+                // 5 সেকেন্ডের মধ্যে প্রতিক্রিয়া না পেলে ত্রুটি
+                otpTimeout = setTimeout(() => {
                     if (document.getElementById('loading').style.display === 'inline') {
                         document.getElementById('loading').style.display = 'none';
                         document.getElementById('error').style.display = 'block';
@@ -121,8 +175,9 @@
             document.getElementById('otpDisplay').textContent = '';
             document.getElementById('loading').style.display = 'none';
             document.getElementById('error').style.display = 'none';
+            document.getElementById('success').style.display = 'none';
+            clearTimeout(otpTimeout);
         }
     </script>
 </body>
 </html>
-```
