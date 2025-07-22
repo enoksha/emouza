@@ -1,0 +1,43 @@
+```html
+   <!-- Previous HTML content remains the same until the script -->
+   <script>
+       async function loadMapDatabase() {
+           try {
+               const response = await fetch('maps.json');
+               return await response.json();
+           } catch (error) {
+               console.error('Error loading map database:', error);
+               return {};
+           }
+       }
+
+       async function searchMap() {
+           const district = document.getElementById('district').value;
+           const upazila = document.getElementById('upazila').value;
+           const mouza = document.getElementById('mouza').value.trim().toLowerCase();
+
+           if (!district || !upazila || !mouza) {
+               alert('দয়া করে জেলা, উপজেলা এবং মৌজার নাম নির্বাচন করুন।');
+               return;
+           }
+
+           const mapDatabase = await loadMapDatabase();
+           if (mapDatabase[district] && mapDatabase[district][upazila] && mapDatabase[district][upazila][mouza]) {
+               const map = mapDatabase[district][upazila][mouza];
+               const result = `
+                   <p>ম্যাপ পাওয়া গেছে! নিচে ডাউনলোড করুন:</p>
+                   <a href="${map.pdf}" download class="bg-blue-600 text-white px-4 py-2 rounded-md mr-2">PDF ডাউনলোড</a>
+                   <a href="${map.jpg}" download class="bg-blue-600 text-white px-4 py-2 rounded-md">JPG ডাউনলোড</a>
+               `;
+               const resultDiv = document.createElement('div');
+               resultDiv.innerHTML = result;
+               resultDiv.className = 'container mx-auto px-4 mt-4 text-center';
+               document.querySelector('.hero-bg').appendChild(resultDiv);
+           } else {
+               alert(`কোনো ম্যাপ পাওয়া যায়নি: ${district}, ${upazila}, ${mouza}`);
+           }
+       }
+   </script>
+   </body>
+   </html>
+   ```
