@@ -7,9 +7,10 @@
                     "file_name": "Prajapati_Map",
                     "district_no": "20",
                     "file_size": "2MB",
-                    "seat_no": "১",
                     "pdf": "https://example.com/prajapati.pdf",
-                    "jpg": "https://example.com/prajapati.jpg"
+                    "jpg": "https://example.com/prajapati.jpg",
+                    "pdf_seat_no": "-১",
+                    "jpg_seat_no": "-২"
                 }
             }
         }
