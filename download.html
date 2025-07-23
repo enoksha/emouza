@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
@@ -101,6 +101,7 @@
                         pdfSection.innerHTML = `
                             <p><strong>ফাইল টাইপ:</strong> PDF</p>
                             <p><strong>ফাইল সাইজ:</strong> ${mapData.file_size || 'উল্লেখিত নাও'}</p>
+                            <p><strong>সিট নং:</strong> ${mapData.seat_no || 'উল্লেখিত নাও'}</p>
                         `;
                         const pdfLink = document.createElement('a');
                         pdfLink.href = mapData.pdf;
@@ -118,6 +119,7 @@
                         jpgSection.innerHTML = `
                             <p><strong>ফাইল টাইপ:</strong> JPG</p>
                             <p><strong>ফাইল সাইজ:</strong> ${mapData.file_size || 'উল্লেখিত নাও'}</p>
+                            <p><strong>সিট নং:</strong> ${mapData.seat_no || 'উল্লেখিত নাও'}</p>
                         `;
                         const jpgLink = document.createElement('a');
                         jpgLink.href = mapData.jpg;
@@ -135,6 +137,7 @@
                         pngSection.innerHTML = `
                             <p><strong>ফাইল টাইপ:</strong> PNG</p>
                             <p><strong>ফাইল সাইজ:</strong> ${mapData.file_size || 'উল্লেখিত নাও'}</p>
+                            <p><strong>সিট নং:</strong> ${mapData.seat_no || 'উল্লেখিত নাও'}</p>
                         `;
                         const pngLink = document.createElement('a');
                         pngLink.href = mapData.png;
