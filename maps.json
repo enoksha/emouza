@@ -1,16 +1,34 @@
 {
     "mymensingh": {
-        "জামালপুর": {
-            "ইসলামপুর": {
+        "jamalpur": {
+            "islampur": {
                 "প্রজাপতি (২০)": {
                     "code": "২০",
                     "file_name": "Prajapati_Map",
                     "district_no": "20",
                     "file_size": "2MB",
-                    "jpg": "https://example.com/prajapati.pdf",
-                    "jpg": "https://example.com/prajapati.jpg",
-                    "jpg_seat_no": "১",
-                    "jpg_seat_no": "২"
+                    "files": [
+                        {
+                            "type": "pdf",
+                            "url": "https://example.com/prajapati1.pdf",
+                            "seat_no": "১"
+                        },
+                        {
+                            "type": "pdf",
+                            "url": "https://example.com/prajapati2.pdf",
+                            "seat_no": "২"
+                        },
+                        {
+                            "type": "jpg",
+                            "url": "https://example.com/prajapati1.jpg",
+                            "seat_no": "৩"
+                        },
+                        {
+                            "type": "jpg",
+                            "url": "https://example.com/prajapati2.jpg",
+                            "seat_no": "৪"
+                        }
+                    ]
                 }
             }
         }
