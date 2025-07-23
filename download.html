@@ -96,7 +96,12 @@
                         linksDiv.appendChild(pdfLink);
                         linksDiv.appendChild(document.createElement('br'));
                     }
-                        <p><strong>শিট নং:</strong> ${mapData.sit_no}</p>
+                    
+             if (mapData) {
+                    infoDiv.innerHTML = 
+                   <p><strong>শিট নং:</strong> ${mapData.sit_no}</p>
+              
+                    ;
                     
                     // Check for JPG link
                     if (mapData.jpg) {
