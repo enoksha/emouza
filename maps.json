@@ -14,16 +14,6 @@
                             "seat_no": "-১"
                         },
                         {
-                            "type": "pdf",
-                            "url": "https://example.com/belgacha2.pdf",
-                            "seat_no": "-২"
-                        },
-                        {
-                            "type": "jpg",
-                            "url": "https://example.com/belgacha1.jpg",
-                            "seat_no": "-৩"
-                        },
-                        {
                             "type": "jpg",
                             "url": "https://example.com/belgacha2.jpg",
                             "seat_no": "-৪"
@@ -40,16 +30,6 @@
                             "type": "pdf",
                             "url": "https://example.com/ghilabari1.pdf",
                             "seat_no": "-১"
-                        },
-                        {
-                            "type": "pdf",
-                            "url": "https://example.com/ghilabari2.pdf",
-                            "seat_no": "-২"
-                        },
-                        {
-                            "type": "jpg",
-                            "url": "https://example.com/ghilabari1.jpg",
-                            "seat_no": "-৩"
                         },
                         {
                             "type": "jpg",
@@ -70,16 +50,6 @@
                             "seat_no": "-১"
                         },
                         {
-                            "type": "pdf",
-                            "url": "https://example.com/chorgila2.pdf",
-                            "seat_no": "-২"
-                        },
-                        {
-                            "type": "jpg",
-                            "url": "https://example.com/chorgila1.jpg",
-                            "seat_no": "-৩"
-                        },
-                        {
                             "type": "jpg",
                             "url": "https://example.com/chorgila2.jpg",
                             "seat_no": "-৪"
@@ -98,135 +68,11 @@
                             "seat_no": "-১"
                         },
                         {
-                            "type": "pdf",
-                            "url": "https://example.com/charbelgacha2.pdf",
-                            "seat_no": "-২"
-                        },
-                        {
-                            "type": "jpg",
-                            "url": "https://example.com/charbelgacha1.jpg",
-                            "seat_no": "-৩"
-                        },
-                        {
                             "type": "jpg",
                             "url": "https://example.com/charbelgacha2.jpg",
                             "seat_no": "-৪"
                         }
                     ]
-                }
-                "চর কুলকান্দি (১৫)": {
-                    "code": "১৫",
-                    "file_name": "Char_Kulkandi_Map",
-                    "district_no": "20",
-                    "file_size": "2.4MB",
-                    "files": [
-                        {
-                            "type": "pdf",
-                            "url": "https://example.com/charkulkandi1.pdf",
-                            "seat_no": "-১"
-                        },
-                        {
-                            "type": "pdf",
-                            "url": "https://example.com/charkulkandi2.pdf",
-                            "seat_no": "-২"
-                        },
-                        {
-                            "type": "jpg",
-                            "url": "https://example.com/charkulkandi1.jpg",
-                            "seat_no": "-৩"
-                        },
-                        {
-                            "type": "jpg",
-                            "url": "https://example.com/charkulkandi2.jpg",
-                            "seat_no": "-৪"
-                        }
-                    ]
-                },
-                "বড়ল (১৬)": {
-                    "code": "১৬",
-                    "file_name": "Baral_Map",
-                    "district_no": "20",
-                    "file_size": "2.5MB",
-                    "files": [
-                        {
-                            "type": "pdf",
-                            "url": "https://example.com/baral1.pdf",
-                            "seat_no": "-১"
-                        },
-                        {
-                            "type": "pdf",
-                            "url": "https://example.com/baral2.pdf",
-                            "seat_no": "-২"
-                        },
-                        {
-                            "type": "jpg",
-                            "url": "https://example.com/baral1.jpg",
-                            "seat_no": "-৩"
-                        },
-                        {
-                            "type": "jpg",
-                            "url": "https://example.com/baral2.jpg",
-                            "seat_no": "-৪"
-                        }
-                    ]
-                },
-                "ধরপাড়া (১৭)": {
-                    "code": "১৭",
-                    "file_name": "Dharpara_Map",
-                    "district_no": "20",
-                    "file_size": "2.6MB",
-                    "files": [
-                        {
-                            "type": "pdf",
-                            "url": "https://example.com/dharpara1.pdf",
-                            "seat_no": "-১"
-                        },
-                        {
-                            "type": "pdf",
-                            "url": "https://example.com/dharpara2.pdf",
-                            "seat_no": "-২"
-                        },
-                        {
-                            "type": "jpg",
-                            "url": "https://example.com/dharpara1.jpg",
-                            "seat_no": "-৩"
-                        },
-                        {
-                            "type": "jpg",
-                            "url": "https://example.com/dharpara2.jpg",
-                            "seat_no": "-৪"
-                        }
-                    ]
-                },
-                "বাঘরদী (৮৫)": {
-                    "code": "৮৫",
-                    "file_name": "Baghardi_Map",
-                    "district_no": "20",
-                    "file_size": "9.4MB",
-                    "files": [
-                        {
-                            "type": "pdf",
-                            "url": "https://example.com/baghardi1.pdf",
-                            "seat_no": "-১"
-                        },
-                        {
-                            "type": "pdf",
-                            "url": "https://example.com/baghardi2.pdf",
-                            "seat_no": "-২"
-                        },
-                        {
-                            "type": "jpg",
-                            "url": "https://example.com/baghardi1.jpg",
-                            "seat_no": "-৩"
-                        },
-                        {
-                            "type": "jpg",
-                            "url": "https://example.com/baghardi2.jpg",
-                            "seat_no": "-৪"
-                        }
-                    ]
-                }
-            }
         }
     }
-            }
+        }
