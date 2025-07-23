@@ -9,7 +9,7 @@ const otps = new Map();
 
 function generateOTP() {
   const otp = Math.floor(100000 + Math.random() * 900000).toString(); // 6 ডিজিট OTP
-  console.log(`Generated OTP: ${otp}`);
+  console.log(`Generated OTP: ${otp} at ${new Date().toLocaleString()}`);
   return otp;
 }
 
@@ -17,7 +17,7 @@ function generateOTP() {
 async function readMapData() {
   try {
     const data = await fs.readFile('maps.json', 'utf8');
-    return JSON.parse(data);
+    return JSON.parse(data || '{}'); // ডিফল্ট খালি অবজেক্ট
   } catch (error) {
     console.error('Error reading maps.json:', error);
     return {};
@@ -28,14 +28,14 @@ async function readMapData() {
 async function writeMapData(data) {
   try {
     await fs.writeFile('maps.json', JSON.stringify(data, null, 2));
-    console.log('maps.json updated successfully');
+    console.log('maps.json updated successfully at:', new Date().toLocaleString());
   } catch (error) {
     console.error('Error writing maps.json:', error);
   }
 }
 
 wss.on('connection', (ws) => {
-  console.log('New client connected');
+  console.log('New client connected at:', new Date().toLocaleString());
   ws.on('message', async (message) => {
     console.log('Received message:', message.toString());
     try {
@@ -62,7 +62,7 @@ wss.on('connection', (ws) => {
       }
     } catch (error) {
       console.error('Error processing message:', error);
-      ws.send(JSON.stringify({ type: 'error', message: 'Invalid request' }));
+      ws.send(JSON.stringify({ type: 'error', message: 'Invalid request or server error' }));
     }
   });
 
@@ -71,10 +71,10 @@ wss.on('connection', (ws) => {
   });
 
   ws.on('close', () => {
-    console.log('Client disconnected');
+    console.log('Client disconnected at:', new Date().toLocaleString());
   });
 });
 
 server.listen(8080, () => {
-  console.log('WebSocket server running on port 8080');
+  console.log('WebSocket server running on port 8080 at:', new Date().toLocaleString());
 });
