@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="bn">
 <head>
@@ -24,10 +25,10 @@
             margin: 20px auto;
             transition: all 0.3s ease;
         }
-        .login-form, .data-entry {
+        .login-form, .otp-section {
             display: none;
         }
-        .login-form.active, .data-entry.active {
+        .login-form.active, .otp-section.active {
             display: block;
         }
         .loading {
@@ -100,7 +101,7 @@
             margin-bottom: 15px;
             text-decoration: underline;
         }
-        input, select {
+        input {
             border-color: #D1D5DB;
             border-radius: 10px;
             padding: 8px;
@@ -109,36 +110,10 @@
             transition: border-color 0.3s ease;
             box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
         }
-        input:focus, select:focus {
+        input:focus {
             outline: none;
             border-color: #7E22CE;
             box-shadow: 0 0 8px rgba(126, 34, 206, 0.5), inset 0 2px 4px rgba(0, 0, 0, 0.05);
-        }
-        .data-entry-form {
-            margin-top: 15px;
-            text-align: left;
-            background: #F9FAFB;
-            padding: 15px;
-            border-radius: 15px;
-            border: 1px solid #E5E7EB;
-        }
-        .data-entry-form label {
-            display: block;
-            margin-bottom: 5px;
-            color: #4B5563;
-            font-weight: 500;
-        }
-        .data-entry-form button {
-            background-color: #8B5CF6;
-            color: white;
-            margin-top: 10px;
-        }
-        .data-entry-form button:hover {
-            background-color: #7C3AED;
-        }
-        .status-message {
-            margin-top: 10px;
-            font-size: 1rem;
         }
         @media (min-width: 640px) { /* sm breakpoint */
             .container {
@@ -158,25 +133,6 @@
             button {
                 padding: 12px 20px;
                 width: auto;
-            }
-            .data-entry-form {
-                padding: 20px;
-            }
-        }
-        @media (min-width: 1024px) { /* lg breakpoint */
-            .container {
-                max-width: 800px;
-            }
-            .data-entry-form {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 15px;
-            }
-            .data-entry-form > div:nth-child(8) {
-                grid-column: span 2;
-            }
-            button {
-                grid-column: span 2;
             }
         }
     </style>
@@ -200,12 +156,10 @@
             </form>
         </div>
 
-        <!-- ডাটা এন্ট্রি সেকশন -->
-        <div id="dataEntry" class="data-entry">
-            <h2>ডাটা এন্ট্রি ও OTP ম্যানেজমেন্ট</h2>
-            <div class="flex flex-col sm:flex-row justify-center mb-4 gap-4">
-                <button id="generateOTPBtn" onclick="generateOTP()" class="bg-green-500 hover:bg-green-600 text-white">OTP জেনারেট করুন</button>
-            </div>
+        <!-- OTP সেকশন -->
+        <div id="otpSection" class="otp-section">
+            <h2>OTP ম্যানেজমেন্ট</h2>
+            <button id="generateOTPBtn" onclick="generateOTP()" class="bg-green-500 hover:bg-green-600 text-white mb-4">OTP জেনারেট করুন</button>
             <span id="loading" class="loading">OTP জেনারেট হচ্ছে...</span>
             <span id="error" class="error">OTP জেনারেট করতে সমস্যা হয়েছে! সার্ভার চালু আছে কিনা চেক করুন।</span>
             <span id="success" class="success">OTP সফলভাবে জেনারেট হয়েছে!</span>
@@ -213,42 +167,6 @@
                 <p id="otpDisplay" class="otp-display"></p>
                 <button onclick="copyOTP()" class="bg-blue-500 hover:bg-blue-600 text-white mt-3">কপি করুন</button>
             </div>
-            <form id="mapForm" class="data-entry-form space-y-4" onsubmit="addMapData(event)">
-                <div>
-                    <label for="district">জেলা:</label>
-                    <input type="text" id="district" required>
-                </div>
-                <div>
-                    <label for="upazila">উপজেলা:</label>
-                    <input type="text" id="upazila" required>
-                </div>
-                <div>
-                    <label for="mouza">মৌজা:</label>
-                    <input type="text" id="mouza" required>
-                </div>
-                <div>
-                    <label for="file_name">ফাইলের নাম:</label>
-                    <input type="text" id="file_name" required>
-                </div>
-                <div>
-                    <label for="district_no">জেল নম্বর:</label>
-                    <input type="text" id="district_no" required>
-                </div>
-                <div>
-                    <label for="file_size">ফাইল সাইজ:</label>
-                    <input type="text" id="file_size" required>
-                </div>
-                <div>
-                    <label for="pdf">PDF URL:</label>
-                    <input type="url" id="pdf" required>
-                </div>
-                <div>
-                    <label for="jpg">JPG URL:</label>
-                    <input type="url" id="jpg" required>
-                </div>
-                <button type="submit" class="mt-4">ডাটা সংযোজন করুন</button>
-            </form>
-            <span id="mapStatus" class="status-message"></span>
             <button onclick="logout()" class="bg-red-500 hover:bg-red-600 text-white mt-6">লগআউট</button>
         </div>
     </div>
@@ -278,16 +196,6 @@
                 document.getElementById('loading').style.display = 'none';
                 document.getElementById('error').style.display = 'block';
                 document.getElementById('otpBox').style.display = 'none';
-            } else if (data.type === 'map_data_added' && data.success) {
-                document.getElementById('mapStatus').textContent = 'ম্যাপ ডাটা সফলভাবে সংযোজিত হয়েছে!';
-                document.getElementById('mapStatus').style.color = '#10B981';
-                setTimeout(() => {
-                    document.getElementById('mapStatus').textContent = '';
-                }, 3000);
-                document.getElementById('mapForm').reset();
-            } else if (data.type === 'error') {
-                document.getElementById('mapStatus').textContent = 'ডাটা সংযোজনে সমস্যা হয়েছে!';
-                document.getElementById('mapStatus').style.color = '#EF4444';
             }
         };
         ws.onerror = (error) => {
@@ -295,16 +203,12 @@
             document.getElementById('loading').style.display = 'none';
             document.getElementById('error').style.display = 'block';
             document.getElementById('otpBox').style.display = 'none';
-            document.getElementById('mapStatus').textContent = 'WebSocket ত্রুটি!';
-            document.getElementById('mapStatus').style.color = '#EF4444';
         };
         ws.onclose = () => {
             console.log('WebSocket disconnected at:', new Date().toLocaleString());
             document.getElementById('loading').style.display = 'none';
             document.getElementById('error').style.display = 'block';
             document.getElementById('otpBox').style.display = 'none';
-            document.getElementById('mapStatus').textContent = 'WebSocket বিচ্ছিন্ন!';
-            document.getElementById('mapStatus').style.color = '#EF4444';
         };
 
         function login(event) {
@@ -315,7 +219,7 @@
             if (username === 'admin' && password === 'admin123') {
                 isLoggedIn = true;
                 document.getElementById('loginForm').classList.remove('active');
-                document.getElementById('dataEntry').classList.add('active');
+                document.getElementById('otpSection').classList.add('active');
             } else {
                 alert('অবৈধ ইউজারনেম বা পাসওয়ার্ড!');
             }
@@ -352,37 +256,18 @@
             }
         }
 
-        function addMapData(event) {
-            event.preventDefault();
-            if (isLoggedIn) {
-                const mapData = {
-                    district: document.getElementById('district').value,
-                    upazila: document.getElementById('upazila').value,
-                    mouza: document.getElementById('mouza').value,
-                    file_name: document.getElementById('file_name').value,
-                    district_no: document.getElementById('district_no').value,
-                    file_size: document.getElementById('file_size').value,
-                    pdf: document.getElementById('pdf').value,
-                    jpg: document.getElementById('jpg').value
-                };
-                ws.send(JSON.stringify({ type: 'add_map_data', mapData }));
-            } else {
-                alert('প্রথমে লগইন করুন!');
-            }
-        }
-
         function logout() {
             isLoggedIn = false;
-            document.getElementById('dataEntry').classList.remove('active');
+            document.getElementById('otpSection').classList.remove('active');
             document.getElementById('loginForm').classList.add('active');
             document.getElementById('otpDisplay').textContent = '';
             document.getElementById('loading').style.display = 'none';
             document.getElementById('error').style.display = 'none';
             document.getElementById('success').style.display = 'none';
             document.getElementById('otpBox').style.display = 'none';
-            document.getElementById('mapStatus').textContent = '';
             clearTimeout(otpTimeout);
         }
     </script>
 </body>
 </html>
+```
