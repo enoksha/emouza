@@ -94,62 +94,34 @@
 
                     linksDiv.innerHTML = ''; // Clear previous links
 
-                    // Check for PDF
-                    if (mapData.pdf) {
-                        const pdfSection = document.createElement('div');
-                        pdfSection.className = 'file-info';
-                        pdfSection.innerHTML = `
-                            <p><strong>ফাইল টাইপ:</strong> PDF</p>
-                            <p><strong>ফাইল সাইজ:</strong> ${mapData.file_size || 'উল্লেখিত নাও'}</p>
-                            <p><strong>সিট নং:</strong> ${mapData.pdf_seat_no || 'উল্লেখিত নাও'}</p>
-                        `;
-                        const pdfLink = document.createElement('a');
-                        pdfLink.href = mapData.pdf;
-                        pdfLink.download = `${mouza}_map.pdf`;
-                        pdfLink.className = 'download-button';
-                        pdfLink.textContent = 'PDF ডাউনলোড';
-                        pdfSection.appendChild(pdfLink);
-                        linksDiv.appendChild(pdfSection);
-                    }
+                    // Check for files array and create sections for each file
+                    if (mapData.files && Array.isArray(mapData.files)) {
+                        let hasFiles = false;
+                        mapData.files.forEach(file => {
+                            if (file.url) {
+                                hasFiles = true;
+                                const fileSection = document.createElement('div');
+                                fileSection.className = 'file-info';
+                                fileSection.innerHTML = `
+                                    <p><strong>ফাইল টাইপ:</strong> ${file.type.toUpperCase()}</p>
+                                    <p><strong>ফাইল সাইজ:</strong> ${mapData.file_size || 'উল্লেখিত নাও'}</p>
+                                    <p><strong>সিট নং:</strong> ${file.seat_no || 'উল্লেখিত নাও'}</p>
+                                `;
+                                const fileLink = document.createElement('a');
+                                fileLink.href = file.url;
+                                fileLink.download = `${mouza}_map_${file.type}_${file.seat_no || '1'}.${file.type}`;
+                                fileLink.className = 'download-button';
+                                fileLink.textContent = `${file.type.toUpperCase()} ডাউনলোড`;
+                                fileSection.appendChild(fileLink);
+                                linksDiv.appendChild(fileSection);
+                            }
+                        });
 
-                    // Check for JPG
-                    if (mapData.jpg) {
-                        const jpgSection = document.createElement('div');
-                        jpgSection.className = 'file-info';
-                        jpgSection.innerHTML = `
-                            <p><strong>ফাইল টাইপ:</strong> JPG</p>
-                            <p><strong>ফাইল সাইজ:</strong> ${mapData.file_size || 'উল্লেখিত নাও'}</p>
-                            <p><strong>সিট নং:</strong> ${mapData.jpg_seat_no || 'উল্লেখিত নাও'}</p>
-                        `;
-                        const jpgLink = document.createElement('a');
-                        jpgLink.href = mapData.jpg;
-                        jpgLink.download = `${mouza}_map.jpg`;
-                        jpgLink.className = 'download-button';
-                        jpgLink.textContent = 'JPG ডাউনলোড';
-                        jpgSection.appendChild(jpgLink);
-                        linksDiv.appendChild(jpgSection);
-                    }
-
-                    // Check for PNG (if added in future)
-                    if (mapData.png) {
-                        const pngSection = document.createElement('div');
-                        pngSection.className = 'file-info';
-                        pngSection.innerHTML = `
-                            <p><strong>ফাইল টাইপ:</strong> PNG</p>
-                            <p><strong>ফাইল সাইজ:</strong> ${mapData.file_size || 'উল্লেখিত নাও'}</p>
-                            <p><strong>সিট নং:</strong> ${mapData.png_seat_no || 'উল্লেখিত নাও'}</p>
-                        `;
-                        const pngLink = document.createElement('a');
-                        pngLink.href = mapData.png;
-                        pngLink.download = `${mouza}_map.png`;
-                        pngLink.className = 'download-button';
-                        pngLink.textContent = 'PNG ডাউনলোড';
-                        pngSection.appendChild(pngLink);
-                        linksDiv.appendChild(pngSection);
-                    }
-
-                    if (!mapData.pdf && !mapData.jpg && !mapData.png) {
-                        linksDiv.innerHTML = '<p class="text-red-500">কোনো ডাউনলোডযোগ্য ফাইল পাওয়া যায়নি।</p>';
+                        if (!hasFiles) {
+                            linksDiv.innerHTML = '<p class="text-red-500">কোনো ডাউনলোডযোগ্য ফাইল পাওয়া যায়নি।</p>';
+                        }
+                    } else {
+                        linksDiv.innerHTML = '<p class="text-red-500">ফাইল ডাটা সঠিক ফরম্যাটে পাওয়া যায়নি।</p>';
                     }
                 } else {
                     infoDiv.innerHTML = '<p class="text-red-500">ম্যাপ ডাটা পাওয়া যায়নি।</p>';
