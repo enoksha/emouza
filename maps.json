@@ -6,6 +6,7 @@
                     "file_name": "Prajapati_Map",
                     "district_no": "20",
                     "file_size": "2MB",
+                    "sit_no": "1",
                     "jpg": "https://drive.google.com/uc?export=download&id=1PQvW7k1ismlrlXpetgykNA2odmqjEz3F"
                 },
                 "সিন্দুরতলি (২১)": {
@@ -20,6 +21,7 @@
                     "file_name": "Shildaha_Map",
                     "district_no": "22",
                     "file_size": "2.2MB",
+                    "sit_no": "1",
                     "pdf": "https://example.com/shildaha.pdf",
                     "jpg": "https://example.com/shildaha.jpg"
                 },
@@ -27,6 +29,7 @@
                     "file_name": "Char_Nandanerpara_Map",
                     "district_no": "23",
                     "file_size": "2.3MB",
+                    "sit_no": "1",
                     "pdf": "https://example.com/char_nandanerpara.pdf",
                     "jpg": "https://example.com/char_nandanerpara.jpg"
                 },
@@ -34,6 +37,7 @@
                     "file_name": "Shishua_Map",
                     "district_no": "24",
                     "file_size": "2.4MB",
+                    "sit_no": "1",
                     "pdf": "https://example.com/shishua.pdf",
                     "jpg": "https://example.com/shishua.jpg"
                 },
@@ -41,6 +45,7 @@
                     "file_name": "Char_Shishua_Map",
                     "district_no": "25",
                     "file_size": "2.5MB",
+                    "sit_no": "1",
                     "pdf": "https://example.com/char_shishua.pdf",
                     "jpg": "https://example.com/char_shishua.jpg"
                 },
@@ -48,6 +53,7 @@
                     "file_name": "Joknai_Map",
                     "district_no": "26",
                     "file_size": "2.6MB",
+                    "sit_no": "1",
                     "pdf": "https://example.com/joknai.pdf",
                     "jpg": "https://example.com/joknai.jpg"
                 },
@@ -55,6 +61,7 @@
                     "file_name": "Chengania_Map",
                     "district_no": "27",
                     "file_size": "2.7MB",
+                    "sit_no": "1",
                     "pdf": "https://example.com/chengania.pdf",
                     "jpg": "https://example.com/chengania.jpg"
                 }
