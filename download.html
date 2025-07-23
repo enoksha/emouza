@@ -31,6 +31,16 @@
             border-radius: 8px;
             border-left: 4px solid #4CAF50;
         }
+        .file-section {
+            margin-top: 15px;
+        }
+        .file-info {
+            padding: 10px;
+            background: #f0f0f0;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border-left: 4px solid #2196F3;
+        }
         .download-button {
             background: linear-gradient(to right, #4CAF50, #2E7D32);
             padding: 8px 16px;
@@ -40,12 +50,10 @@
             transition: background 0.3s;
             margin-top: 5px;
             display: inline-block;
+            text-decoration: none;
         }
         .download-button:hover {
             background: linear-gradient(to right, #45a049, #2E7D32);
-        }
-        .file-section {
-            margin-top: 10px;
         }
     </style>
 </head>
@@ -86,43 +94,55 @@
 
                     linksDiv.innerHTML = ''; // Clear previous links
 
-                    // Check for PDF link
+                    // Check for PDF
                     if (mapData.pdf) {
+                        const pdfSection = document.createElement('div');
+                        pdfSection.className = 'file-info';
+                        pdfSection.innerHTML = `
+                            <p><strong>ফাইল টাইপ:</strong> PDF</p>
+                            <p><strong>ফাইল সাইজ:</strong> ${mapData.file_size || 'উল্লেখিত নাও'}</p>
+                        `;
                         const pdfLink = document.createElement('a');
                         pdfLink.href = mapData.pdf;
                         pdfLink.download = `${mouza}_map.pdf`;
                         pdfLink.className = 'download-button';
                         pdfLink.textContent = 'PDF ডাউনলোড';
-                        linksDiv.appendChild(pdfLink);
-                        linksDiv.appendChild(document.createElement('br'));
+                        pdfSection.appendChild(pdfLink);
+                        linksDiv.appendChild(pdfSection);
                     }
-                    
-             if (mapData) {
-                    infoDiv.innerHTML = 
-                   <p><strong>শিট নং:</strong> ${mapData.sit_no}</p>
-              
-                    ;
-                    
-                    // Check for JPG link
+
+                    // Check for JPG
                     if (mapData.jpg) {
+                        const jpgSection = document.createElement('div');
+                        jpgSection.className = 'file-info';
+                        jpgSection.innerHTML = `
+                            <p><strong>ফাইল টাইপ:</strong> JPG</p>
+                            <p><strong>ফাইল সাইজ:</strong> ${mapData.file_size || 'উল্লেখিত নাও'}</p>
+                        `;
                         const jpgLink = document.createElement('a');
                         jpgLink.href = mapData.jpg;
                         jpgLink.download = `${mouza}_map.jpg`;
                         jpgLink.className = 'download-button';
                         jpgLink.textContent = 'JPG ডাউনলোড';
-                        linksDiv.appendChild(jpgLink);
-                        linksDiv.appendChild(document.createElement('br'));
+                        jpgSection.appendChild(jpgLink);
+                        linksDiv.appendChild(jpgSection);
                     }
 
-                    // Add more file types if present in mapData (e.g., png, etc.)
+                    // Check for PNG (if added in future)
                     if (mapData.png) {
+                        const pngSection = document.createElement('div');
+                        pngSection.className = 'file-info';
+                        pngSection.innerHTML = `
+                            <p><strong>ফাইল টাইপ:</strong> PNG</p>
+                            <p><strong>ফাইল সাইজ:</strong> ${mapData.file_size || 'উল্লেখিত নাও'}</p>
+                        `;
                         const pngLink = document.createElement('a');
                         pngLink.href = mapData.png;
                         pngLink.download = `${mouza}_map.png`;
                         pngLink.className = 'download-button';
                         pngLink.textContent = 'PNG ডাউনলোড';
-                        linksDiv.appendChild(pngLink);
-                        linksDiv.appendChild(document.createElement('br'));
+                        pngSection.appendChild(pngLink);
+                        linksDiv.appendChild(pngSection);
                     }
 
                     if (!mapData.pdf && !mapData.jpg && !mapData.png) {
