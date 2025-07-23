@@ -1,7 +1,7 @@
 {
     "mymensingh": {
-        "jamalpur": {
-            "islampur": {
+        "জামালপুর": {
+            "ইসলামপুর": {
                 "প্রজাপতি (২০)": {
                     "code": "২০",
                     "file_name": "Prajapati_Map",
@@ -9,8 +9,8 @@
                     "file_size": "2MB",
                     "pdf": "https://example.com/prajapati.pdf",
                     "jpg": "https://example.com/prajapati.jpg",
-                    "pdf_seat_no": "-১",
-                    "jpg_seat_no": "-২"
+                    "pdf_seat_no": "১",
+                    "jpg_seat_no": "২"
                 }
             }
         }
