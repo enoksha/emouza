@@ -1,8 +1,8 @@
-```html
 <!DOCTYPE html>
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>এডমিন প্যানেল</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;700&display=swap" rel="stylesheet">
@@ -11,20 +11,17 @@
             font-family: 'Noto Sans Bengali', sans-serif;
             background: linear-gradient(135deg, #4A90E2, #F5A623);
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             margin: 0;
             color: #333;
         }
         .container {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             border-radius: 20px;
-            padding: 40px;
+            padding: 20px;
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-            width: 100%;
+            border: 2px solid #7E22CE;
             max-width: 600px;
-            text-align: center;
+            margin: 20px auto;
             transition: all 0.3s ease;
         }
         .login-form, .data-entry {
@@ -37,16 +34,28 @@
             display: none;
             color: #6B7280;
             font-weight: 600;
+            padding: 8px 16px;
+            background: #F3F4F6;
+            border-radius: 10px;
+            margin-top: 10px;
         }
         .error {
             display: none;
             color: #EF4444;
             font-weight: 600;
+            padding: 8px 16px;
+            background: #FEF2F2;
+            border-radius: 10px;
+            margin-top: 10px;
         }
         .success {
             display: none;
             color: #10B981;
             font-weight: 600;
+            padding: 8px 16px;
+            background: #D1FAE5;
+            border-radius: 10px;
+            margin-top: 10px;
         }
         .otp-box {
             display: none;
@@ -54,21 +63,26 @@
             padding: 20px;
             border: 3px solid #10B981;
             border-radius: 15px;
-            background-color: #F3FAF6;
+            background: linear-gradient(135deg, #E6FFFB, #F3FAF6);
             text-align: center;
             transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.2);
         }
         .otp-display {
-            font-size: 2rem;
+            font-size: 1.5rem;
             font-weight: 800;
-            letter-spacing: 8px;
+            letter-spacing: 6px;
             color: #1E40AF;
             margin-bottom: 15px;
+            text-transform: uppercase;
         }
         button {
             transition: all 0.3s ease;
             border-radius: 10px;
-            padding: 12px 20px;
+            padding: 10px 15px;
+            font-weight: 600;
+            width: 100%;
+            margin: 5px 0;
         }
         button:hover {
             transform: translateY(-3px);
@@ -76,31 +90,37 @@
         }
         h1 {
             color: #1E40AF;
-            font-size: 2.5rem;
-            margin-bottom: 25px;
+            font-size: 2rem;
+            margin-bottom: 20px;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
         }
         h2 {
             color: #7E22CE;
-            font-size: 1.8rem;
-            margin-bottom: 20px;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            text-decoration: underline;
         }
         input, select {
             border-color: #D1D5DB;
             border-radius: 10px;
-            padding: 10px;
+            padding: 8px;
             width: 100%;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             transition: border-color 0.3s ease;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
         }
         input:focus, select:focus {
             outline: none;
             border-color: #7E22CE;
-            box-shadow: 0 0 8px rgba(126, 34, 206, 0.5);
+            box-shadow: 0 0 8px rgba(126, 34, 206, 0.5), inset 0 2px 4px rgba(0, 0, 0, 0.05);
         }
         .data-entry-form {
-            margin-top: 20px;
+            margin-top: 15px;
             text-align: left;
+            background: #F9FAFB;
+            padding: 15px;
+            border-radius: 15px;
+            border: 1px solid #E5E7EB;
         }
         .data-entry-form label {
             display: block;
@@ -111,10 +131,53 @@
         .data-entry-form button {
             background-color: #8B5CF6;
             color: white;
-            width: 100%;
+            margin-top: 10px;
         }
         .data-entry-form button:hover {
             background-color: #7C3AED;
+        }
+        .status-message {
+            margin-top: 10px;
+            font-size: 1rem;
+        }
+        @media (min-width: 640px) { /* sm breakpoint */
+            .container {
+                padding: 30px;
+                margin: 30px auto;
+            }
+            h1 {
+                font-size: 2.5rem;
+            }
+            h2 {
+                font-size: 1.8rem;
+            }
+            .otp-display {
+                font-size: 2rem;
+                letter-spacing: 8px;
+            }
+            button {
+                padding: 12px 20px;
+                width: auto;
+            }
+            .data-entry-form {
+                padding: 20px;
+            }
+        }
+        @media (min-width: 1024px) { /* lg breakpoint */
+            .container {
+                max-width: 800px;
+            }
+            .data-entry-form {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 15px;
+            }
+            .data-entry-form > div:nth-child(8) {
+                grid-column: span 2;
+            }
+            button {
+                grid-column: span 2;
+            }
         }
     </style>
 </head>
@@ -124,7 +187,7 @@
 
         <!-- লগইন ফর্ম -->
         <div id="loginForm" class="login-form active">
-            <form onsubmit="login(event)" class="space-y-6">
+            <form onsubmit="login(event)" class="space-y-4">
                 <div>
                     <label for="username" class="block text-gray-700 font-medium">ইউজারনেম</label>
                     <input type="text" id="username" class="w-full px-4 py-2 border" required>
@@ -139,8 +202,10 @@
 
         <!-- ডাটা এন্ট্রি সেকশন -->
         <div id="dataEntry" class="data-entry">
-            <h2>ডাটা এন্ট্রি</h2>
-            <button id="generateOTPBtn" onclick="generateOTP()" class="bg-green-500 hover:bg-green-600 text-white mr-4">OTP জেনারেট করুন</button>
+            <h2>ডাটা এন্ট্রি ও OTP ম্যানেজমেন্ট</h2>
+            <div class="flex flex-col sm:flex-row justify-center mb-4 gap-4">
+                <button id="generateOTPBtn" onclick="generateOTP()" class="bg-green-500 hover:bg-green-600 text-white">OTP জেনারেট করুন</button>
+            </div>
             <span id="loading" class="loading">OTP জেনারেট হচ্ছে...</span>
             <span id="error" class="error">OTP জেনারেট করতে সমস্যা হয়েছে! সার্ভার চালু আছে কিনা চেক করুন।</span>
             <span id="success" class="success">OTP সফলভাবে জেনারেট হয়েছে!</span>
@@ -183,7 +248,7 @@
                 </div>
                 <button type="submit" class="mt-4">ডাটা সংযোজন করুন</button>
             </form>
-            <span id="mapStatus" class="text-lg mt-4"></span>
+            <span id="mapStatus" class="status-message"></span>
             <button onclick="logout()" class="bg-red-500 hover:bg-red-600 text-white mt-6">লগআউট</button>
         </div>
     </div>
@@ -194,7 +259,7 @@
         let otpTimeout = null;
 
         ws.onopen = () => {
-            console.log('Admin connected to WebSocket');
+            console.log('Admin connected to WebSocket at:', new Date().toLocaleString());
         };
         ws.onmessage = (event) => {
             const data = JSON.parse(event.data);
@@ -234,7 +299,7 @@
             document.getElementById('mapStatus').style.color = '#EF4444';
         };
         ws.onclose = () => {
-            console.log('WebSocket disconnected');
+            console.log('WebSocket disconnected at:', new Date().toLocaleString());
             document.getElementById('loading').style.display = 'none';
             document.getElementById('error').style.display = 'block';
             document.getElementById('otpBox').style.display = 'none';
@@ -321,4 +386,3 @@
     </script>
 </body>
 </html>
-```
