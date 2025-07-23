@@ -30,29 +30,23 @@
             margin-top: 10px;
             border-left: 4px solid #4CAF50;
         }
-        .auth-modal {
+        .mouza-list {
             display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            justify-content: center;
-            align-items: center;
-        }
-        .auth-content {
+            margin-top: 10px;
+            max-height: 200px;
+            overflow-y: auto;
             background: white;
-            padding: 20px;
+            padding: 10px;
             border-radius: 8px;
-            width: 90%;
-            max-width: 400px;
-            text-align: center;
+            border: 2px solid #4CAF50;
         }
-        .whatsapp-icon {
-            font-size: 2rem;
-            color: #25D366;
+        .mouza-item {
+            padding: 8px;
             cursor: pointer;
+            transition: background 0.2s;
+        }
+        .mouza-item:hover {
+            background: #f0f4f8;
         }
     </style>
 </head>
@@ -75,20 +69,22 @@
     <section class="hero-bg flex items-center justify-center text-center text-white py-20">
         <div class="container mx-auto px-4">
             <h1 class="text-4xl md:text-5xl font-bold mb-6 text-orange-300">মৌজা ম্যাপ ডাউনলোড করুন</h1>
-            <p class="text-lg mb-8 text-green-200">বাংলাদেশের সকল জেলা, উপজেলা ও মৌজার ম্যাপ PDF এবং JPG ফরম্যাটে।</p>
+            <p class="text-lg mb-8 text-green-200">বাংলাদেশের সকল বিভাগ, জেলা, উপজেলা ও মৌজার ম্যাপ PDF এবং JPG ফরম্যাটে।</p>
             <div class="search-box max-w-2xl mx-auto">
                 <form id="searchForm" class="flex flex-col md:flex-row gap-4">
-                    <select id="district" class="w-full px-4 py-2 rounded-md text-black bg-white border border-green-300">
-                        <option value="">জেলা নির্বাচন করুন</option>
-                        <option value="dhaka">ঢাকা</option>
+                    <select id="division" class="w-full px-4 py-2 rounded-md text-black bg-white border border-green-300" onchange="loadDistricts()">
+                        <option value="">বিভাগ নির্বাচন করুন</option>
+                        <option value="mymensingh">ময়মনসিংহ</option>
                         <option value="chittagong">চট্টগ্রাম</option>
                     </select>
-                    <select id="upazila" class="w-full px-4 py-2 rounded-md text-black bg-white border border-green-300">
-                        <option value="">উপজেলা নির্বাচন করুন</option>
-                        <option value="savar">সাভার</option>
-                        <option value="mirpur">মিরপুর</option>
+                    <select id="district" class="w-full px-4 py-2 rounded-md text-black bg-white border border-green-300" onchange="loadUpazilas()">
+                        <option value="">জেলা নির্বাচন করুন</option>
                     </select>
-                    <input type="text" id="mouza" placeholder="মৌজার নাম লিখুন" class="w-full px-4 py-2 rounded-md text-black bg-white border border-green-300">
+                    <select id="upazila" class="w-full px-4 py-2 rounded-md text-black bg-white border border-green-300" onchange="loadMouzas()">
+                        <option value="">উপজেলা নির্বাচন করুন</option>
+                    </select>
+                    <input type="text" id="mouzaSearch" placeholder="মৌজা খুঁজুন..." class="w-full px-4 py-2 rounded-md text-black bg-white border border-green-300">
+                    <div id="mouzaList" class="mouza-list"></div>
                     <button type="button" onclick="searchMap()" class="bg-gradient-to-r from-green-500 to-teal-500 hover:from-green-600 hover:to-teal-600 text-white px-6 py-2 rounded-md">অনুসন্ধান</button>
                 </form>
             </div>
@@ -145,47 +141,10 @@
         </div>
     </footer>
 
-    <!-- Authentication Modal -->
-    <div id="authModal" class="auth-modal" onclick="closeModal(event)">
-        <div class="auth-content" onclick="event.stopPropagation()">
-            <h3 class="text-xl font-bold mb-4 text-green-700">আইডি ডাউনলোড করতে, হোয়াটসঅ্যাপে যোগাযোগ করুন</h3>
-            <input type="text" id="otpCode" placeholder="কোড লিখুন" class="w-full px-4 py-2 mb-4 rounded-md border border-gray-300" required>
-            <button onclick="confirmOTP()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md w-full">কনফার্ম</button>
-            <p id="authStatus" class="mt-4"></p>
-            <div class="mt-4">
-                <span class="whatsapp-icon" onclick="openWhatsApp()">📱</span>
-            </div>
-        </div>
-    </div>
-
     <script>
         let mapDatabase = {};
         let isDataLoaded = false;
-        let selectedMap = null;
-        let usedOTPs = new Set(); // একবার ব্যবহৃত OTP ট্র্যাক
 
-        // WebSocket সংযোগ
-        const ws = new WebSocket('ws://localhost:8080');
-        ws.onopen = () => console.log('Connected to WebSocket');
-        ws.onmessage = (event) => {
-            const data = JSON.parse(event.data);
-            if (data.type === 'otp_generated') {
-                console.log('Received OTP:', data.otp);
-            } else if (data.type === 'otp_verified' && data.success) {
-                document.getElementById('authStatus').textContent = 'কোড যাচাই সফল! ফাইল ডাউনলোড করুন।';
-                document.getElementById('authStatus').classList.add('confirmed');
-                displayDownloadOptions();
-                document.getElementById('authModal').style.display = 'none';
-                usedOTPs.add(document.getElementById('otpCode').value); // OTP ব্যবহৃত হিসেবে চিহ্নিত
-            } else if (data.type === 'otp_verified' && !data.success) {
-                document.getElementById('authStatus').textContent = 'অবৈধ বা ব্যবহৃত কোড!';
-                document.getElementById('authStatus').classList.add('pending');
-            }
-        };
-        ws.onerror = (error) => console.error('WebSocket error:', error);
-        ws.onclose = () => console.log('WebSocket disconnected');
-
-        // ডাটা লোড করার ফাংশন
         async function loadMapDatabase() {
             if (!isDataLoaded) {
                 try {
@@ -203,16 +162,78 @@
             }
         }
 
-        // পেজ লোড হলে ডাটা লোড
         window.onload = loadMapDatabase;
 
-        function searchMap() {
-            const district = document.getElementById('district').value.toLowerCase();
-            const upazila = document.getElementById('upazila').value.toLowerCase();
-            const mouza = document.getElementById('mouza').value.trim().toLowerCase();
+        function loadDistricts() {
+            const division = document.getElementById('division').value;
+            const districtSelect = document.getElementById('district');
+            districtSelect.innerHTML = '<option value="">জেলা নির্বাচন করুন</option>';
+            if (division && mapDatabase[division]) {
+                Object.keys(mapDatabase[division]).forEach(district => {
+                    const option = document.createElement('option');
+                    option.value = district;
+                    option.textContent = district;
+                    districtSelect.appendChild(option);
+                });
+            }
+            document.getElementById('upazila').innerHTML = '<option value="">উপজেলা নির্বাচন করুন</option>';
+            document.getElementById('mouzaList').style.display = 'none';
+        }
 
-            if (!district || !upazila || !mouza) {
-                alert('দয়া করে জেলা, উপজেলা এবং মৌজার নাম নির্বাচন করুন।');
+        function loadUpazilas() {
+            const division = document.getElementById('division').value;
+            const district = document.getElementById('district').value;
+            const upazilaSelect = document.getElementById('upazila');
+            upazilaSelect.innerHTML = '<option value="">উপজেলা নির্বাচন করুন</option>';
+            if (division && district && mapDatabase[division] && mapDatabase[division][district]) {
+                Object.keys(mapDatabase[division][district]).forEach(upazila => {
+                    const option = document.createElement('option');
+                    option.value = upazila;
+                    option.textContent = upazila;
+                    upazilaSelect.appendChild(option);
+                });
+            }
+            document.getElementById('mouzaList').style.display = 'none';
+        }
+
+        function loadMouzas() {
+            const division = document.getElementById('division').value;
+            const district = document.getElementById('district').value;
+            const upazila = document.getElementById('upazila').value;
+            const mouzaList = document.getElementById('mouzaList');
+            mouzaList.innerHTML = '';
+            mouzaList.style.display = 'block';
+            if (division && district && upazila && mapDatabase[division] && mapDatabase[division][district] && mapDatabase[division][district][upazila]) {
+                const mouzas = mapDatabase[division][district][upazila];
+                Object.keys(mouzas).forEach(mouza => {
+                    const item = document.createElement('div');
+                    item.className = 'mouza-item';
+                    item.textContent = `${mouza} (${mouzas[mouza].code})`;
+                    item.onclick = () => {
+                        document.getElementById('mouzaSearch').value = mouza;
+                        mouzaList.style.display = 'none';
+                    };
+                    mouzaList.appendChild(item);
+                });
+            }
+            document.getElementById('mouzaSearch').addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                const items = mouzaList.getElementsByClassName('mouza-item');
+                Array.from(items).forEach(item => {
+                    const text = item.textContent.toLowerCase();
+                    item.style.display = text.includes(searchTerm) ? 'block' : 'none';
+                });
+            });
+        }
+
+        function searchMap() {
+            const division = document.getElementById('division').value;
+            const district = document.getElementById('district').value;
+            const upazila = document.getElementById('upazila').value;
+            const mouza = document.getElementById('mouzaSearch').value.trim();
+
+            if (!division || !district || !upazila || !mouza) {
+                alert('দয়া করে বিভাগ, জেলা, উপজেলা এবং মৌজার নাম নির্বাচন করুন।');
                 return;
             }
 
@@ -222,73 +243,8 @@
                 return;
             }
 
-            console.log('Searching for:', district, upazila, mouza);
-            if (mapDatabase[district] && mapDatabase[district][upazila] && mapDatabase[district][upazila][mouza]) {
-                selectedMap = mapDatabase[district][upazila][mouza];
-                showAuthModal();
-            } else {
-                alert(`কোনো ম্যাপ পাওয়া যায়নি: ${district}, ${upazila}, ${mouza}`);
-            }
-        }
-
-        function showAuthModal() {
-            document.getElementById('authStatus').textContent = '';
-            document.getElementById('otpCode').value = '';
-            const modal = document.getElementById('authModal');
-            modal.style.display = 'flex';
-        }
-
-        function closeModal(event) {
-            if (event.target.id === 'authModal') {
-                document.getElementById('authModal').style.display = 'none';
-            }
-        }
-
-        function openWhatsApp() {
-            const phoneNumber = '8801712345678'; // এডমিনের WhatsApp নম্বর
-            const message = 'আমি ম্যাপ ডাউনলোড করতে চাই। দয়া করে একটি কোড প্রদান করুন।';
-            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-            window.open(whatsappUrl, '_blank');
-        }
-
-        function confirmOTP() {
-            const otp = document.getElementById('otpCode').value.trim();
-            if (!otp) {
-                document.getElementById('authStatus').textContent = 'কোড লিখুন!';
-                return;
-            }
-            ws.send(JSON.stringify({ type: 'verify_otp', otp }));
-        }
-
-        function displayDownloadOptions() {
-            const resultDiv = document.createElement('div');
-            resultDiv.className = 'container mx-auto px-4 mt-4 text-center';
-
-            if (selectedMap.pdf) {
-                const pdfInfo = `
-                    <div class="file-info">
-                        <p><strong>ফাইলের নাম:</strong> ${selectedMap.file_name}</p>
-                        <p><strong>জেল নং:</strong> ${selectedMap.district_no}</p>
-                        <p><strong>ফাইল সাইজ:</strong> ${selectedMap.file_size}</p>
-                        <a href="${selectedMap.pdf}" download class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md mt-2 inline-block">ডাউনলোড (PDF)</a>
-                    </div>
-                `;
-                resultDiv.innerHTML += pdfInfo;
-            }
-
-            if (selectedMap.jpg) {
-                const jpgInfo = `
-                    <div class="file-info">
-                        <p><strong>ফাইলের নাম:</strong> ${selectedMap.file_name}</p>
-                        <p><strong>জেল নং:</strong> ${selectedMap.district_no}</p>
-                        <p><strong>ফাইল সাইজ:</strong> ${selectedMap.file_size}</p>
-                        <a href="${selectedMap.jpg}" download class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md mt-2 inline-block">ডাউনলোড (JPG)</a>
-                    </div>
-                `;
-                resultDiv.innerHTML += jpgInfo;
-            }
-
-            document.querySelector('.hero-bg').appendChild(resultDiv);
+            const mapUrl = `download.html?division=${division}&district=${district}&upazila=${upazila}&mouza=${encodeURIComponent(mouza)}`;
+            window.location.href = mapUrl;
         }
     </script>
 </body>
