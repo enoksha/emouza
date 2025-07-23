@@ -22,6 +22,7 @@
             border-radius: 12px;
             padding: 20px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative; /* Positioning context for children */
         }
         .file-info {
             background: rgba(255, 255, 255, 0.9);
@@ -32,18 +33,24 @@
         }
         .mouza-list {
             display: none;
-            margin-top: 10px;
             max-height: 200px;
             overflow-y: auto;
             background: white;
             padding: 10px;
             border-radius: 8px;
             border: 2px solid #4CAF50;
+            z-index: 10; /* Stay above other elements */
+            position: absolute;
+            width: 100%; /* Match the width of mouzaSearch */
+            top: 100%; /* Position below mouzaSearch */
+            left: 0;
+            color: #333; /* Ensure text is visible */
         }
         .mouza-item {
             padding: 8px;
             cursor: pointer;
             transition: background 0.2s;
+            color: #333; /* Ensure text color is visible */
         }
         .mouza-item:hover {
             background: #f0f4f8;
@@ -83,8 +90,10 @@
                     <select id="upazila" class="w-full px-4 py-2 rounded-md text-black bg-white border border-green-300" onchange="loadMouzas()">
                         <option value="">উপজেলা নির্বাচন করুন</option>
                     </select>
-                    <input type="text" id="mouzaSearch" placeholder="মৌজা খুঁজুন..." class="w-full px-4 py-2 rounded-md text-black bg-white border border-green-300">
-                    <div id="mouzaList" class="mouza-list"></div>
+                    <div class="relative w-full"> <!-- Wrap mouzaSearch and mouzaList in a relative container -->
+                        <input type="text" id="mouzaSearch" placeholder="মৌজা খুঁজুন..." class="w-full px-4 py-2 rounded-md text-black bg-white border border-green-300">
+                        <div id="mouzaList" class="mouza-list"></div>
+                    </div>
                     <button type="button" onclick="searchMap()" class="bg-gradient-to-r from-green-500 to-teal-500 hover:from-green-600 hover:to-teal-600 text-white px-6 py-2 rounded-md">অনুসন্ধান</button>
                 </form>
             </div>
@@ -202,19 +211,21 @@
             const upazila = document.getElementById('upazila').value;
             const mouzaList = document.getElementById('mouzaList');
             mouzaList.innerHTML = '';
-            mouzaList.style.display = 'block';
+            mouzaList.style.display = 'block'; // Ensure list is visible
             if (division && district && upazila && mapDatabase[division] && mapDatabase[division][district] && mapDatabase[division][district][upazila]) {
                 const mouzas = mapDatabase[division][district][upazila];
                 Object.keys(mouzas).forEach(mouza => {
                     const item = document.createElement('div');
                     item.className = 'mouza-item';
-                    item.textContent = `${mouza} (${mouzas[mouza].code})`;
+                    item.textContent = `${mouza} (${mouzas[mouza].code})`; // Display mouza name and code
                     item.onclick = () => {
                         document.getElementById('mouzaSearch').value = mouza;
-                        mouzaList.style.display = 'none';
+                        mouzaList.style.display = 'none'; // Hide list after selection
                     };
                     mouzaList.appendChild(item);
                 });
+            } else {
+                mouzaList.innerHTML = '<div class="mouza-item">কোনো মৌজা পাওয়া যায়নি</div>';
             }
             document.getElementById('mouzaSearch').addEventListener('input', function() {
                 const searchTerm = this.value.toLowerCase();
