@@ -185,7 +185,148 @@
                         {
                             "type": "jpg",
                             "url": "https://drive.google.com/file/d/19J8tdAF9zNfoHkRYGuqvjnlX-gnaX_6E",
+                            "seat_no": "১"
+                            
+                       }
+                    ]
+            },
+            "চরগিলা বাড়ী (১৩)": {
+                    "code": "13",
+                    "file_name": "চরগিলা বাড়ী",
+                    "district_no": "13",
+                    "file_size": "27MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/179Aw1eV00Jy8TAlfyawzhWp3k-K-Yjfe",
+                            "seat_no": "২"
+                            
+                       }
+                    ]
+            },
+            "চর বেলগাছা (১৪)": {
+                    "code": "14",
+                    "file_name": "চর বেলগাছা",
+                    "district_no": "14",
+                    "file_size": "24MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/170m6NWokQUugTocUKFsyTgxwM6yTi88O",
                             "seat_no": ""
+                            
+                       }
+                    ]
+            },
+            "চর কুলকান্দি (১৫)": {
+                    "code": "15",
+                    "file_name": "চর কুলকান্দি",
+                    "district_no": "15",
+                    "file_size": "23MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/14mCP0vVQ71N6p-NWvfbkb5heAt93ETJj",
+                            "seat_no": "১"
+                            
+                       }
+                    ]
+            },
+            "বড়ল (১৬)": {
+                    "code": "16",
+                    "file_name": "বড়ল",
+                    "district_no": "16",
+                    "file_size": "25MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1NolaXhLqw00nC7iRxZkTfxlan8a75UIq",
+                            "seat_no": "১"
+                            
+                       },
+                       {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1pMLq30Cj7z_CjEULILYc_EXrp0nAi4Aw",
+                            "seat_no": "২"
+                        }
+                    ]
+            },
+            "ধরপাড়া (১৭)": {
+                    "code": "17",
+                    "file_name": "ধরপাড়া",
+                    "district_no": "17",
+                    "file_size": "26MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/19J8tdAF9zNfoHkRYGuqvjnlX-gnaX_6E",
+                            "seat_no": "২"
+                            
+                       }
+                    ]
+            },
+            "মন্নিয়া (১৮)": {
+                    "code": "18",
+                    "file_name": "মন্নিয়া",
+                    "district_no": "18",
+                    "file_size": "23MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1UMuecyOUh6eQajRabndNjvo18TAPVzhD",
+                            "seat_no": "১"
+                            
+                       },
+                       {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1NJjUnQKWoLfJQM3z9u2RKLflFTR2buz7",
+                            "seat_no": "২"
+                        }
+                    ]
+            },
+            "চরমইনা (১৯)": {
+                    "code": "19",
+                    "file_name": "চরমইনা",
+                    "district_no": "19",
+                    "file_size": "22MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1B5aMr5PGVIUA_I7ZzE5qggHMVjsRo9Rb",
+                            "seat_no": "২"
+                            
+                       }
+                    ]
+            },
+            "প্রজাপতি (২০)": {
+                    "code": "20",
+                    "file_name": "প্রজাপতি",
+                    "district_no": "20",
+                    "file_size": "24MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/17Do8tVtMjm0Xm-LYZdB4thW9svBP_wym",
+                            "seat_no": "১"
+                            
+                       },
+                       {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1jht4qiwbdLKuOs6x_YmGPPd5IzBrrc4W",
+                            "seat_no": "২"
+                        }
+                    ]
+            },
+            "সিন্দুরতলি (২১)": {
+                    "code": "21",
+                    "file_name": "ঘিলাবাড়ী",
+                    "district_no": "21",
+                    "file_size": "20MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1nITi-lpZuYOZngkb66oUEpqDI2DBXgZ6",
+                            "seat_no": "২"
                             
                        }
                     ]
