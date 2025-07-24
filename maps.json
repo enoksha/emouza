@@ -2,44 +2,35 @@
     "mymensingh": {
         "jamalpur": {
             "islampur": {
-                "প্রজাপতি (২০)": {
-                    "code": "২০",
-                    "file_name": "Prajapati_Map",
-                    "district_no": "20",
-                    "file_size": "2MB",
+                "জিগাতলা (1)": {
+                    "code": "1",
+                    "file_name": "জিগাতলা",
+                    "district_no": "1",
+                    "file_size": "24MB",
                     "files": [
                         {
-                            "type": "pdf",
-                            "url": "https://example.com/prajapati1.pdf",
-                            "seat_no": "-১"
-                        },
-                        {
-                            "type": "pdf",
-                            "url": "https://example.com/prajapati2.pdf",
-                            "seat_no": "-২"
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1eimVfgliJ5g-6gWGdn-eDWFxmppEXYfa",
+                            "seat_no": "১"
                         },
                         {
                             "type": "jpg",
-                            "url": "https://example.com/prajapati1.jpg",
-                            "seat_no": "-৩"
-                        },
-                        {
-                            "type": "jpg",
-                            "url": "https://example.com/prajapati2.jpg",
-                            "seat_no": "-৪"
+                            "url": "https://drive.google.com/file/d/1PbtcKMxhikWZnmWqfUPklOvLwS5DUUD6",
+                            "seat_no": "২"
                         }
+                       
                     ]
                 },
-                 "ঘিলাবাড়ী (১২)": {
-                    "code": "১২",
-                    "file_name": "Ghilabari_Map",
-                    "district_no": "20",
-                    "file_size": "2.1MB",
+                 "চর বেড়কুশা (২)": {
+                    "code": "2",
+                    "file_name": "চর বেড়কুশা",
+                    "district_no": "2",
+                    "file_size": "21MB",
                     "files": [
                         {
-                            "type": "pdf",
-                            "url": "https://example.com/ghilabari1.pdf",
-                            "seat_no": "-১"
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1Jj6xo1Ap-BieH21li7DOLbst6zelQI5U",
+                            "seat_no": "0"
                             
                        }
                     ]
