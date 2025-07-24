@@ -1,7 +1,7 @@
 {
     "mymensingh": {
-        "jamalpur": {
-            "islampur": {
+        "জামালপুর": {
+            "ইসলামপুর": {
                 "জিগাতলা (১)": {
                     "code": "1",
                     "file_name": "জিগাতলা",
@@ -30,7 +30,7 @@
                         {
                             "type": "jpg",
                             "url": "https://drive.google.com/file/d/1Jj6xo1Ap-BieH21li7DOLbst6zelQI5U",
-                            "seat_no": ""
+                            "seat_no": "0"
                             
                        }
                     ]
@@ -44,7 +44,7 @@
                         {
                             "type": "jpg",
                             "url": "https://drive.google.com/file/d/1Q50AEpqdvPTaagdi9AxBKky--dfxzuUp",
-                            "seat_no": ""
+                            "seat_no": "0"
                             
                        }
                     ]
@@ -58,7 +58,7 @@
                         {
                             "type": "jpg",
                             "url": "https://drive.google.com/file/d/1OWo2hBWBD4Fwk-x9mkuNy6LKJLjktpKu",
-                            "seat_no": ""
+                            "seat_no": "0"
                             
                        }
                     ]
@@ -120,6 +120,25 @@
                        {
                             "type": "jpg",
                             "url": "https://drive.google.com/file/d/11mgX4-gwSVTbKKlikZIJ1YTTns2pjao",
+                            "seat_no": "২"
+                        }
+                    ]
+            },
+			"কুলকান্দি (৯)": {
+                    "code": "8",
+                    "file_name": "চর বেড়কুশা",
+                    "district_no": "9",
+                    "file_size": "25MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/150cg7Kan34Qr0G85hIFhta2nng8kXx11",
+                            "seat_no": "১"
+                            
+                       },
+                       {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1UiuLo_EYCfEA7CrsrMANaB2Xj2efgqD7",
                             "seat_no": "২"
                         }
                     ]
