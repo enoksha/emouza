@@ -69,70 +69,82 @@
         const division = urlParams.get('division');
         const district = urlParams.get('district');
         const upazila = urlParams.get('upazila');
-        const mouza = decodeURIComponent(urlParams.get('mouza'));
+        const mouza = decodeURIComponent(urlParams.get('mouza') || '');
 
-        fetch('https://raw.githubusercontent.com/enoksha/emouza/main/maps.json')
-            .then(response => {
-                if (!response.ok) throw new Error('Network response was not ok');
-                return response.json();
-            })
-            .then(mapDatabase => {
-                const mapData = mapDatabase[division]?.[district]?.[upazila]?.[mouza];
-                const infoDiv = document.getElementById('downloadInfo');
-                const linksDiv = document.getElementById('downloadLinks');
+        const infoDiv = document.getElementById('downloadInfo');
+        const linksDiv = document.getElementById('downloadLinks');
 
-                if (mapData) {
-                    infoDiv.innerHTML = `
-                        <p><strong>বিভাগ:</strong> ${division}</p>
-                        <p><strong>জেলা:</strong> ${district}</p>
-                        <p><strong>উপজেলা:</strong> ${upazila}</p>
-                        <p><strong>মৌজা:</strong> ${mouza}</p>
-                        <p><strong>ফাইলের নাম:</strong> ${mapData.file_name}</p>
-                        <p><strong>জেল নং:</strong> ${mapData.district_no}</p>
-                        <p><strong>ফাইল সাইজ:</strong> ${mapData.file_size}</p>
-                    `;
+        // Debug: Log URL parameters
+        console.log('URL Params:', { division, district, upazila, mouza });
 
-                    linksDiv.innerHTML = ''; // Clear previous links
+        // Fetch and handle data
+        fetch('https://raw.githubusercontent.com/enoksha/emouza/main/maps.json', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status} - ${response.statusText}`);
+            }
+            return response.json();
+        })
+        .then(mapDatabase => {
+            console.log('Fetched mapDatabase:', mapDatabase);
 
-                    // Check for files array and create sections for each file
-                    if (mapData.files && Array.isArray(mapData.files)) {
-                        let hasFiles = false;
-                        mapData.files.forEach(file => {
-                            if (file.url) {
-                                hasFiles = true;
-                                const fileSection = document.createElement('div');
-                                fileSection.className = 'file-info';
-                                fileSection.innerHTML = `
-                                    <p><strong>ফাইল টাইপ:</strong> ${file.type.toUpperCase()}</p>
-                                    <p><strong>ফাইল সাইজ:</strong> ${mapData.file_size || 'উল্লেখিত নাও'}</p>
-                                    <p><strong>সিট নং:</strong> ${file.seat_no || 'উল্লেখিত নাও'}</p>
-                                `;
-                                const fileLink = document.createElement('a');
-                                fileLink.href = file.url;
-                                fileLink.download = `${mouza}_map_${file.type}_${file.seat_no || '1'}.${file.type}`;
-                                fileLink.className = 'download-button';
-                                fileLink.textContent = `${file.type.toUpperCase()} ডাউনলোড`;
-                                fileSection.appendChild(fileLink);
-                                linksDiv.appendChild(fileSection);
-                            }
-                        });
+            if (!mapDatabase || typeof mapDatabase !== 'object') {
+                throw new Error('Invalid map database format');
+            }
 
-                        if (!hasFiles) {
-                            linksDiv.innerHTML = '<p class="text-red-500">কোনো ডাউনলোডযোগ্য ফাইল পাওয়া যায়নি।</p>';
+            const mapData = mapDatabase[division]?.[district]?.[upazila]?.[mouza];
+            console.log('mapData for', mouza, ':', mapData);
+
+            if (mapData) {
+                infoDiv.innerHTML = `
+                    <p><strong>বিভাগ:</strong> ${division || 'উল্লেখিত নাও'}</p>
+                    <p><strong>জেলা:</strong> ${district || 'উল্লেখিত নাও'}</p>
+                    <p><strong>উপজেলা:</strong> ${upazila || 'উল্লেখিত নাও'}</p>
+                    <p><strong>মৌজা:</strong> ${mouza || 'উল্লেখিত নাও'}</p>
+                    <p><strong>ফাইলের নাম:</strong> ${mapData.file_name || 'উল্লেখিত নাও'}</p>
+                    <p><strong>জেল নং:</strong> ${mapData.district_no || 'উল্লেখিত নাও'}</p>
+                    <p><strong>ফাইল সাইজ:</strong> ${mapData.file_size || 'উল্লেখিত নাও'}</p>
+                `;
+
+                linksDiv.innerHTML = '';
+
+                if (mapData.files && Array.isArray(mapData.files) && mapData.files.length > 0) {
+                    mapData.files.forEach(file => {
+                        if (file.url) {
+                            const fileSection = document.createElement('div');
+                            fileSection.className = 'file-info';
+                            fileSection.innerHTML = `
+                                <p><strong>ফাইল টাইপ:</strong> ${file.type.toUpperCase()}</p>
+                                <p><strong>ফাইল সাইজ:</strong> ${mapData.file_size || 'উল্লেখিত নাও'}</p>
+                                <p><strong>সিট নং:</strong> ${file.seat_no || 'উল্লেখিত নাও'}</p>
+                            `;
+                            const fileLink = document.createElement('a');
+                            fileLink.href = file.url;
+                            fileLink.download = `${mouza}_map_${file.type}_${file.seat_no || '1'}.${file.type}`;
+                            fileLink.className = 'download-button';
+                            fileLink.textContent = `${file.type.toUpperCase()} ডাউনলোড`;
+                            fileSection.appendChild(fileLink);
+                            linksDiv.appendChild(fileSection);
                         }
-                    } else {
-                        linksDiv.innerHTML = '<p class="text-red-500">ফাইল ডাটা সঠিক ফরম্যাটে পাওয়া যায়নি।</p>';
-                    }
+                    });
                 } else {
-                    infoDiv.innerHTML = '<p class="text-red-500">ম্যাপ ডাটা পাওয়া যায়নি।</p>';
-                    linksDiv.innerHTML = '';
+                    linksDiv.innerHTML = '<p class="text-red-500">কোনো ডাউনলোডযোগ্য ফাইল পাওয়া যায়নি।</p>';
                 }
-            })
-            .catch(error => {
-                console.error('Error loading map data:', error);
-                document.getElementById('downloadInfo').innerHTML = '<p class="text-red-500">ম্যাপ ডাটা লোড করতে সমস্যা হয়েছে।</p>';
-                document.getElementById('downloadLinks').innerHTML = '';
-            });
+            } else {
+                infoDiv.innerHTML = '<p class="text-red-500">ম্যাপ ডাটা পাওয়া যায়নি। দয়া করে URL প্যারামিটার চেক করুন।</p>';
+                linksDiv.innerHTML = '';
+            }
+        })
+        .catch(error => {
+            console.error('Error loading map data:', error);
+            infoDiv.innerHTML = `<p class="text-red-500">ম্যাপ ডাটা লোড করতে সমস্যা হয়েছে: ${error.message}</p>`;
+            linksDiv.innerHTML = '';
+        });
     </script>
 </body>
 </html>
