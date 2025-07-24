@@ -330,8 +330,287 @@
                             
                        }
                     ]
+            },
+            "শিশুয়া (২৪)": {
+                    "code": "24",
+                    "file_name": "শিশুয়া",
+                    "district_no": "24",
+                    "file_size": "22MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1W2Rkop9qPNRYJlavJLH7W3La07r_r86y",
+                            "seat_no": ""
+                            
+                       }
+                    ]
+            },
+             "চর শিশুয়া (২৫)": {
+                    "code": "25",
+                    "file_name": "চর শিশুয়া",
+                    "district_no": "25",
+                    "file_size": "24MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1HDUMybMQE51YXhTKLCo_blNqTJH2t5AH",
+                            "seat_no": "১"
+                            
+                       },
+                       {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/16Edyo6YoYVbTGhuBTxxWpyV4taqNBMh9",
+                            "seat_no": "২"
+                        }
+                    ]
+            },
+            "চেঙ্গানিয়া (২৭)": {
+                    "code": "27",
+                    "file_name": "চেঙ্গানিয়া",
+                    "district_no": "27",
+                    "file_size": "20MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1e7FuE3AiOmExTPb6evum8QoxpG8rLu1p",
+                            "seat_no": "২"
+                            
+                       }
+                    ]
+            },
+            "কাটমা কৃষ্ণনগর (৩৩)": {
+                    "code": "33",
+                    "file_name": "কাটমা কৃষ্ণনগর",
+                    "district_no": "33",
+                    "file_size": "24MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1ixBQ_o4Rmgp7g3ZbQu_UqmQm8udyTFDi",
+                            "seat_no": "১"
+                            
+                       },
+                       {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1Z-R48_TdjPz40ip2Znjqz77PlLhfQNT2",
+                            "seat_no": "২"
+                        }
+                    ]
+            },
+            "মাইজবাড়ী (৩৬)": {
+                    "code": "36",
+                    "file_name": "মাইজবাড়ী",
+                    "district_no": "36",
+                    "file_size": "24MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1qcIkw9oOuH2aCKDBiGXIDRA4CivPZmOP",
+                            "seat_no": "১"
+                            
+                       },
+                       {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1L9q-sYm9OtMFwqG86TK2nVahqbpiFzbd",
+                            "seat_no": "২"
+                        }
+                    ]
+            },
+            "নোয়ারপাড়া (৩৭)": {
+                    "code": "37",
+                    "file_name": "নোয়ারপাড়া",
+                    "district_no": "37",
+                    "file_size": "20MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1u070ybOLKbm3PGiVU8fNMnHQdx5A0EVW",
+                            "seat_no": "১"
+                            
+                       }
+                    ]
+            },
+            "রাজাপুর (৩৮)": {
+                    "code": "38",
+                    "file_name": "রাজাপুর",
+                    "district_no": "38",
+                    "file_size": "21MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/14qrH6t8Nge1GOggd1dWNkOj6n0burCeD",
+                            "seat_no": ""
+                            
+                       }
+                    ]
+            },
+            "সাপধরী (৩৯)": {
+                    "code": "39",
+                    "file_name": "সাপধরী",
+                    "district_no": "39",
+                    "file_size": "25MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1PkHVlZ_75Y80VvL2Gst4g8smT5OZl3p6",
+                            "seat_no": "১"
+                            
+                       },
+                       {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1lcq-S0VZbO3Z8IjfSp_GS7K_1NWJqDTF",
+                            "seat_no": "২"
+                        },
+                        {
+                            "type": "pdf",
+                            "url": "https://drive.google.com/file/d/1Ds9A0tZXRJ7rq_xDbmRK9HZ0fcZWwn8d",
+                            "seat_no": "৩"
+                        }
+                    ]
+            },
+             "নন্দনের পাড়া (৪০)": {
+                    "code": "40",
+                    "file_name": "নন্দনের পাড়া",
+                    "district_no": "40",
+                    "file_size": "22MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/16dwJU57soZS_9dPha1_wSJBN-LGpQ4Ee",
+                            "seat_no": "১"
+                            
+                       },
+                       {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1Fgd-4jnfOYJk-dCuqAmqJi1vObIskaT6",
+                            "seat_no": "২"
+                        },
+                        {
+                            "type": "pdf",
+                            "url": "https://drive.google.com/file/d/1a49XAzOuUEWRJ7SoilAhYBB5dMxOJvkg",
+                            "seat_no": "৩"
+                        }
+                    ]
+            },
+            "চিনাডুলী (৪১)": {
+                    "code": "41",
+                    "file_name": "চিনাডুলী",
+                    "district_no": "41",
+                    "file_size": "24MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/193mQOK6l1_qtdeSphT0xmUFyfNT4Xf8A",
+                            "seat_no": "১"
+                            
+                       },
+                       {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1wC-PZEan33LKW80N0wjW_v2e1OlzC-Vz",
+                            "seat_no": "২"
+                        }
+                    ]
+            },
+            "পচাবহালা (৪২)": {
+                    "code": "42",
+                    "file_name": "পচাবহালা",
+                    "district_no": "42",
+                    "file_size": "24MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1kKr5ucloOrr0JUieXiUqxPwVUBW33xIe",
+                            "seat_no": "১"
+                            
+                       },
+                       {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1L03VeWKqygxGswgLheVVKYL-CFSewNG5",
+                            "seat_no": "২"
+                        },
+                        {
+                            "type": "pdf",
+                            "url": "https://drive.google.com/file/d/1o8YXe0DoyHl6pySxRcFLJfbFC-NLeptJ",
+                            "seat_no": "৩"
+                        }
+                    ]
+            },
+            "পাঁচবাড়ীয়া (৪৩)": {
+                    "code": "43",
+                    "file_name": "পাঁচবাড়ীয়া",
+                    "district_no": "43",
+                    "file_size": "26MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1Cmza9zJRq6C7kRytGZnsKakV2UsqbOSM",
+                            "seat_no": "১"
+                            
+                       }
+                    ]
+            },
+            "পাকামুড়ি (৪৪)": {
+                    "code": "44",
+                    "file_name": "পাকামুড়ি",
+                    "district_no": "44",
+                    "file_size": "20MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/16sgkGwuD_goNqpxhZN6gwz1n-6AIA_JY",
+                            "seat_no": ""
+                            
+                       }
+                    ]
+            },
+            "দরিয়াবাদ (৪৫)": {
+                    "code": "45",
+                    "file_name": "দরিয়াবাদ",
+                    "district_no": "45",
+                    "file_size": "25MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1mxXvELfFnCCceZN3qSBKJPJBJE106yt_",
+                            "seat_no": "১"
+                            
+                       },
+                       {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1yJL3AGe1xnAVDw78CHMSv3DnQ266QG0D",
+                            "seat_no": "২"
+                        }
+                    ]
+            },
+            "কিসমত জাল্লা (৪৬)": {
+                    "code": "46",
+                    "file_name": "কিসমত জাল্লা",
+                    "district_no": "46",
+                    "file_size": "25MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1clg8jv6uiXzDRQNtsS2QtPSB690GZi5i",
+                            "seat_no": ""
+                            
+                       }
+                    ]
+            },
+            "গাঁওকুড়া (৪৭)": {
+                    "code": "47",
+                    "file_name": "গাঁওকুড়া",
+                    "district_no": "47",
+                    "file_size": "27MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1IQJdTTke6QsfYNNQ5bRtBqi3l9UyRcHG",
+                            "seat_no": ""
+                            
+                       }
+                    ]
             }
         }
 }
     }
-}
+	    }
