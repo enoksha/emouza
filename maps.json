@@ -590,8 +590,189 @@
                             "seat_no": "২"
                         }
                     ]
+                },
+                "শংকর পুর (৪৯)": {
+                    "code": "49",
+                    "file_name": "শংকর পুর",
+                    "district_no": "49",
+                    "file_size": "26MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/15cnakCShPz_BZDDPZtRnCYS8UJy2ktJX",
+                            "seat_no": ""
+                        }
+                    ]
+          },
+           "বালিয়াদহ (৫০)": {
+                    "code": "50",
+                    "file_name": "বালিয়াদহ",
+                    "district_no": "50",
+                    "file_size": "23MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1tfFdEmJz91__eKcCAZySb7c6sNY8Js_o",
+                            "seat_no": ""
+                        }
+                    ]
+               },
+               "বামনা (৫১)": {
+                    "code": "51",
+                    "file_name": "বামনা",
+                    "district_no": "51",
+                    "file_size": "20MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1dJ-S4EYwOTxa-E6Kv0rmVSobQ1bh5EcO",
+                            "seat_no": "১"
+                        },
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1Og9im3Hx9iAYTzYl4nqM_IoLLnYHrefp",
+                            "seat_no": "২"
+                        }
+                    ]
+                },
+                "চেঙ্গারগড় (৫২)": {
+                    "code": "52",
+                    "file_name": "চেঙ্গারগড়",
+                    "district_no": "52",
+                    "file_size": "21MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1tlQgcM60wVdw64We-10QTxJI3UTii5R6",
+                            "seat_no": "১"
+                        },
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1-ObVj_umsfAUJUiYhkvBI3-jjcTdn93u",
+                            "seat_no": "২"
+                        }
+                    ]
+                },
+                "গঙ্গা পাড়া (৫৩)": {
+                    "code": "53",
+                    "file_name": "গঙ্গা পাড়া",
+                    "district_no": "53",
+                    "file_size": "23MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1sKLGFsUbpHygxTMbvPFHI6Yjn2j3h_Pk",
+                            "seat_no": ""
+                        }
+                    ]
+               },
+               "লাউদত্ত (৫৪)": {
+                    "code": "54",
+                    "file_name": "লাউদত্ত",
+                    "district_no": "54",
+                    "file_size": "26MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1iRp237dzWp1qAwKo_rRIFLDsHgw62yte",
+                            "seat_no": ""
+                        }
+                    ]
+               },
+               "রৌহারকান্দা (৫৫)": {
+                    "code": "55",
+                    "file_name": "রৌহারকান্দা",
+                    "district_no": "55",
+                    "file_size": "24MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/13plhAgrv17OdPmMJAtMpbkPGxfM7VZD5",
+                            "seat_no": ""
+                        }
+                    ]
+               },
+               "মুকসিমলা (৫৬)": {
+                    "code": "56",
+                    "file_name": "মুকসিমলা",
+                    "district_no": "56",
+                    "file_size": "26MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1d4Zv3KKh2tvoEsTAqmeX5jexpltYUeI7",
+                            "seat_no": ""
+                        }
+                    ]
+               },
+               "গামারিয়া (৫৭)": {
+                    "code": "57",
+                    "file_name": "গামারিয়া",
+                    "district_no": "57",
+                    "file_size": "25MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/14mpiASIgU2Yk7nMXwZqj-l9W0mTQacMC",
+                            "seat_no": "১"
+                        },
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1SDA0WB3CL-mc8OYxweutUz0FSyDYic5r",
+                            "seat_no": "২"
+                        }
+                    ]
+                },
+                "হারিয়াবাড়ী (৫৮)": {
+                    "code": "58",
+                    "file_name": "হারিয়াবাড়ী",
+                    "district_no": "58",
+                    "file_size": "22MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1MiuzLZsB_AKTSZ0wn6RF_lKBCMpf8NIb",
+                            "seat_no": "১"
+                        },
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1r2jD87HY0SsEv3nukgtZogoWybP6HPjL",
+                            "seat_no": "২"
+                        }
+                    ]
+                },
+                "বাধির আলগা (৫৯)": {
+                    "code": "59",
+                    "file_name": "বাধির আলগা",
+                    "district_no": "59",
+                    "file_size": "27MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1UTiPENUkVsRkg0at-ymMAbWf6ewsjSjY",
+                            "seat_no": ""
+                        }
+                    ]
+               },
+               "তেঘরিয়া (৬১)": {
+                    "code": "61",
+                    "file_name": "তেঘরিয়া",
+                    "district_no": "61",
+                    "file_size": "24MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1S75UMzun-qOBKK2lx3stcM37b0VXGmmT",
+                            "seat_no": "১"
+                        },
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/17xQ0K3R9pMjo1Y671mzFkitRe5KAoeaF",
+                            "seat_no": "২"
+                        }
+                    ]
                 }
-            },
+          },
             "দেওয়ানগঞ্জ": {
                 "কালিকাপুর": {
                     "code": "49",
@@ -639,4 +820,4 @@
             }
         }
     }
-	    }
+		}
