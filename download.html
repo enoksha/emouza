@@ -55,6 +55,10 @@
         .download-button:hover {
             background: linear-gradient(to right, #45a049, #2E7D32);
         }
+        .error-message {
+            color: #f44336;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -75,9 +79,9 @@
         const linksDiv = document.getElementById('downloadLinks');
 
         // Debug: Log URL parameters
-        console.log('URL Params:', { division, district, upazila, mouza });
+        console.log('URL Parameters:', { division, district, upazila, mouza });
 
-        // Fetch and handle data
+        // Fetch data
         fetch('https://raw.githubusercontent.com/enoksha/emouza/main/maps.json', {
             method: 'GET',
             headers: {
@@ -86,7 +90,7 @@
         })
         .then(response => {
             if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status} - ${response.statusText}`);
+                throw new Error(`HTTP ত্রুটি! স্ট্যাটাস: ${response.status} - ${response.statusText}`);
             }
             return response.json();
         })
@@ -94,7 +98,7 @@
             console.log('Fetched mapDatabase:', mapDatabase);
 
             if (!mapDatabase || typeof mapDatabase !== 'object') {
-                throw new Error('Invalid map database format');
+                throw new Error('অবৈধ ম্যাপ ডাটাবেস ফরম্যাট');
             }
 
             const mapData = mapDatabase[division]?.[district]?.[upazila]?.[mouza];
@@ -133,16 +137,16 @@
                         }
                     });
                 } else {
-                    linksDiv.innerHTML = '<p class="text-red-500">কোনো ডাউনলোডযোগ্য ফাইল পাওয়া যায়নি।</p>';
+                    linksDiv.innerHTML = '<p class="error-message">কোনো ডাউনলোডযোগ্য ফাইল পাওয়া যায়নি।</p>';
                 }
             } else {
-                infoDiv.innerHTML = '<p class="text-red-500">ম্যাপ ডাটা পাওয়া যায়নি। দয়া করে URL প্যারামিটার চেক করুন।</p>';
+                infoDiv.innerHTML = '<p class="error-message">ম্যাপ ডাটা পাওয়া যায়নি। URL প্যারামিটার চেক করুন।</p>';
                 linksDiv.innerHTML = '';
             }
         })
         .catch(error => {
-            console.error('Error loading map data:', error);
-            infoDiv.innerHTML = `<p class="text-red-500">ম্যাপ ডাটা লোড করতে সমস্যা হয়েছে: ${error.message}</p>`;
+            console.error('ম্যাপ ডাটা লোডে ত্রুটি:', error);
+            infoDiv.innerHTML = `<p class="error-message">ম্যাপ ডাটা লোড করতে সমস্যা হয়েছে: ${error.message}</p>`;
             linksDiv.innerHTML = '';
         });
     </script>
