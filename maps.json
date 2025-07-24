@@ -34,6 +34,20 @@
                             
                        }
                     ]
+            },
+            "বিরকুর্শা (৩)": {
+                    "code": "3",
+                    "file_name": "বিরকুর্শা",
+                    "district_no": "3",
+                    "file_size": "23MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1Q50AEpqdvPTaagdi9AxBKky--dfxzuUp",
+                            "seat_no": "0"
+                            
+                       }
+                    ]
             }
         }
 }
