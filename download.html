@@ -105,7 +105,7 @@
                                 fileSection.innerHTML = `
                                     <p><strong>ফাইল টাইপ:</strong> ${file.type.toUpperCase()}</p>
                                     <p><strong>ফাইল সাইজ:</strong> ${mapData.file_size || 'উল্লেখিত নাও'}</p>
-                                    <p><strong>সিট নং:</strong> ${file.seat_no || 'উল্লেখিত নাও'}</p>
+                                    <p><strong>সিট নং:</strong> ${file.seat_no || 'নেই...'}</p>
                                 `;
                                 const fileLink = document.createElement('a');
                                 fileLink.href = file.url;
