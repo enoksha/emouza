@@ -29,7 +29,20 @@
                             "seat_no": "-৪"
                         }
                     ]
-                }
+                },
+},
+                "ঘিলাবাড়ী (১২)": {
+                    "code": "১২",
+                    "file_name": "Ghilabari_Map",
+                    "district_no": "20",
+                    "file_size": "2.1MB",
+                    "files": [
+                        {
+                            "type": "pdf",
+                            "url": "https://example.com/ghilabari1.pdf",
+                            "seat_no": "-১"
+                   ]
+                        }
             }
         }
     }
