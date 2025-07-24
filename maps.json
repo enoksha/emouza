@@ -1,154 +1,638 @@
-<!DOCTYPE html>
-<html lang="bn">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>মৌজা ম্যাপ ডাউনলোড</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Noto Sans Bengali', sans-serif;
-            background: linear-gradient(to right, #e0f7fa, #e0eafc);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .download-container {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            max-width: 500px;
-            width: 100%;
-            text-align: center;
-        }
-        .download-info {
-            margin-bottom: 20px;
-            padding: 10px;
-            background: #f9f9f9;
-            border-radius: 8px;
-            border-left: 4px solid #4CAF50;
-        }
-        .file-section {
-            margin-top: 15px;
-        }
-        .file-info {
-            padding: 10px;
-            background: #f0f0f0;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            border-left: 4px solid #2196F3;
-        }
-        .download-button {
-            background: linear-gradient(to right, #4CAF50, #2E7D32);
-            padding: 8px 16px;
-            border-radius: 8px;
-            color: white;
-            font-weight: bold;
-            transition: background 0.3s;
-            margin-top: 5px;
-            display: inline-block;
-            text-decoration: none;
-        }
-        .download-button:hover {
-            background: linear-gradient(to right, #45a049, #2E7D32);
-        }
-        .error-message {
-            color: #f44336;
-            font-weight: bold;
-        }
-    </style>
-</head>
-<body>
-    <div class="download-container">
-        <h1 class="text-2xl font-bold mb-4 text-green-800">মৌজা ম্যাপ ডাউনলোড</h1>
-        <div id="downloadInfo" class="download-info"></div>
-        <div id="downloadLinks" class="file-section"></div>
-    </div>
-
-    <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        const division = urlParams.get('division');
-        const district = urlParams.get('district');
-        const upazila = urlParams.get('upazila');
-        const mouza = decodeURIComponent(urlParams.get('mouza') || '');
-
-        const infoDiv = document.getElementById('downloadInfo');
-        const linksDiv = document.getElementById('downloadLinks');
-
-        // Debug: Log URL parameters
-        console.log('URL Parameters:', { division, district, upazila, mouza });
-
-        // Fetch data
-        fetch('https://raw.githubusercontent.com/enoksha/emouza/main/maps.json', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP ত্রুটি! স্ট্যাটাস: ${response.status} - ${response.statusText}`);
-            }
-            return response.json();
-        })
-        .then(mapDatabase => {
-            console.log('Fetched mapDatabase:', mapDatabase);
-
-            if (!mapDatabase || typeof mapDatabase !== 'object') {
-                throw new Error('অবৈধ ম্যাপ ডাটাবেস ফরম্যাট');
-            }
-
-            const mapData = mapDatabase[division]?.[district]?.[upazila]?.[mouza];
-            console.log('mapData for', mouza, ':', mapData);
-
-            if (mapData) {
-                infoDiv.innerHTML = `
-                    <p><strong>বিভাগ:</strong> ${division || 'উল্লেখিত নাও'}</p>
-                    <p><strong>জেলা:</strong> ${district || 'উল্লেখিত নাও'}</p>
-                    <p><strong>উপজেলা:</strong> ${upazila || 'উল্লেখিত নাও'}</p>
-                    <p><strong>মৌজা:</strong> ${mouza || 'উল্লেখিত নাও'}</p>
-                    <p><strong>ফাইলের নাম:</strong> ${mapData.file_name || 'উল্লেখিত নাও'}</p>
-                    <p><strong>জেল নং:</strong> ${mapData.district_no || 'উল্লেখিত নাও'}</p>
-                    <p><strong>ফাইল সাইজ:</strong> ${mapData.file_size || 'উল্লেখিত নাও'}</p>
-                `;
-
-                linksDiv.innerHTML = '';
-
-                if (mapData.files && Array.isArray(mapData.files) && mapData.files.length > 0) {
-                    mapData.files.forEach(file => {
-                        if (file.url) {
-                            const fileSection = document.createElement('div');
-                            fileSection.className = 'file-info';
-                            fileSection.innerHTML = `
-                                <p><strong>ফাইল টাইপ:</strong> ${file.type.toUpperCase()}</p>
-                                <p><strong>ফাইল সাইজ:</strong> ${mapData.file_size || 'উল্লেখিত নাও'}</p>
-                                <p><strong>সিট নং:</strong> ${file.seat_no || 'উল্লেখিত নাও'}</p>
-                            `;
-                            const fileLink = document.createElement('a');
-                            fileLink.href = file.url;
-                            fileLink.download = `${mouza}_map_${file.type}_${file.seat_no || '1'}.${file.type}`;
-                            fileLink.className = 'download-button';
-                            fileLink.textContent = `${file.type.toUpperCase()} ডাউনলোড`;
-                            fileSection.appendChild(fileLink);
-                            linksDiv.appendChild(fileSection);
+{
+    "mymensingh": {
+        "jamalpur": {
+            "islampur": {
+                "বেলগাছা (১১)": {
+                    "code": "১১",
+                    "file_name": "Belgacha_Map",
+                    "district_no": "20",
+                    "file_size": "2MB",
+                    "files": [
+                        {
+                            "type": "pdf",
+                            "url": "https://example.com/belgacha1.pdf",
+                            "seat_no": "-১"
+                        },
+                        {
+                            "type": "pdf",
+                            "url": "https://example.com/belgacha2.pdf",
+                            "seat_no": "-২"
+                        },
+                        {
+                            "type": "jpg",
+                            "url": "https://example.com/belgacha1.jpg",
+                            "seat_no": "-৩"
+                        },
+                        {
+                            "type": "jpg",
+                            "url": "https://example.com/belgacha2.jpg",
+                            "seat_no": "-৪"
                         }
-                    });
-                } else {
-                    linksDiv.innerHTML = '<p class="error-message">কোনো ডাউনলোডযোগ্য ফাইল পাওয়া যায়নি।</p>';
+                    ]
+                },
+                "ঘিলাবাড়ী (১২)": {
+                    "code": "১২",
+                    "file_name": "Ghilabari_Map",
+                    "district_no": "20",
+                    "file_size": "2.1MB",
+                    "files": [
+                        {
+                            "type": "pdf",
+                            "url": "https://example.com/ghilabari1.pdf",
+                            "seat_no": "-১"
+                        },
+                        {
+                            "type": "pdf",
+                            "url": "https://example.com/ghilabari2.pdf",
+                            "seat_no": "-২"
+                        },
+                        {
+                            "type": "jpg",
+                            "url": "https://example.com/ghilabari1.jpg",
+                            "seat_no": "-৩"
+                        },
+                        {
+                            "type": "jpg",
+                            "url": "https://example.com/ghilabari2.jpg",
+                            "seat_no": "-৪"
+                        }
+                    ]
+                },
+                "চরগিলা বাড়ী (১৩)": {
+                    "code": "১৩",
+                    "file_name": "Chorgila_Bari_Map",
+                    "district_no": "20",
+                    "file_size": "2.2MB",
+                    "files": [
+                        {
+                            "type": "pdf",
+                            "url": "https://example.com/chorgila1.pdf",
+                            "seat_no": "-১"
+                        },
+                        {
+                            "type": "pdf",
+                            "url": "https://example.com/chorgila2.pdf",
+                            "seat_no": "-২"
+                        },
+                        {
+                            "type": "jpg",
+                            "url": "https://example.com/chorgila1.jpg",
+                            "seat_no": "-৩"
+                        },
+                        {
+                            "type": "jpg",
+                            "url": "https://example.com/chorgila2.jpg",
+                            "seat_no": "-৪"
+                        }
+                    ]
+                },
+                "চর বেলগাছা (১৪)": {
+                    "code": "১৪",
+                    "file_name": "Char_Belgacha_Map",
+                    "district_no": "20",
+                    "file_size": "2.3MB",
+                    "files": [
+                        {
+                            "type": "pdf",
+                            "url": "https://example.com/charbelgacha1.pdf",
+                            "seat_no": "-১"
+                        },
+                        {
+                            "type": "pdf",
+                            "url": "https://example.com/charbelgacha2.pdf",
+                            "seat_no": "-২"
+                        },
+                        {
+                            "type": "jpg",
+                            "url": "https://example.com/charbelgacha1.jpg",
+                            "seat_no": "-৩"
+                        },
+                        {
+                            "type": "jpg",
+                            "url": "https://example.com/charbelgacha2.jpg",
+                            "seat_no": "-৪"
+                        }
+                    ]
+                },
+                "চর কুলকান্দি (১৫)": {
+                    "code": "১৫",
+                    "file_name": "Char_Kulkandi_Map",
+                    "district_no": "20",
+                    "file_size": "2.4MB",
+                    "files": [
+                        {
+                            "type": "pdf",
+                            "url": "https://example.com/charkulkandi1.pdf",
+                            "seat_no": "-১"
+                        },
+                        {
+                            "type": "pdf",
+                            "url": "https://example.com/charkulkandi2.pdf",
+                            "seat_no": "-২"
+                        },
+                        {
+                            "type": "jpg",
+                            "url": "https://example.com/charkulkandi1.jpg",
+                            "seat_no": "-৩"
+                        },
+                        {
+                            "type": "jpg",
+                            "url": "https://example.com/charkulkandi2.jpg",
+                            "seat_no": "-৪"
+                        }
+                    ]
+                },
+                "বড়ল (১৬)": {
+                    "code": "১৬",
+                    "file_name": "Baral_Map",
+                    "district_no": "20",
+                    "file_size": "2.5MB",
+                    "files": []
+                },
+                "ধরপাড়া (১৭)": {
+                    "code": "১৭",
+                    "file_name": "Dharpara_Map",
+                    "district_no": "20",
+                    "file_size": "2.6MB",
+                    "files": []
+                },
+                "মন্নিয়া (১৮)": {
+                    "code": "১৮",
+                    "file_name": "Mannia_Map",
+                    "district_no": "20",
+                    "file_size": "2.7MB",
+                    "files": []
+                },
+                "চরমইনা (১৯)": {
+                    "code": "১৯",
+                    "file_name": "Char_Moina_Map",
+                    "district_no": "20",
+                    "file_size": "2.8MB",
+                    "files": []
+                },
+                "প্রজাপতি (২০)": {
+                    "code": "২০",
+                    "file_name": "Prajapati_Map",
+                    "district_no": "20",
+                    "file_size": "2.9MB",
+                    "files": []
+                },
+                "সিন্দুরতলি (২১)": {
+                    "code": "২১",
+                    "file_name": "Sindurtali_Map",
+                    "district_no": "20",
+                    "file_size": "3.0MB",
+                    "files": []
+                },
+                "শিলদহ (২২)": {
+                    "code": "২২",
+                    "file_name": "Shildaha_Map",
+                    "district_no": "20",
+                    "file_size": "3.1MB",
+                    "files": []
+                },
+                "চর নন্দনের পাড়া (২৩)": {
+                    "code": "২৩",
+                    "file_name": "Char_Nandaner_Para_Map",
+                    "district_no": "20",
+                    "file_size": "3.2MB",
+                    "files": []
+                },
+                "শিশুয়া (২৪)": {
+                    "code": "২৪",
+                    "file_name": "Shishua_Map",
+                    "district_no": "20",
+                    "file_size": "3.3MB",
+                    "files": []
+                },
+                "চর শিশুয়া (২৫)": {
+                    "code": "২৫",
+                    "file_name": "Char_Shishua_Map",
+                    "district_no": "20",
+                    "file_size": "3.4MB",
+                    "files": []
+                },
+                "জোকনাই (২৬)": {
+                    "code": "২৬",
+                    "file_name": "Joknai_Map",
+                    "district_no": "20",
+                    "file_size": "3.5MB",
+                    "files": []
+                },
+                "চেঙ্গানিয়া (২৭)": {
+                    "code": "২৭",
+                    "file_name": "Chengania_Map",
+                    "district_no": "20",
+                    "file_size": "3.6MB",
+                    "files": []
+                },
+                "দিঘাইর (২৮)": {
+                    "code": "২৮",
+                    "file_name": "Dighair_Map",
+                    "district_no": "20",
+                    "file_size": "3.7MB",
+                    "files": []
+                },
+                "ভাংবাড়ী (২৯)": {
+                    "code": "২৯",
+                    "file_name": "Bhangbari_Map",
+                    "district_no": "20",
+                    "file_size": "3.8MB",
+                    "files": []
+                },
+                "চর ভাংবাড়ী (৩০)": {
+                    "code": "৩০",
+                    "file_name": "Char_Bhangbari_Map",
+                    "district_no": "20",
+                    "file_size": "3.9MB",
+                    "files": []
+                },
+                "চর মাইজবাড়ী (৩১)": {
+                    "code": "৩১",
+                    "file_name": "Char_Maizbari_Map",
+                    "district_no": "20",
+                    "file_size": "4.0MB",
+                    "files": []
+                },
+                "চরটগা (৩২)": {
+                    "code": "৩২",
+                    "file_name": "Char_Toga_Map",
+                    "district_no": "20",
+                    "file_size": "4.1MB",
+                    "files": []
+                },
+                "কাটমা কৃষ্ণনগর (৩৩)": {
+                    "code": "৩৩",
+                    "file_name": "Katma_Krishnanagar_Map",
+                    "district_no": "20",
+                    "file_size": "4.2MB",
+                    "files": []
+                },
+                "কাজলা (৩৪)": {
+                    "code": "৩৪",
+                    "file_name": "Kajla_Map",
+                    "district_no": "20",
+                    "file_size": "4.3MB",
+                    "files": []
+                },
+                "টগা (৩৫)": {
+                    "code": "৩৫",
+                    "file_name": "Toga_Map",
+                    "district_no": "20",
+                    "file_size": "4.4MB",
+                    "files": []
+                },
+                "মাইজবাড়ী (৩৬)": {
+                    "code": "৩৬",
+                    "file_name": "Maizbari_Map",
+                    "district_no": "20",
+                    "file_size": "4.5MB",
+                    "files": []
+                },
+                "নোয়ারপাড়া (৩৭)": {
+                    "code": "৩৭",
+                    "file_name": "Noarpara_Map",
+                    "district_no": "20",
+                    "file_size": "4.6MB",
+                    "files": []
+                },
+                "রাজাপুর (৩৮)": {
+                    "code": "৩৮",
+                    "file_name": "Rajapur_Map",
+                    "district_no": "20",
+                    "file_size": "4.7MB",
+                    "files": []
+                },
+                "সাপধরী (৩৯)": {
+                    "code": "৩৯",
+                    "file_name": "Sapdhari_Map",
+                    "district_no": "20",
+                    "file_size": "4.8MB",
+                    "files": []
+                },
+                "নন্দনের পাড়া (৪০)": {
+                    "code": "৪০",
+                    "file_name": "Nandaner_Para_Map",
+                    "district_no": "20",
+                    "file_size": "4.9MB",
+                    "files": []
+                },
+                "চিনাডুলী (৪১)": {
+                    "code": "৪১",
+                    "file_name": "Chinaduli_Map",
+                    "district_no": "20",
+                    "file_size": "5.0MB",
+                    "files": []
+                },
+                "পচাবহালা (৪২)": {
+                    "code": "৪২",
+                    "file_name": "Pachabhala_Map",
+                    "district_no": "20",
+                    "file_size": "5.1MB",
+                    "files": []
+                },
+                "পাঁচবাড়ীয়া (৪৩)": {
+                    "code": "৪৩",
+                    "file_name": "Panchbariya_Map",
+                    "district_no": "20",
+                    "file_size": "5.2MB",
+                    "files": []
+                },
+                "পাকামুড়ি (৪৪)": {
+                    "code": "৪৪",
+                    "file_name": "Pakamuri_Map",
+                    "district_no": "20",
+                    "file_size": "5.3MB",
+                    "files": []
+                },
+                "দরিয়াবাদ (৪৫)": {
+                    "code": "৪৫",
+                    "file_name": "Dariabad_Map",
+                    "district_no": "20",
+                    "file_size": "5.4MB",
+                    "files": []
+                },
+                "কিসমত জাল্লা (৪৬)": {
+                    "code": "৪৬",
+                    "file_name": "Kismat_Jalla_Map",
+                    "district_no": "20",
+                    "file_size": "5.5MB",
+                    "files": []
+                },
+                "গাঁওকুড়া (৪৭)": {
+                    "code": "৪৭",
+                    "file_name": "Gaokura_Map",
+                    "district_no": "20",
+                    "file_size": "5.6MB",
+                    "files": []
+                },
+                "ভেঙ্গুরা (৪৮)": {
+                    "code": "৪৮",
+                    "file_name": "Bhengura_Map",
+                    "district_no": "20",
+                    "file_size": "5.7MB",
+                    "files": []
+                },
+                "শংকর পুর (৪৯)": {
+                    "code": "৪৯",
+                    "file_name": "Shankar_Pur_Map",
+                    "district_no": "20",
+                    "file_size": "5.8MB",
+                    "files": []
+                },
+                "বালিয়াদহ (৫০)": {
+                    "code": "৫০",
+                    "file_name": "Baliadaha_Map",
+                    "district_no": "20",
+                    "file_size": "5.9MB",
+                    "files": []
+                },
+                "বামনা (৫১)": {
+                    "code": "৫১",
+                    "file_name": "Bamna_Map",
+                    "district_no": "20",
+                    "file_size": "6.0MB",
+                    "files": []
+                },
+                "চেঙ্গারগড় (৫২)": {
+                    "code": "৫২",
+                    "file_name": "Chengargar_Map",
+                    "district_no": "20",
+                    "file_size": "6.1MB",
+                    "files": []
+                },
+                "গঙ্গা পাড়া (৫৩)": {
+                    "code": "৫৩",
+                    "file_name": "Ganga_Para_Map",
+                    "district_no": "20",
+                    "file_size": "6.2MB",
+                    "files": []
+                },
+                "লাউদত্ত (৫৪)": {
+                    "code": "৫৪",
+                    "file_name": "Laudatta_Map",
+                    "district_no": "20",
+                    "file_size": "6.3MB",
+                    "files": []
+                },
+                "রৌহারকান্দা (৫৫)": {
+                    "code": "৫৫",
+                    "file_name": "Rouharkanda_Map",
+                    "district_no": "20",
+                    "file_size": "6.4MB",
+                    "files": []
+                },
+                "মুকসিমলা (৫৬)": {
+                    "code": "৫৬",
+                    "file_name": "Muksimala_Map",
+                    "district_no": "20",
+                    "file_size": "6.5MB",
+                    "files": []
+                },
+                "গামারিয়া (৫৭)": {
+                    "code": "৫৭",
+                    "file_name": "Gamaria_Map",
+                    "district_no": "20",
+                    "file_size": "6.6MB",
+                    "files": []
+                },
+                "হারিয়াবাড়ী (৫৮)": {
+                    "code": "৫৮",
+                    "file_name": "Hariabari_Map",
+                    "district_no": "20",
+                    "file_size": "6.7MB",
+                    "files": []
+                },
+                "বাধির আলগা (৫৯)": {
+                    "code": "৫৯",
+                    "file_name": "Badhir_Alga_Map",
+                    "district_no": "20",
+                    "file_size": "6.8MB",
+                    "files": []
+                },
+                "টঙ্গের আলগা (৬০)": {
+                    "code": "৬০",
+                    "file_name": "Tonger_Alga_Map",
+                    "district_no": "20",
+                    "file_size": "6.9MB",
+                    "files": []
+                },
+                "তেঘরিয়া (৬১)": {
+                    "code": "৬১",
+                    "file_name": "Tegharia_Map",
+                    "district_no": "20",
+                    "file_size": "7.0MB",
+                    "files": []
+                },
+                "বাইটকামারী (৬২)": {
+                    "code": "৬২",
+                    "file_name": "Baitkamari_Map",
+                    "district_no": "20",
+                    "file_size": "7.1MB",
+                    "files": []
+                },
+                "পলবান্দা (৬৩)": {
+                    "code": "৬৩",
+                    "file_name": "Palbanda_Map",
+                    "district_no": "20",
+                    "file_size": "7.2MB",
+                    "files": []
+                },
+                "চরগাঁওকুড়া (৬৪)": {
+                    "code": "৬৪",
+                    "file_name": "Char_Gaokura_Map",
+                    "district_no": "20",
+                    "file_size": "7.3MB",
+                    "files": []
+                },
+                "জাল্লা (৬৫)": {
+                    "code": "৬৫",
+                    "file_name": "Jalla_Map",
+                    "district_no": "20",
+                    "file_size": "7.4MB",
+                    "files": []
+                },
+                "ইসলামপুর (৬৬)": {
+                    "code": "৬৬",
+                    "file_name": "Islampur_Map",
+                    "district_no": "20",
+                    "file_size": "7.5MB",
+                    "files": []
+                },
+                "চারিয়া (৬৭)": {
+                    "code": "৬৭",
+                    "file_name": "Charia_Map",
+                    "district_no": "20",
+                    "file_size": "7.6MB",
+                    "files": []
+                },
+                "বাহাদুর পুর (৬৮)": {
+                    "code": "৬৮",
+                    "file_name": "Bahadur_Pur_Map",
+                    "district_no": "20",
+                    "file_size": "7.7MB",
+                    "files": []
+                },
+                "সিরাজা বাদ (৬৯)": {
+                    "code": "৬৯",
+                    "file_name": "Siraja_Bad_Map",
+                    "district_no": "20",
+                    "file_size": "7.8MB",
+                    "files": []
+                },
+                "কদমতলী (৭০)": {
+                    "code": "৭০",
+                    "file_name": "Kadamtali_Map",
+                    "district_no": "20",
+                    "file_size": "7.9MB",
+                    "files": []
+                },
+                "গোয়ালের চর (৭১)": {
+                    "code": "৭১",
+                    "file_name": "Gowal_Char_Map",
+                    "district_no": "20",
+                    "file_size": "8.0MB",
+                    "files": []
+                },
+                "কাছিমার চর (৭২)": {
+                    "code": "৭২",
+                    "file_name": "Kachimar_Char_Map",
+                    "district_no": "20",
+                    "file_size": "8.1MB",
+                    "files": []
+                },
+                "মহলগিরি (৭৩)": {
+                    "code": "৭৩",
+                    "file_name": "Mahalgiri_Map",
+                    "district_no": "20",
+                    "file_size": "8.2MB",
+                    "files": []
+                },
+                "মালমারা (৭৪)": {
+                    "code": "৭৪",
+                    "file_name": "Malmara_Map",
+                    "district_no": "20",
+                    "file_size": "8.3MB",
+                    "files": []
+                },
+                "চর দাদনা (৭৫)": {
+                    "code": "৭৫",
+                    "file_name": "Char_Dadna_Map",
+                    "district_no": "20",
+                    "file_size": "8.4MB",
+                    "files": []
+                },
+                "গাইবান্দা (৭৬)": {
+                    "code": "৭৬",
+                    "file_name": "Gaibanda_Map",
+                    "district_no": "20",
+                    "file_size": "8.5MB",
+                    "files": []
+                },
+                "ষাঁড়মারা (৭৭)": {
+                    "code": "৭৭",
+                    "file_name": "Shandmara_Map",
+                    "district_no": "20",
+                    "file_size": "8.6MB",
+                    "files": []
+                },
+                "গোপাল নগর (৭৮)": {
+                    "code": "৭৮",
+                    "file_name": "Gopal_Nagar_Map",
+                    "district_no": "20",
+                    "file_size": "8.7MB",
+                    "files": []
+                },
+                "চর পুটিমারী (৭৯)": {
+                    "code": "৭৯",
+                    "file_name": "Char_Putimari_Map",
+                    "district_no": "20",
+                    "file_size": "8.8MB",
+                    "files": []
+                },
+                "উত্তর গোয়ালনীরচর (৮০)": {
+                    "code": "৮০",
+                    "file_name": "Uttar_Gowalni_Char_Map",
+                    "district_no": "20",
+                    "file_size": "8.9MB",
+                    "files": []
+                },
+                "কিছমত গোবিন্দি (৮১)": {
+                    "code": "৮১",
+                    "file_name": "Kismat_Gobindi_Map",
+                    "district_no": "20",
+                    "file_size": "9.0MB",
+                    "files": []
+                },
+                "চর গোবিন্দী (৮২)": {
+                    "code": "৮২",
+                    "file_name": "Char_Gobindi_Map",
+                    "district_no": "20",
+                    "file_size": "9.1MB",
+                    "files": []
+                },
+                "প্রতাপ ঝগড়ী (৮৩)": {
+                    "code": "৮৩",
+                    "file_name": "Pratap_Jhagri_Map",
+                    "district_no": "20",
+                    "file_size": "9.2MB",
+                    "files": []
+                },
+                "গোয়ালনীর চর (৮৪)": {
+                    "code": "৮৪",
+                    "file_name": "Gowalni_Char_Map",
+                    "district_no": "20",
+                    "file_size": "9.3MB",
+                    "files": []
+                },
+                "বাঘরদী (৮৫)": {
+                    "code": "৮৫",
+                    "file_name": "Baghardi_Map",
+                    "district_no": "20",
+                    "file_size": "9.4MB",
+                    "files": []
                 }
-            } else {
-                infoDiv.innerHTML = '<p class="error-message">ম্যাপ ডাটা পাওয়া যায়নি। URL প্যারামিটার চেক করুন।</p>';
-                linksDiv.innerHTML = '';
             }
-        })
-        .catch(error => {
-            console.error('ম্যাপ ডাটা লোডে ত্রুটি:', error);
-            infoDiv.innerHTML = `<p class="error-message">ম্যাপ ডাটা লোড করতে সমস্যা হয়েছে: ${error.message}</p>`;
-            linksDiv.innerHTML = '';
-        });
-    </script>
-</body>
-</html>
+        }
+    }
+                }
