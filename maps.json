@@ -771,6 +771,392 @@
                             "seat_no": "২"
                         }
                     ]
+                },
+                "বাইটকামারী (৬২)": {
+                    "code": "62",
+                    "file_name": "বাইটকামারী",
+                    "district_no": "62",
+                    "file_size": "25MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1besGSQRfs-WY7nx4E4WV7UFZYkc3LPK5",
+                            "seat_no": "১"
+                        },
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/14ht74zTl_jUI1XxU5-letjUGk-X68mqn",
+                            "seat_no": "২"
+                        }
+                    ]
+                },
+                "পলবান্দা (৬৩)": {
+                    "code": "63",
+                    "file_name": "পলবান্দা",
+                    "district_no": "63",
+                    "file_size": "23MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/19MVb8TJc80Pi1AeWZmUZQg4IJT4FSRUJ",
+                            "seat_no": "১"
+                        },
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1boNhz06IFbUzyndD7GSd5uCCF7r-NLVD",
+                            "seat_no": "২"
+                        }
+                    ]
+                },
+                "চরগাঁওকুড়া (৬৪)": {
+                    "code": "64",
+                    "file_name": "চরগাঁওকুড়া",
+                    "district_no": "64",
+                    "file_size": "20MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1LsCRdTcA_tmlqy7DDUsnpSMCysa1zFBG",
+                            "seat_no": ""
+                        }
+                    ]
+               },
+               "জাল্লা (৬৫)": {
+                    "code": "65",
+                    "file_name": "জাল্লা",
+                    "district_no": "65",
+                    "file_size": "21MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1eWULT7LWzZpgxHQkSBinooN7qYcXNUZc",
+                            "seat_no": ""
+                        }
+                    ]
+               },
+               "বাহাদুর পুর (৬৮)": {
+                    "code": "68",
+                    "file_name": "বাহাদুর পুর",
+                    "district_no": "68",
+                    "file_size": "24MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1YPmlTtr24sHbYADk6lsjNIO4TPUDOdB_",
+                            "seat_no": "১"
+                        },
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1y8QOftyYNJeoJhXfGO0vf9WY5T06uwCh",
+                            "seat_no": "২"
+                        }
+                    ]
+                },
+                "সিরাজাবাদ (৬৯)": {
+                    "code": "69",
+                    "file_name": "সিরাজাবাদ",
+                    "district_no": "69",
+                    "file_size": "26MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1pcATlseWvqO09PAwfgUSjWCeEyzbkruG",
+                            "seat_no": "১"
+                        },
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1F5tAhlCnQpDRi1GPoEBQrS4RjuTkRzqA",
+                            "seat_no": "২"
+                        }
+                    ]
+                },
+                "কদমতলী (৭০)": {
+                    "code": "70",
+                    "file_name": "কদমতলী",
+                    "district_no": "70",
+                    "file_size": "23MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1ABAD40G1Du1QgiBZpa5t-vF7bUbeGdPy",
+                            "seat_no": ""
+                        }
+                    ]
+               },
+               "গোয়ালের চর (৭১)": {
+                    "code": "71",
+                    "file_name": "গোয়ালের চর",
+                    "district_no": "71",
+                    "file_size": "24MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1okIg2KK-4Zlzkop-dJ04nVptm5yei8JU",
+                            "seat_no": "১"
+                        },
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1uLURcVj3v_8KEMEAAP-FzxZNV-YQNOEk",
+                            "seat_no": "২"
+                        }
+                    ]
+                },
+                "কাছিমার চর (৭২)": {
+                    "code": "72",
+                    "file_name": "কাছিমার চর",
+                    "district_no": "72",
+                    "file_size": "26MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1BLSfFbR09ZeGwEqTpHoDTe8kVQiUT-Tj",
+                            "seat_no": "১"
+                        },
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1uLURcVj3v_8KEMEAAP-FzxZNV-YQNOEk",
+                            "seat_no": "২"
+                        }
+                    ]
+                },
+                "মহলগিরি (৭৩)": {
+                    "code": "73",
+                    "file_name": "মহলগিরি",
+                    "district_no": "73",
+                    "file_size": "26MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1O9KY4ILIhgTuPuzaOmeWkZftm_Bq68en",
+                            "seat_no": "১"
+                        },
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1g-lwr5PaFL-1eRR8rIGQxU1RIRcm9Jyt",
+                            "seat_no": "২"
+                        }
+                    ]
+                },
+                "মালমারা (৭৪)": {
+                    "code": "74",
+                    "file_name": "মালমারা",
+                    "district_no": "74",
+                    "file_size": "26MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1rSyj54IQ6w5bYaebhm6ldoW38xQ0cnSz",
+                            "seat_no": "১"
+                        },
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1KeGMdMLTH3C26hfvqeOs4jqT9T-BeEZ7",
+                            "seat_no": "২"
+                        },
+                        {
+                            "type": "png",
+                            "url": "https://drive.google.com/file/d/1CAys68jNdffxTQx__9ZD8iG1Nj5lyoBm",
+                            "seat_no": "৩"
+                        }
+                    ]
+                },
+                "চর দাদনা (৭৫)": {
+                    "code": "75",
+                    "file_name": "চর দাদনা",
+                    "district_no": "75",
+                    "file_size": "26MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1DvN6GBnYgq5onOFH7wSeKWle0I2qkZOO",
+                            "seat_no": "১"
+                        },
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1-yCGMiCvvsd8ugd8_5Gx_Or4kNmXS1QQ",
+                            "seat_no": "২"
+                        }
+                    ]
+                },
+                "গাইবান্দা (৭৬)": {
+                    "code": "76",
+                    "file_name": "গাইবান্দা",
+                    "district_no": "76",
+                    "file_size": "26MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1D3M_5882nhi5USwKDw0HaSnaLVHdoPp1",
+                            "seat_no": "১"
+                        },
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1sITB1d2z1ck1d5dF1hJWFRUe-gPF2_Kx",
+                            "seat_no": "২"
+                        },
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1T3ppKmXCSMSs6G3rSg0srzMD6GDSEBSO",
+                            "seat_no": "৩"
+                        }
+                    ]
+                },
+                "ষাঁড়মারা (৭৭)": {
+                    "code": "77",
+                    "file_name": "ষাঁড়মারা",
+                    "district_no": "77",
+                    "file_size": "26MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1S7KZuw9DTscG2IZ4ZkTgO9dU0wSZT0KH",
+                            "seat_no": "১"
+                        },
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1Z0bK_kKWOC6XXNcyODtI2AjujGgY9Bqr",
+                            "seat_no": "২"
+                        }
+                    ]
+                },
+                "গোপাল নগর (৭৮)": {
+                    "code": "78",
+                    "file_name": "গোপাল নগর",
+                    "district_no": "78",
+                    "file_size": "26MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1YoJHJKW_zg_PKgVcRTaC8tCE9MYz9yzX",
+                            "seat_no": "১"
+                        },
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1h9x8IF_QjK5-gCdZajBCNS22h35bx_Kt",
+                            "seat_no": "২"
+                        }
+                    ]
+                },
+                "চর পুটিমারী (৭৯)": {
+                    "code": "79",
+                    "file_name": "চর পুটিমারী",
+                    "district_no": "79",
+                    "file_size": "26MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1Lp5Ogno9yvE8lok1b2EVBxRb4gDVaqs0",
+                            "seat_no": "১"
+                        },
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1UI-pAumD6nJmXfVl4iXIw4obGB5UGmAc",
+                            "seat_no": "২"
+                        }
+                    ]
+                },
+                "উত্তর গোয়ালনীরচর (৮০)": {
+                    "code": "80",
+                    "file_name": "উত্তর গোয়ালনীরচর",
+                    "district_no": "80",
+                    "file_size": "26MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1zuShVq7bwnb6uWPboueqTt4JH3Lcs9n6",
+                            "seat_no": "১"
+                        },
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1TsABoIAyHNFoeg21dN5QtswPFiDTNgdC",
+                            "seat_no": "২"
+                        }
+                    ]
+                },
+                "কিছমত গোবিন্দি (৮১)": {
+                    "code": "81",
+                    "file_name": "কিছমত গোবিন্দি",
+                    "district_no": "81",
+                    "file_size": "26MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1lqAyKnXUJvnHd-FAdQ158gPLaYMkIhH2",
+                            "seat_no": "১"
+                        },
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1MicDrp7N5pHsyLNSGJWCynJlw0XqAkuq",
+                            "seat_no": "২"
+                        }
+                    ]
+                },
+                "চর গোবিন্দী (৮২)": {
+                    "code": "82",
+                    "file_name": "চর গোবিন্দী",
+                    "district_no": "82",
+                    "file_size": "26MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1VxvZA2ZgSV8j_LBL877X77HhRfro0Rgi",
+                            "seat_no": "১"
+                        },
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1qL3CKpI6IPf7Q0gLV7q0xPHU-2MXb1zU",
+                            "seat_no": "২"
+                        }
+                    ]
+                },
+                "প্রতাপ ঝগড়ী (৮৩)": {
+                    "code": "83",
+                    "file_name": "প্রতাপ ঝগড়ী",
+                    "district_no": "83",
+                    "file_size": "26MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1IBZiAxHoPAXq4tLeKAN4j2EIxbqie81N",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "গোয়ালনীর চর (৮৪)": {
+                    "code": "84",
+                    "file_name": "গোয়ালনীর চর",
+                    "district_no": "84",
+                    "file_size": "26MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1BcagGKTOnR2Jmm8TPCJvJy3H034aZL_K",
+                            "seat_no": "১"
+                        },
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1x4fzYhaM5Q9Twd3T4VaPFI486HCYNkMx",
+                            "seat_no": "২"
+                        },
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1uwD2W2Ilt_ZnNsg8Ul7Z5CIrbe3EBVHN",
+                            "seat_no": "৪"
+                        }
+                    ]
+                },
+                "বাঘরদী (৮৫)": {
+                    "code": "85",
+                    "file_name": "বাঘরদী",
+                    "district_no": "85",
+                    "file_size": "26MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "https://drive.google.com/file/d/1sbCg6RVUTvVNEjEahtr1k1DUdtiyHent",
+                            "seat_no": "১"
+                        }
+                    ]
                 }
           },
             "দেওয়ানগঞ্জ": {
@@ -782,7 +1168,7 @@
                     "files": [
                         {
                             "type": "jpg",
-                            "url": "https://drive.google.com/file/d/1example-url-for-kalikapur.jpg",
+                            "url": "",
                             "seat_no": ""
                         }
                     ]
@@ -797,7 +1183,7 @@
                     "files": [
                         {
                             "type": "jpg",
-                            "url": "https://drive.google.com/file/d/1example-url-for-hatija.jpg",
+                            "url": "",
                             "seat_no": ""
                         }
                     ]
@@ -812,7 +1198,7 @@
                     "files": [
                         {
                             "type": "jpg",
-                            "url": "https://drive.google.com/file/d/1example-url-for-enampur.jpg",
+                            "url": "",
                             "seat_no": ""
                         }
                     ]
@@ -820,4 +1206,4 @@
             }
         }
     }
-		}
+			}
