@@ -1760,10 +1760,517 @@
                 }
             },
             "মেলান্দহ": {
-                "হাতিজা": {
-                    "code": "50",
+                "হাতিজা (১)": {
+                    "code": "১",
                     "file_name": "হাতিজা",
-                    "district_no": "50",
+                    "district_no": "১",
+                    "file_size": "23MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "সরুলিয়া (২)": {
+                    "code": "2",
+                    "file_name": "সরুলিয়া",
+                    "district_no": "2",
+                    "file_size": "23MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "আমবাড়ীয়া (৩)": {
+                    "code": "3",
+                    "file_name": "আমবাড়ীয়া",
+                    "district_no": "3",
+                    "file_size": "23MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "জাঙ্গালীয়া (৪)": {
+                    "code": "4",
+                    "file_name": "জাঙ্গালীয়া",
+                    "district_no": "4",
+                    "file_size": "23MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "গোকুলের পাড়া (৫)": {
+                    "code": "5",
+                    "file_name": "গোকুলের পাড়া",
+                    "district_no": "5",
+                    "file_size": "23MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "কলাবাধা (৬)": {
+                    "code": "6",
+                    "file_name": "কলাবাধা",
+                    "district_no": "6",
+                    "file_size": "23MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "দিগর কলাবাধা (৭)": {
+                    "code": "7",
+                    "file_name": "দিগর কলাবাধা",
+                    "district_no": "7",
+                    "file_size": "23MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "সুলতানখালী (৮)": {
+                    "code": "8",
+                    "file_name": "সুলতানখালী",
+                    "district_no": "8",
+                    "file_size": "23MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "চরপাংশি (৯)": {
+                    "code": "9",
+                    "file_name": "চরপাংশি",
+                    "district_no": "9",
+                    "file_size": "23MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "বাহেরচর (১০)": {
+                    "code": "10",
+                    "file_name": "বাহেরচর",
+                    "district_no": "10",
+                    "file_size": "23MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "দুরমুট (১১)": {
+                    "code": "11",
+                    "file_name": "দুরমুট",
+                    "district_no": "11",
+                    "file_size": "23MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "সিন্দুরা ফসল (১২)": {
+                    "code": "12",
+                    "file_name": "সিন্দুরা ফসল",
+                    "district_no": "12",
+                    "file_size": "23MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "দাউদকুড়া (১৩)": {
+                    "code": "13",
+                    "file_name": "দাউদকুড়া",
+                    "district_no": "13",
+                    "file_size": "23MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "টনকী (১৪)": {
+                    "code": "14",
+                    "file_name": "টনকী",
+                    "district_no": "14",
+                    "file_size": "23MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "সাদিপাটি (১৫)": {
+                    "code": "15",
+                    "file_name": "সাদিপাটি",
+                    "district_no": "15",
+                    "file_size": "23MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "তারাকান্দি (১৬)": {
+                    "code": "16",
+                    "file_name": "তারাকান্দি",
+                    "district_no": "16",
+                    "file_size": "23MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "ডেপলাপাড়া (১৭)": {
+                    "code": "17",
+                    "file_name": "ডেপলাপাড়া",
+                    "district_no": "17",
+                    "file_size": "23MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "কাঙ্গালকুশা (১৮)": {
+                    "code": "18",
+                    "file_name": "কাঙ্গালকুশা",
+                    "district_no": "18",
+                    "file_size": "23MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "মেঘারবাড়ী (১৯)": {
+                    "code": "19",
+                    "file_name": "মেঘারবাড়ী",
+                    "district_no": "19",
+                    "file_size": "23MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "ভালুকা (২০)": {
+                    "code": "20",
+                    "file_name": "ভালুকা",
+                    "district_no": "20",
+                    "file_size": "23MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "চিনিতোলা (২১)": {
+                    "code": "21",
+                    "file_name": "চিনিতোলা",
+                    "district_no": "21",
+                    "file_size": "23MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "হরিপুর (২২)": {
+                    "code": "22",
+                    "file_name": "হরিপুর",
+                    "district_no": "22",
+                    "file_size": "23MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "পয়লা (২৩)": {
+                    "code": "23",
+                    "file_name": "পয়লা",
+                    "district_no": "23",
+                    "file_size": "23MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "তেঘরিয়া (২৪)": {
+                    "code": "24",
+                    "file_name": "তেঘরিয়া",
+                    "district_no": "24",
+                    "file_size": "23MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "সাদিপাটী (২৫)": {
+                    "code": "25",
+                    "file_name": "সাদিপাটী",
+                    "district_no": "25",
+                    "file_size": "23MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "বল্লভপুর (২৬)": {
+                    "code": "26",
+                    "file_name": "বল্লভপুর",
+                    "district_no": "26",
+                    "file_size": "23MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "কুলিয়া (২৭)": {
+                    "code": "27",
+                    "file_name": "কুলিয়া",
+                    "district_no": "27",
+                    "file_size": "23MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "হামলা (২৮)": {
+                    "code": "28",
+                    "file_name": "হামলা",
+                    "district_no": "28",
+                    "file_size": "23MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "রুকনাই (২৯)": {
+                    "code": "29",
+                    "file_name": "রুকনাই",
+                    "district_no": "29",
+                    "file_size": "23MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "খুদিয়ার কান্দা (৩০)": {
+                    "code": "30",
+                    "file_name": "খুদিয়ার কান্দা",
+                    "district_no": "30",
+                    "file_size": "23MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "সিতানিরবন্দ (৩১)": {
+                    "code": "31",
+                    "file_name": "সিতানিরবন্দ",
+                    "district_no": "31",
+                    "file_size": "23MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "পচা বহলা (৩২)": {
+                    "code": "32",
+                    "file_name": "পচা বহলা",
+                    "district_no": "32",
+                    "file_size": "23MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "বানিয়াবাড়ী (৩৩)": {
+                    "code": "33",
+                    "file_name": "বানিয়াবাড়ী",
+                    "district_no": "33",
+                    "file_size": "23MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "ইমামপুর (৩৪)": {
+                    "code": "34",
+                    "file_name": "ইমামপুর",
+                    "district_no": "34",
+                    "file_size": "23MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "নাংলা পাড়া বগা (৩৫)": {
+                    "code": "35",
+                    "file_name": "নাংলা পাড়া বগা",
+                    "district_no": "35",
+                    "file_size": "23MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "বন্দএলাঙ্গি (৩৬)": {
+                    "code": "36",
+                    "file_name": "বন্দএলাঙ্গি",
+                    "district_no": "36",
+                    "file_size": "23MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "খাবুলী (৩৭)": {
+                    "code": "37",
+                    "file_name": "খাবুলী",
+                    "district_no": "37",
+                    "file_size": "23MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "মাহমুদপুর (৩৮)": {
+                    "code": "38",
+                    "file_name": "মাহমুদপুর",
+                    "district_no": "38",
+                    "file_size": "23MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "খাশিমারা (৩৯)": {
+                    "code": "39",
+                    "file_name": "খাশিমারা",
+                    "district_no": "39",
+                    "file_size": "23MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "নাংলা (৪০)": {
+                    "code": "40",
+                    "file_name": "নাংলা",
+                    "district_no": "40",
                     "file_size": "23MB",
                     "files": [
                         {
