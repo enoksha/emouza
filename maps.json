@@ -1160,10 +1160,595 @@
                 }
           },
             "দেওয়ানগঞ্জ": {
-                "কালিকাপুর": {
-                    "code": "49",
+                "উত্তর জোয়ানের চর (১)": {
+                    "code": "1",
+                    "file_name": "উত্তর জোয়ানের চর",
+                    "district_no": "1",
+                    "file_size": "22MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                 "জোয়ানের চর (২)": {
+                    "code": "2",
+                    "file_name": "জোয়ানের চর",
+                    "district_no": "2",
+                    "file_size": "22MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "ডাংধরা (৩)": {
+                    "code": "3",
+                    "file_name": "ডাংধরা",
+                    "district_no": "3",
+                    "file_size": "22MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "কারখানা (৪)": {
+                    "code": "4",
+                    "file_name": "কারখানা",
+                    "district_no": "4",
+                    "file_size": "22MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "বাঘার চর (৫)": {
+                    "code": "5",
+                    "file_name": "বাঘার চর",
+                    "district_no": "5",
+                    "file_size": "22MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "মাদারের চর (৬)": {
+                    "code": "6",
+                    "file_name": "মাদারের চর",
+                    "district_no": "6",
+                    "file_size": "22MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "চর মাদার (৭)": {
+                    "code": "7",
+                    "file_name": "চর মাদার",
+                    "district_no": "7",
+                    "file_size": "22MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "গোয়ালকুল (৮)": {
+                    "code": "8",
+                    "file_name": "গোয়ালকুল",
+                    "district_no": "8",
+                    "file_size": "22MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "হারুয়াবাড়ী (৯)": {
+                    "code": "9",
+                    "file_name": "হারুয়াবাড়ী",
+                    "district_no": "9",
+                    "file_size": "22MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "সানন্দবাড়ী (১০)": {
+                    "code": "10",
+                    "file_name": "সানন্দবাড়ী",
+                    "district_no": "10",
+                    "file_size": "22MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "খলাবাড়ী (১১)": {
+                    "code": "11",
+                    "file_name": "খলাবাড়ী",
+                    "district_no": "11",
+                    "file_size": "22MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "চর আম খাওয়া (১২)": {
+                    "code": "12",
+                    "file_name": "চর আম খাওয়া",
+                    "district_no": "12",
+                    "file_size": "22MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "কিছমত আম খাওয়া (১৩)": {
+                    "code": "13",
+                    "file_name": "কিছমত আম খাওয়া",
+                    "district_no": "13",
+                    "file_size": "22MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "চর লংকা (১৪)": {
+                    "code": "14",
+                    "file_name": "চর লংকা",
+                    "district_no": "14",
+                    "file_size": "22MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "চর হাতীভাঙ্গা (১৫)": {
+                    "code": "15",
+                    "file_name": "চর হাতীভাঙ্গা",
+                    "district_no": "15",
+                    "file_size": "22MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "হাতীভাঙ্গা (১৬)": {
+                    "code": "16",
+                    "file_name": "হাতীভাঙ্গা",
+                    "district_no": "16",
+                    "file_size": "22MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "আমখাওয়া (১৭)": {
+                    "code": "17",
+                    "file_name": "আমখাওয়া",
+                    "district_no": "17",
+                    "file_size": "22MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "বলারামের চর (১৮)": {
+                    "code": "18",
+                    "file_name": "বলারামের চর",
+                    "district_no": "18",
+                    "file_size": "22MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "পাররামরামপুর (১৯)": {
+                    "code": "19",
+                    "file_name": "পাররামরামপুর",
+                    "district_no": "19",
+                    "file_size": "22MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "বেলুয়ার চর (২০)": {
+                    "code": "20",
+                    "file_name": "বেলুয়ার চর",
+                    "district_no": "20",
+                    "file_size": "22MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "বাহাদুরাবাদ (২১)": {
+                    "code": "21",
+                    "file_name": "বাহাদুরাবাদ",
+                    "district_no": "21",
+                    "file_size": "22MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "হরিচন্ডী (২২)": {
+                    "code": "22",
+                    "file_name": "হরিচন্ডী",
+                    "district_no": "22",
+                    "file_size": "22MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "চর বাহাদুরাবাদ (২৩)": {
+                    "code": "23",
+                    "file_name": "চর বাহাদুরাবাদ",
+                    "district_no": "23",
+                    "file_size": "22MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "চর মাগুরী হাট (২৪)": {
+                    "code": "24",
+                    "file_name": "চর মাগুরী হাট",
+                    "district_no": "24",
+                    "file_size": "22MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "সিনাই (২৫))": {
+                    "code": "25",
+                    "file_name": "সিনাই",
+                    "district_no": "25",
+                    "file_size": "22MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "শাঙ্খয়া (২৬)": {
+                    "code": "26",
+                    "file_name": "শাঙ্খয়া",
+                    "district_no": "26",
+                    "file_size": "22MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "চর হলকা হাবরাবাড়ী (২৭)": {
+                    "code": "27",
+                    "file_name": "চর হলকা হাবরাবাড়ী",
+                    "district_no": "27",
+                    "file_size": "22MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "চর হরিন ধরা (২৮)": {
+                    "code": "28",
+                    "file_name": "চর হরিন ধরা",
+                    "district_no": "28",
+                    "file_size": "22MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "হলকার চর (২৯)": {
+                    "code": "29",
+                    "file_name": "হলকার চর",
+                    "district_no": "29",
+                    "file_size": "22MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "রামপুরা (৩০)": {
+                    "code": "30",
+                    "file_name": "রামপুরা",
+                    "district_no": "30",
+                    "file_size": "22MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "চর ডাকাতিয়া পাড়া (৩১)": {
+                    "code": "31",
+                    "file_name": "চর ডাকাতিয়া পাড়া",
+                    "district_no": "31",
+                    "file_size": "22MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "ডাকাতিয়া পাড়া (৩২)": {
+                    "code": "32",
+                    "file_name": "ডাকাতিয়া পাড়া",
+                    "district_no": "32",
+                    "file_size": "22MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "কাজলা পাড়া (৩৩)": {
+                    "code": "33",
+                    "file_name": "কাজলা পাড়া",
+                    "district_no": "33",
+                    "file_size": "22MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "কালিকাপুর (৩৫)": {
+                    "code": "35",
                     "file_name": "কালিকাপুর",
-                    "district_no": "49",
+                    "district_no": "35",
+                    "file_size": "22MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "গোবিন্দ নগর (৩৬)": {
+                    "code": "36",
+                    "file_name": "গোবিন্দ নগর",
+                    "district_no": "36",
+                    "file_size": "22MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "চুনিয়া পাড়া (৩৭)": {
+                    "code": "37",
+                    "file_name": "চুনিয়া পাড়া",
+                    "district_no": "37",
+                    "file_size": "22MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "চিকাজানী (৩৮)": {
+                    "code": "38",
+                    "file_name": "চিকাজানী",
+                    "district_no": "38",
+                    "file_size": "22MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "চুকাইবাড়ী (৩৯)": {
+                    "code": "39",
+                    "file_name": "চুকাইবাড়ী",
+                    "district_no": "39",
+                    "file_size": "22MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "বাদেশা সারিয়াবাড়ী (৪০)": {
+                    "code": "40",
+                    "file_name": "বাদেশা সারিয়াবাড়ী",
+                    "district_no": "40",
+                    "file_size": "22MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "ভবসুর (৪১)": {
+                    "code": "41",
+                    "file_name": "ভবসুর",
+                    "district_no": "41",
+                    "file_size": "22MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "চর ভবসুর (৪২)": {
+                    "code": "42",
+                    "file_name": "চর ভবসুর",
+                    "district_no": "42",
+                    "file_size": "22MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "বানিয়ানীর চর (৪৩)": {
+                    "code": "43",
+                    "file_name": "বানিয়ানীর চর",
+                    "district_no": "43",
+                    "file_size": "22MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "গামারিয়া (৪৪)": {
+                    "code": "44",
+                    "file_name": "গামারিয়া",
+                    "district_no": "44",
+                    "file_size": "22MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "খরমা (৪৫)": {
+                    "code": "45",
+                    "file_name": "খরমা",
+                    "district_no": "45",
+                    "file_size": "22MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "উৎমার চর (৪৬)": {
+                    "code": "46",
+                    "file_name": "উৎমার চর",
+                    "district_no": "46",
+                    "file_size": "22MB",
+                    "files": [
+                        {
+                            "type": "jpg",
+                            "url": "",
+                            "seat_no": ""
+                        }
+                    ]
+                },
+                "তিলকপুর (৪৭)": {
+                    "code": "47",
+                    "file_name": "তিলকপুর",
+                    "district_no": "47",
                     "file_size": "22MB",
                     "files": [
                         {
@@ -1206,4 +1791,4 @@
             }
         }
     }
-			}
+}
