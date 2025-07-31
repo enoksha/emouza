@@ -1,17 +1,128 @@
-<!DOCTYPE html>
-<html lang="bn">
+<!DOCTYPE html><html lang="bn">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ভূমি ক্যালকুলেটর</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;700&display=swap" rel="stylesheet" />
-  <style>
-    body { font-family: 'Noto Sans Bengali', sans-serif; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>জমি শতাংশ ক্যালকুলেটর</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans Bengali', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f5f8;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header {
+            background: linear-gradient(90deg, #4a90e2, #6dd5ed);
+            color: white;
+            padding: 25px 15px;
+            text-align: center;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-bottom: 4px solid #fff;
+        }
+        main {
+            flex: 1;
+            padding: 20px;
+        }
+        .container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 400px;
+            margin: auto;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            font-size: 16px;
+            border: 1px solid #d3d3d3;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #357ab8;
+        }
+        #result {
+            margin-top: 15px;
+            font-size: 18px;
+            color: #333;
+            background-color: #e7f3ff;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        footer {
+            background-color: #4a90e2;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 14px;
+        }
+        @media (max-width: 600px) {
+            header {
+                font-size: 24px;
+                padding: 20px 10px;
+            }
+            footer {
+                font-size: 13px;
+                padding: 8px;
+            }
+            .container {
+                padding: 15px;
+            }
+        }
+    </style>
 </head>
-<body class="bg-gray-50 text-center py-16">
-  <h1 class="text-3xl font-bold text-yellow-700 mb-4">📐 ভূমি ক্যালকুলেটর</h1>
-  <p class="text-lg text-gray-700">এই পৃষ্ঠায় ভূমি ক্যালকুলেটর ফিচার যুক্ত হবে।</p>
-</body>
+<body><header>
+    📐 <span style="color: #ffff66; text-shadow: 2px 2px #333;">জমি শতাংশ ক্যালকুলেটর</span>
+</header><main>
+    <div class="container">
+        <input type="number" id="length" placeholder="দৈর্ঘ্য (ফুট)">
+        <input type="number" id="width" placeholder="প্রস্থ (ফুট)">
+        <button onclick="calculateArea()">হিসাব করুন</button>
+        <button style="background-color:#e74c3c" onclick="resetForm()">রিসেট করুন</button>
+        <div id="result"></div>
+    </div>
+</main><footer>
+    © ২০২৫ | আপনার বিশ্বস্ত ক্যালকুলেটর
+</footer><script>
+    function calculateArea() {
+        let length = parseFloat(document.getElementById('length').value);
+        let width = parseFloat(document.getElementById('width').value);
+
+        if (isNaN(length) || isNaN(width) || length <= 0 || width <= 0) {
+            document.getElementById('result').innerHTML = "⚠️ সঠিক মান দিন";
+            return;
+        }
+
+        let area = (length * width) / 435.6;
+        document.getElementById('result').innerHTML = `✅ মোট জমি: <strong>${area.toFixed(3)}</strong> শতাংশ`;
+    }
+
+    function resetForm() {
+        document.getElementById('length').value = '';
+        document.getElementById('width').value = '';
+        document.getElementById('result').innerHTML = '';
+    }
+</script></body>
 </html>
