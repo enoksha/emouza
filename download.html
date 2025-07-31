@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>মৌজা ম্যাপ ডাউনলোড</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;700&display=swap" rel="stylesheet"/>
     <style>
         body {
             font-family: 'Noto Sans Bengali', sans-serif;
@@ -57,121 +57,150 @@
         }
     </style>
 </head>
-<body class="flex flex-col min-h-screen">
-    <!-- Header -->
-    <header class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white sticky top-0 z-50 shadow-lg">
-        <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <div class="text-3xl font-bold text-yellow-300">
-                <a href="index.html">ই-নকশা</a>
-            </div>
-            <ul class="flex space-x-6 text-lg">
-                <li><a href="index.html" class="hover:text-yellow-200">হোম</a></li>
-                <li><a href="services.html" class="hover:text-yellow-200">সেবা</a></li>
-                <li><a href="contact.html" class="hover:text-yellow-200">যোগাযোগ</a></li>
-            </ul>
-        </nav>
-    </header>
+<body class="flex flex-col min-h-screen bg-gradient-to-r from-blue-100 via-green-100 to-purple-100">
 
-    <!-- Main Download Container -->
-    <div class="download-container my-12">
-        <h1 class="text-2xl font-bold mb-4 text-green-800">মৌজা ম্যাপ ডাউনলোড</h1>
-        <div id="downloadInfo" class="download-info"></div>
-        <div id="downloadLinks" class="file-section"></div>
-    </div>
+<!-- Sidebar -->
+<div id="sidebar" class="fixed top-0 left-0 h-full w-64 bg-indigo-800 text-white p-6 transform -translate-x-full transition-transform duration-300 ease-in-out z-50">
+    <div class="text-2xl font-bold text-yellow-300 mb-4">ই-নকশা</div>
+    <ul class="space-y-4 mt-12 text-lg">
+        <li><a class="hover:text-yellow-200" href="index.html">🏠 হোম</a></li>
+        <li><a class="hover:text-yellow-200" href="services.html">🛠️ সেবাসমূহ</a></li>
+        <li><a class="hover:text-yellow-200" href="contact.html">📞 যোগাযোগ</a></li>
+    </ul>
+</div>
 
-    <!-- Footer -->
-    <footer class="bg-gradient-to-r from-indigo-800 to-purple-800 text-white py-8 mt-auto">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div>
-                    <h3 class="text-xl font-semibold mb-4 text-yellow-200">ই-নকশা</h3>
-                    <p class="text-gray-300">বাংলাদেশের মৌজা ম্যাপ ডাউনলোডের সহজ প্ল্যাটফর্ম।</p>
-                </div>
-                <div>
-                    <h3 class="text-xl font-semibold mb-4 text-yellow-200">দ্রুত লিঙ্ক</h3>
-                    <ul class="space-y-2">
-                        <li><a href="index.html" class="hover:text-yellow-100">হোম</a></li>
-                        <li><a href="services.html" class="hover:text-yellow-100">সেবা</a></li>
-                        <li><a href="contact.html" class="hover:text-yellow-100">যোগাযোগ</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-xl font-semibold mb-4 text-yellow-200">যোগাযোগ</h3>
-                    <p class="text-gray-300">ইমেইল: info@emouza.com</p>
-                    <p class="text-gray-300">ফোন: +৮৮০ ১২৩৪-৫৬৭৮৯০</p>
-                </div>
+<!-- Header -->
+<header class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white sticky top-0 z-50 shadow-lg">
+    <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
+        <button class="text-white text-3xl focus:outline-none md:hidden" id="sidebarToggle" onclick="toggleSidebar()">☰</button>
+        <div class="flex flex-col items-center justify-center w-full text-2xl font-bold text-yellow-300">
+            <a href="index.html">ই-নকশা</a>
+            <p class="text-sm text-white mt-1" id="bengaliDate"></p>
+        </div>
+    </nav>
+</header>
+
+<!-- Main Content -->
+<div class="download-container my-12">
+    <h1 class="text-2xl font-bold mb-4 text-green-800">মৌজা ম্যাপ ডাউনলোড</h1>
+    <div id="downloadInfo" class="download-info"></div>
+    <div id="downloadLinks" class="file-section"></div>
+</div>
+
+<!-- Footer -->
+<footer class="bg-gradient-to-r from-indigo-800 to-purple-800 text-white py-8 mt-auto">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+                <h3 class="text-xl font-semibold mb-4 text-yellow-200">ই-নকশা</h3>
+                <p class="text-gray-300">বাংলাদেশের মৌজা ম্যাপ ডাউনলোডের সহজ প্ল্যাটফর্ম।</p>
             </div>
-            <div class="text-center mt-8">
-                <p class="text-gray-300">© ২০২৫ ই-নকশা। সর্বস্বত্ব সংরক্ষিত।</p>
+            <div>
+                <h3 class="text-xl font-semibold mb-4 text-yellow-200">দ্রুত লিঙ্ক</h3>
+                <ul class="space-y-2">
+                    <li><a href="index.html" class="hover:text-yellow-100">হোম</a></li>
+                    <li><a href="services.html" class="hover:text-yellow-100">সেবা</a></li>
+                    <li><a href="contact.html" class="hover:text-yellow-100">যোগাযোগ</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-xl font-semibold mb-4 text-yellow-200">যোগাযোগ</h3>
+                <p class="text-gray-300">ইমেইল: info@emouza.com</p>
+                <p class="text-gray-300">ফোন: +৮৮০ ১২৩৪-৫৬৭৮৯০</p>
             </div>
         </div>
-    </footer>
+        <div class="text-center mt-8">
+            <p class="text-gray-300">© ২০২৫ ই-নকশা। সর্বস্বত্ব সংরক্ষিত।</p>
+        </div>
+    </div>
+</footer>
 
-    <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        const division = urlParams.get('division');
-        const district = urlParams.get('district');
-        const upazila = urlParams.get('upazila');
-        const mouza = decodeURIComponent(urlParams.get('mouza'));
+<!-- Scripts -->
+<script>
+    function toggleSidebar() {
+        const sidebar = document.getElementById("sidebar");
+        sidebar.classList.toggle("-translate-x-full");
+    }
 
-        fetch('https://raw.githubusercontent.com/enoksha/emouza/main/maps.json')
-            .then(response => {
-                if (!response.ok) throw new Error('Network response was not ok');
-                return response.json();
-            })
-            .then(mapDatabase => {
-                const mapData = mapDatabase[division]?.[district]?.[upazila]?.[mouza];
-                const infoDiv = document.getElementById('downloadInfo');
-                const linksDiv = document.getElementById('downloadLinks');
+    const monthNames = [
+        "জানুয়ারি", "ফেব্রুয়ারি", "মার্চ", "এপ্রিল", "মে", "জুন",
+        "জুলাই", "আগস্ট", "সেপ্টেম্বর", "অক্টোবর", "নভেম্বর", "ডিসেম্বর"
+    ];
+    const engToBanglaDigits = number =>
+        number.toString().replace(/\d/g, d => '০১২৩৪৫৬৭৮৯'[d]);
+    const now = new Date();
+    const day = engToBanglaDigits(now.getDate());
+    const month = monthNames[now.getMonth()];
+    const year = engToBanglaDigits(now.getFullYear());
+    document.getElementById("bengaliDate").textContent = `তারিখ: ${day} ${month}, ${year}`;
+</script>
 
-                if (mapData) {
-                    infoDiv.innerHTML = `
-                        <p><strong>বিভাগ:</strong> ${division}</p>
-                        <p><strong>জেলা:</strong> ${district}</p>
-                        <p><strong>উপজেলা:</strong> ${upazila}</p>
-                        <p><strong>মৌজা:</strong> ${mouza}</p>
-                        <p><strong>ফাইলের নাম:</strong> ${mapData.file_name}</p>
-                        <p><strong>জেল নং:</strong> ${mapData.district_no}</p>
-                    `;
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const division = urlParams.get('division');
+    const district = urlParams.get('district');
+    const upazila = urlParams.get('upazila');
+    const mouza = decodeURIComponent(urlParams.get('mouza'));
 
-                    linksDiv.innerHTML = '';
-                    if (mapData.files && Array.isArray(mapData.files)) {
-                        let hasFiles = false;
-                        mapData.files.forEach(file => {
-                            if (file.url) {
-                                hasFiles = true;
-                                const fileSection = document.createElement('div');
-                                fileSection.className = 'file-info';
-                                fileSection.innerHTML = `
-                                    <p><strong>ফাইল টাইপ:</strong> ${file.type.toUpperCase()}</p>
-                                    <p><strong>ফাইল সাইজ:</strong> ${mapData.file_size || 'উল্লেখিত নাও'}</p>
-                                    <p><strong>সিট নং:</strong> ${file.seat_no || 'নেই...'}</p>
-                                `;
-                                const fileLink = document.createElement('a');
-                                fileLink.href = file.url;
-                                fileLink.download = `${mouza}_map_${file.type}_${file.seat_no || '1'}.${file.type}`;
-                                fileLink.className = 'download-button';
-                                fileLink.textContent = `${file.type.toUpperCase()} ডাউনলোড`;
-                                fileSection.appendChild(fileLink);
-                                linksDiv.appendChild(fileSection);
-                            }
-                        });
-                        if (!hasFiles) {
-                            linksDiv.innerHTML = '<p class="text-red-500">কোনো ডাউনলোডযোগ্য ফাইল পাওয়া যায়নি।</p>';
+    fetch('https://raw.githubusercontent.com/enoksha/emouza/main/maps.json')
+        .then(response => {
+            if (!response.ok) throw new Error('Network response was not ok');
+            return response.json();
+        })
+        .then(mapDatabase => {
+            const mapData = mapDatabase[division]?.[district]?.[upazila]?.[mouza];
+            const infoDiv = document.getElementById('downloadInfo');
+            const linksDiv = document.getElementById('downloadLinks');
+
+            if (mapData) {
+                infoDiv.innerHTML = `
+                    <p><strong>বিভাগ:</strong> ${division}</p>
+                    <p><strong>জেলা:</strong> ${district}</p>
+                    <p><strong>উপজেলা:</strong> ${upazila}</p>
+                    <p><strong>মৌজা:</strong> ${mouza}</p>
+                    <p><strong>ফাইলের নাম:</strong> ${mapData.file_name}</p>
+                    <p><strong>জেল নং:</strong> ${mapData.district_no}</p>
+                `;
+
+                linksDiv.innerHTML = '';
+                if (mapData.files && Array.isArray(mapData.files)) {
+                    let hasFiles = false;
+                    mapData.files.forEach(file => {
+                        if (file.url) {
+                            hasFiles = true;
+                            const fileSection = document.createElement('div');
+                            fileSection.className = 'file-info';
+                            fileSection.innerHTML = `
+                                <p><strong>ফাইল টাইপ:</strong> ${file.type.toUpperCase()}</p>
+                                <p><strong>ফাইল সাইজ:</strong> ${mapData.file_size || 'উল্লেখিত নাও'}</p>
+                                <p><strong>সিট নং:</strong> ${file.seat_no || 'নেই...'}</p>
+                            `;
+                            const fileLink = document.createElement('a');
+                            fileLink.href = file.url;
+                            fileLink.download = `${mouza}_map_${file.type}_${file.seat_no || '1'}.${file.type}`;
+                            fileLink.className = 'download-button';
+                            fileLink.textContent = `${file.type.toUpperCase()} ডাউনলোড`;
+                            fileSection.appendChild(fileLink);
+                            linksDiv.appendChild(fileSection);
                         }
-                    } else {
-                        linksDiv.innerHTML = '<p class="text-red-500">ফাইল ডাটা সঠিক ফরম্যাটে পাওয়া যায়নি।</p>';
+                    });
+                    if (!hasFiles) {
+                        linksDiv.innerHTML = '<p class="text-red-500">কোনো ডাউনলোডযোগ্য ফাইল পাওয়া যায়নি।</p>';
                     }
                 } else {
-                    infoDiv.innerHTML = '<p class="text-red-500">ম্যাপ ডাটা পাওয়া যায়নি।</p>';
-                    linksDiv.innerHTML = '';
+                    linksDiv.innerHTML = '<p class="text-red-500">ফাইল ডাটা সঠিক ফরম্যাটে পাওয়া যায়নি।</p>';
                 }
-            })
-            .catch(error => {
-                console.error('Error loading map data:', error);
-                document.getElementById('downloadInfo').innerHTML = '<p class="text-red-500">ম্যাপ ডাটা লোড করতে সমস্যা হয়েছে।</p>';
-                document.getElementById('downloadLinks').innerHTML = '';
-            });
-    </script>
+            } else {
+                infoDiv.innerHTML = '<p class="text-red-500">ম্যাপ ডাটা পাওয়া যায়নি।</p>';
+                linksDiv.innerHTML = '';
+            }
+        })
+        .catch(error => {
+            console.error('Error loading map data:', error);
+            document.getElementById('downloadInfo').innerHTML = '<p class="text-red-500">ম্যাপ ডাটা লোড করতে সমস্যা হয়েছে।</p>';
+            document.getElementById('downloadLinks').innerHTML = '';
+        });
+</script>
+
 </body>
 </html>
