@@ -12,8 +12,7 @@
             background: linear-gradient(to right, #e0f7fa, #e0eafc);
             min-height: 100vh;
             display: flex;
-            justify-content: center;
-            align-items: center;
+            flex-direction: column;
         }
         .download-container {
             background: rgba(255, 255, 255, 0.95);
@@ -23,6 +22,7 @@
             max-width: 500px;
             width: 100%;
             text-align: center;
+            margin: auto;
         }
         .download-info {
             margin-bottom: 20px;
@@ -57,12 +57,55 @@
         }
     </style>
 </head>
-<body>
-    <div class="download-container">
+<body class="flex flex-col min-h-screen">
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white sticky top-0 z-50 shadow-lg">
+        <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="text-3xl font-bold text-yellow-300">
+                <a href="index.html">ই-নকশা</a>
+            </div>
+            <ul class="flex space-x-6 text-lg">
+                <li><a href="index.html" class="hover:text-yellow-200">হোম</a></li>
+                <li><a href="services.html" class="hover:text-yellow-200">সেবা</a></li>
+                <li><a href="contact.html" class="hover:text-yellow-200">যোগাযোগ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Download Container -->
+    <div class="download-container my-12">
         <h1 class="text-2xl font-bold mb-4 text-green-800">মৌজা ম্যাপ ডাউনলোড</h1>
         <div id="downloadInfo" class="download-info"></div>
         <div id="downloadLinks" class="file-section"></div>
     </div>
+
+    <!-- Footer -->
+    <footer class="bg-gradient-to-r from-indigo-800 to-purple-800 text-white py-8 mt-auto">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-semibold mb-4 text-yellow-200">ই-নকশা</h3>
+                    <p class="text-gray-300">বাংলাদেশের মৌজা ম্যাপ ডাউনলোডের সহজ প্ল্যাটফর্ম।</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-4 text-yellow-200">দ্রুত লিঙ্ক</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="hover:text-yellow-100">হোম</a></li>
+                        <li><a href="services.html" class="hover:text-yellow-100">সেবা</a></li>
+                        <li><a href="contact.html" class="hover:text-yellow-100">যোগাযোগ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-4 text-yellow-200">যোগাযোগ</h3>
+                    <p class="text-gray-300">ইমেইল: info@emouza.com</p>
+                    <p class="text-gray-300">ফোন: +৮৮০ ১২৩৪-৫৬৭৮৯০</p>
+                </div>
+            </div>
+            <div class="text-center mt-8">
+                <p class="text-gray-300">© ২০২৫ ই-নকশা। সর্বস্বত্ব সংরক্ষিত।</p>
+            </div>
+        </div>
+    </footer>
 
     <script>
         const urlParams = new URLSearchParams(window.location.search);
@@ -89,12 +132,9 @@
                         <p><strong>মৌজা:</strong> ${mouza}</p>
                         <p><strong>ফাইলের নাম:</strong> ${mapData.file_name}</p>
                         <p><strong>জেল নং:</strong> ${mapData.district_no}</p>
-                        
                     `;
 
-                    linksDiv.innerHTML = ''; // Clear previous links
-
-                    // Check for files array and create sections for each file
+                    linksDiv.innerHTML = '';
                     if (mapData.files && Array.isArray(mapData.files)) {
                         let hasFiles = false;
                         mapData.files.forEach(file => {
@@ -116,7 +156,6 @@
                                 linksDiv.appendChild(fileSection);
                             }
                         });
-
                         if (!hasFiles) {
                             linksDiv.innerHTML = '<p class="text-red-500">কোনো ডাউনলোডযোগ্য ফাইল পাওয়া যায়নি।</p>';
                         }
