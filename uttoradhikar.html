@@ -1,17 +1,168 @@
-<!DOCTYPE html>
-<html lang="bn">
+<!DOCTYPE html><html lang="bn">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>উত্তরাধিকার হিসাব</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;700&display=swap" rel="stylesheet" />
-  <style>
-    body { font-family: 'Noto Sans Bengali', sans-serif; }
-  </style>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
-<body class="bg-gray-50 text-center py-16">
-  <h1 class="text-3xl font-bold text-green-700 mb-4">🧮 উত্তরাধিকার হিসাব</h1>
-  <p class="text-lg text-gray-700">এই পৃষ্ঠায় উত্তরাধিকার হিসাব সংক্রান্ত ফিচার যুক্ত হবে।</p>
-</body>
+<body class="bg-gradient-to-br from-green-50 to-green-100 min-h-screen text-gray-800 flex flex-col">  <!-- Header -->  <header class="bg-gradient-to-r from-green-700 to-emerald-500 shadow-lg py-6 mb-4">
+    <div class="max-w-4xl mx-auto text-center">
+      <h1 class="text-3xl md:text-4xl font-bold text-white tracking-wide">📜 উত্তরাধিকার হিসাব</h1>
+      <p class="text-green-100 text-sm md:text-base mt-2">ইসলামী শরীয়াহ অনুযায়ী জমির হিসাব সহজে নির্ণয় করুন</p>
+    </div>
+  </header>  <!-- Main -->  <main class="flex-grow">
+    <div class="max-w-md mx-auto bg-white rounded-xl shadow-lg px-6 pt-4 pb-6">
+      <h2 class="text-lg font-semibold text-purple-700 border-b pb-2 mb-4">আত্মীয়-স্বজনের তালিকা</h2>
+      <div class="grid grid-cols-1 gap-3 max-h-[500px] overflow-y-auto pr-2">
+        <div class="flex justify-between items-center">
+          <label>স্বামী</label>
+          <div class="flex items-center space-x-2">
+            <button onclick="adjust('husband', -1, 1)" class="bg-green-200 px-2 rounded">-</button>
+            <input id="husband" type="number" value="0" class="w-12 text-center border rounded" readonly>
+            <button onclick="adjust('husband', 1, 1)" class="bg-green-200 px-2 rounded">+</button>
+          </div>
+        </div>
+        <div class="flex justify-between items-center">
+          <label>স্ত্রী</label>
+          <div class="flex items-center space-x-2">
+            <button onclick="adjust('wives', -1, 4)" class="bg-green-200 px-2 rounded">-</button>
+            <input id="wives" type="number" value="0" class="w-12 text-center border rounded" readonly>
+            <button onclick="adjust('wives', 1, 4)" class="bg-green-200 px-2 rounded">+</button>
+          </div>
+        </div>
+        <div class="flex justify-between items-center">
+          <label>পুত্র</label>
+          <div class="flex items-center space-x-2">
+            <button onclick="adjust('sons', -1)" class="bg-green-200 px-2 rounded">-</button>
+            <input id="sons" type="number" value="0" class="w-12 text-center border rounded">
+            <button onclick="adjust('sons', 1)" class="bg-green-200 px-2 rounded">+</button>
+          </div>
+        </div>
+        <div class="flex justify-between items-center">
+          <label>কন্যা</label>
+          <div class="flex items-center space-x-2">
+            <button onclick="adjust('daughters', -1)" class="bg-green-200 px-2 rounded">-</button>
+            <input id="daughters" type="number" value="0" class="w-12 text-center border rounded">
+            <button onclick="adjust('daughters', 1)" class="bg-green-200 px-2 rounded">+</button>
+          </div>
+        </div>
+      </div><h2 class="text-lg font-semibold text-purple-700 border-b pb-2 mt-6 mb-4">সম্পদের বিবরণ</h2>
+  <div class="flex justify-between items-center mb-6">
+    <label>জমি (শতাংশ)</label>
+    <input id="land" type="number" value="0" class="w-24 text-center border rounded">
+  </div>
+
+  <button onclick="calculateInheritance()" class="w-full bg-purple-600 text-white py-2 rounded hover:bg-purple-700">ফলাফল</button>
+  <button id="downloadBtn" onclick="downloadPDF()" class="w-full bg-indigo-600 text-white py-2 rounded hover:bg-indigo-700 mt-3 hidden">PDF ডাউনলোড করুন</button>
+  <button onclick="resetForm()" class="w-full bg-red-500 text-white py-2 rounded hover:bg-red-600 mt-3">রিসেট করুন</button>
+
+  <div id="resultSection" class="mt-4">
+    <div id="inheritanceResult" class="p-3 bg-purple-50 rounded text-sm text-purple-800 border border-purple-200"></div>
+    <canvas id="chartCanvas" class="mt-6"></canvas>
+  </div>
+</div>
+
+  </main>  <!-- Footer -->  <footer class="bg-gray-900 text-white text-sm text-center py-6 mt-6">
+    <p>© <span id="year"></span> উত্তরাধিকার হিসাব. সর্বস্বত্ব সংরক্ষিত।</p>
+    <p class="text-xs text-gray-400 mt-1">Design & Build with ❤️ in Bangladesh</p>
+  </footer><script>
+function adjust(id, change, max = null) {
+  const input = document.getElementById(id);
+  let value = parseInt(input.value) + change;
+  if (max !== null) value = Math.min(max, value);
+  input.value = Math.max(0, value);
+}
+
+function resetForm() {
+  const ids = ['husband','wives','sons','daughters','land'];
+  ids.forEach(id => document.getElementById(id).value = 0);
+  document.getElementById('inheritanceResult').innerHTML = '';
+  document.getElementById('downloadBtn').classList.add('hidden');
+  if (window.pieChart) window.pieChart.destroy();
+}
+
+document.getElementById("year").textContent = new Date().getFullYear();
+
+let pieChart;
+function calculateInheritance() {
+  const land = parseFloat(document.getElementById('land').value);
+  const husbands = parseInt(document.getElementById('husband').value);
+  const wives = parseInt(document.getElementById('wives').value);
+  const sons = parseInt(document.getElementById('sons').value);
+  const daughters = parseInt(document.getElementById('daughters').value);
+
+  if ((sons + daughters + husbands + wives) === 0 || isNaN(land) || land <= 0) {
+    document.getElementById('inheritanceResult').innerHTML = "<p class='text-red-600'>কমপক্ষে একজন আত্মীয় এবং জমির পরিমাণ দিন।</p>";
+    return;
+  }
+
+  let labels = [];
+  let shares = [];
+  let html = '<table class="w-full text-left border mb-4"><thead><tr class="bg-green-200"><th class="p-1">আত্মীয়</th><th class="p-1">অংশ</th><th class="p-1">জমি</th></tr></thead><tbody>';
+
+  let fixedShare = 0;
+  if (husbands > 0) fixedShare += 0.25;
+  if (wives > 0) fixedShare += 0.125;
+  const remaining = 1 - fixedShare;
+
+  if (husbands > 0) {
+    const val = (0.25 * land).toFixed(2);
+    html += `<tr><td class="p-1">স্বামী</td><td class="p-1">0.250</td><td class="p-1">${val}</td></tr>`;
+    labels.push("স্বামী"); shares.push(parseFloat(val));
+  }
+  if (wives > 0) {
+    const each = 0.125 / wives;
+    for (let i = 1; i <= wives; i++) {
+      const val = (each * land).toFixed(2);
+      html += `<tr><td class="p-1">স্ত্রী ${i}</td><td class="p-1">${each.toFixed(3)}</td><td class="p-1">${val}</td></tr>`;
+      labels.push(`স্ত্রী ${i}`); shares.push(parseFloat(val));
+    }
+  }
+
+  const totalPortion = sons * 2 + daughters;
+  if (totalPortion > 0) {
+    const unit = remaining / totalPortion;
+    for (let i = 1; i <= sons; i++) {
+      const share = unit * 2;
+      const val = (share * land).toFixed(2);
+      html += `<tr><td class="p-1">পুত্র ${i}</td><td class="p-1">${share.toFixed(3)}</td><td class="p-1">${val}</td></tr>`;
+      labels.push(`পুত্র ${i}`); shares.push(parseFloat(val));
+    }
+    for (let i = 1; i <= daughters; i++) {
+      const share = unit;
+      const val = (share * land).toFixed(2);
+      html += `<tr><td class="p-1">কন্যা ${i}</td><td class="p-1">${share.toFixed(3)}</td><td class="p-1">${val}</td></tr>`;
+      labels.push(`কন্যা ${i}`); shares.push(parseFloat(val));
+    }
+  }
+
+  html += '</tbody></table>';
+  document.getElementById('inheritanceResult').innerHTML = html;
+  document.getElementById('downloadBtn').classList.remove('hidden');
+
+  const ctx = document.getElementById('chartCanvas').getContext('2d');
+  if (pieChart) pieChart.destroy();
+  pieChart = new Chart(ctx, {
+    type: 'pie',
+    data: {
+      labels: labels,
+      datasets: [{
+        data: shares,
+        backgroundColor: ['#6EE7B7','#C4B5FD','#FDE68A','#FCA5A5','#93C5FD','#FBCFE8']
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { position: 'bottom' } }
+    }
+  });
+}
+
+function downloadPDF() {
+  const element = document.getElementById("resultSection");
+  html2pdf().set({ margin: 0.5, filename: 'uttoradhikar_result.pdf', image: { type: 'jpeg', quality: 0.98 }, html2canvas: { scale: 2 }, jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' } }).from(element).save();
+}
+</script></body>
 </html>
