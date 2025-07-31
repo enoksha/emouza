@@ -1,94 +1,110 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>যোগাযোগ - ই-মৌজা</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Noto Sans Bengali', sans-serif;
-        }
-    </style>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>যোগাযোগ - ই-নকশা</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+    body {
+      font-family: 'Noto Sans Bengali', sans-serif;
+    }
+  </style>
 </head>
-<body class="bg-gray-100">
-    <!-- Header -->
-    <header class="bg-blue-900 text-white sticky top-0 z-50 shadow-md">
-        <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <div class="text-3xl font-bold">
-                <a href="index.html">ই-মৌজা</a>
-            </div>
-            <ul class="flex space-x-6 text-lg">
-                <li><a href="index.html" class="hover:text-blue-300">হোম</a></li>
-                <li><a href="services.html" class="hover:text-blue-300">সেবা</a></li>
-                <li><a href="contact.html" class="hover:text-blue-300">যোগাযোগ</a></li>
-            </ul>
-        </nav>
-    </header>
+<body class="via-blue-100 from-green-100 relative bg-gradient-to-r to-purple-100">
 
-    <!-- Contact Section -->
-    <section class="container mx-auto px-4 py-16">
-        <h1 class="text-4xl font-bold text-center mb-12">যোগাযোগ করুন</h1>
-        <div class="bg-white p-8 rounded-lg shadow-md max-w-lg mx-auto">
-            <form id="contactForm">
-                <div class="mb-4">
-                    <label for="name" class="block text-lg mb-2">নাম</label>
-                    <input type="text" id="name" class="w-full px-4 py-2 rounded-md border" placeholder="আপনার নাম লিখুন">
-                </div>
-                <div class="mb-4">
-                    <label for="email" class="block text-lg mb-2">ইমেইল</label>
-                    <input type="email" id="email" class="w-full px-4 py-2 rounded-md border" placeholder="আপনার ইমেইল লিখুন">
-                </div>
-                <div class="mb-4">
-                    <label for="message" class="block text-lg mb-2">বার্তা</label>
-                    <textarea id="message" class="w-full px-4 py-2 rounded-md border" rows="5" placeholder="আপনার বার্তা লিখুন"></textarea>
-                </div>
-                <button type="button" onclick="submitContact()" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md">জমা দিন</button>
-            </form>
-        </div>
-    </section>
+<!-- Sidebar -->
+<div class="fixed top-0 left-0 h-full w-64 bg-indigo-800 text-white p-6 transform -translate-x-full transition-transform duration-300 ease-in-out z-50" id="sidebar">
+  <div class="text-2xl font-bold text-yellow-300 mb-4">ই-নকশা</div>
+  <ul class="space-y-4 mt-12 text-lg">
+    <li><a class="hover:text-yellow-200" href="index.html">🏠 হোম</a></li>
+    <li><a class="hover:text-yellow-200" href="services.html">🛠️ সেবাসমূহ</a></li>
+    <li><a class="hover:text-yellow-200" href="contact.html">📞 যোগাযোগ</a></li>
+  </ul>
+</div>
 
-    <!-- Footer -->
-    <footer class="bg-blue-900 text-white py-8">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div>
-                    <h3 class="text-xl font-semibold mb-4">ই-মৌজা</h3>
-                    <p>বাংলাদেশের মৌজা ম্যাপ ডাউনলোডের সহজ প্ল্যাটফর্ম।</p>
-                </div>
-                <div>
-                    <h3 class="text-xl font-semibold mb-4">দ্রুত লিঙ্ক</h3>
-                    <ul class="space-y-2">
-                        <li><a href="index.html" class="hover:text-blue-300">হোম</a></li>
-                        <li><a href="services.html" class="hover:text-blue-300">সেবা</a></li>
-                        <li><a href="contact.html" class="hover:text-blue-300">যোগাযোগ</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-xl font-semibold mb-4">যোগাযোগ</h3>
-                    <p>ইমেইল: info@emouza.com</p>
-                    <p>ফোন: +৮৮০ ১২৩৪-৫৬৭৮৯০</p>
-                </div>
-            </div>
-            <div class="text-center mt-8">
-                <p>© ২০২৫ ই-মৌজা। সর্বস্বত্ব সংরক্ষিত।</p>
-            </div>
-        </div>
-    </footer>
+<!-- Header -->
+<header class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white sticky top-0 z-50 shadow-lg">
+  <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
+    <button class="text-white text-3xl focus:outline-none md:hidden" id="sidebarToggle" onclick="toggleSidebar()">☰</button>
+    <div class="flex flex-col items-center justify-center w-full text-2xl font-bold text-yellow-300">
+      <a href="index.html">ই-নকশা</a>
+      <p class="text-sm text-white mt-1" id="bengaliDate"></p>
+    </div>
+  </nav>
+</header>
 
-    <script>
-        function submitContact() {
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
-            if (!name || !email || !message) {
-                alert('দয়া করে সকল ক্ষেত্র পূরণ করুন।');
-                return;
-            }
-            alert(`বার্তা জমা হয়েছে!\nনাম: ${name}\nইমেইল: ${email}\nবার্তা: ${message}\n(এটি একটি ডেমো। বাস্তব ফাংশনালিটির জন্য ব্যাকএন্ড প্রয়োজন।)`);
-            // Backend API call can be added here, e.g., fetch('/api/contact', { method: 'POST', body: JSON.stringify({ name, email, message }) })
-        }
-    </script>
+<!-- Main Content -->
+<section class="container mx-auto px-4 py-16">
+  <h1 class="text-3xl font-bold text-center mb-8 text-indigo-700">যোগাযোগ করুন</h1>
+  <p class="text-center text-lg text-gray-700 mb-8">
+    আপনার যেকোনো প্রশ্ন, পরামর্শ বা সহায়তার জন্য আমাদের সাথে যোগাযোগ করুন। নিচের ফর্মটি পূরণ করুন অথবা সরাসরি ইমেইল করুন।
+  </p>
+  <div class="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-md">
+    <form>
+      <div class="mb-4">
+        <label class="block text-gray-700 mb-2" for="name">নাম</label>
+        <input type="text" id="name" class="w-full px-4 py-2 border rounded-md" placeholder="আপনার নাম লিখুন">
+      </div>
+      <div class="mb-4">
+        <label class="block text-gray-700 mb-2" for="email">ইমেইল</label>
+        <input type="email" id="email" class="w-full px-4 py-2 border rounded-md" placeholder="example@email.com">
+      </div>
+      <div class="mb-4">
+        <label class="block text-gray-700 mb-2" for="message">বার্তা</label>
+        <textarea id="message" class="w-full px-4 py-2 border rounded-md" rows="4" placeholder="আপনার বার্তা লিখুন..."></textarea>
+      </div>
+      <button type="submit" class="bg-indigo-600 text-white px-6 py-2 rounded-md hover:bg-indigo-700">পাঠান</button>
+    </form>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-gradient-to-r from-indigo-800 to-purple-800 text-white py-8">
+  <div class="container mx-auto px-4">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div>
+        <h3 class="text-xl font-semibold mb-4 text-yellow-200">ই-নকশা</h3>
+        <p class="text-gray-300">বাংলাদেশের মৌজা ম্যাপ ডাউনলোডের সহজ প্ল্যাটফর্ম।</p>
+      </div>
+      <div>
+        <h3 class="text-xl font-semibold mb-4 text-yellow-200">দ্রুত লিঙ্ক</h3>
+        <ul class="space-y-2">
+          <li><a class="hover:text-yellow-100" href="index.html">হোম</a></li>
+          <li><a class="hover:text-yellow-100" href="services.html">সেবাসমূহ</a></li>
+          <li><a class="hover:text-yellow-100" href="contact.html">যোগাযোগ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-xl font-semibold mb-4 text-yellow-200">যোগাযোগ</h3>
+        <p class="text-gray-300">ইমেইল: info@emouza.com</p>
+        <p class="text-gray-300">ফোন: +৮৮০ ১২৩৪-৫৬৭৮৯০</p>
+      </div>
+    </div>
+    <div class="text-center mt-8">
+      <p class="text-gray-300">© ২০২৫ ই-নকশা। সর্বস্বত্ব সংরক্ষিত।</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+function toggleSidebar() {
+  const sidebar = document.getElementById("sidebar");
+  sidebar.classList.toggle("-translate-x-full");
+}
+const monthNames = [
+  "জানুয়ারি", "ফেব্রুয়ারি", "মার্চ", "এপ্রিল", "মে", "জুন",
+  "জুলাই", "আগস্ট", "সেপ্টেম্বর", "অক্টোবর", "নভেম্বর", "ডিসেম্বর"
+];
+const engToBanglaDigits = number =>
+  number.toString().replace(/\d/g, d => '০১২৩৪৫৬৭৮৯'[d]);
+const now = new Date();
+const day = engToBanglaDigits(now.getDate());
+const month = monthNames[now.getMonth()];
+const year = engToBanglaDigits(now.getFullYear());
+document.getElementById("bengaliDate").textContent = `তারিখ: ${day} ${month}, ${year}`;
+</script>
+
 </body>
 </html>
